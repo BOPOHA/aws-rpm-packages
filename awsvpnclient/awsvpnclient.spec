@@ -7,7 +7,7 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       3.0.0
-Release:       15
+Release:       23
 License:       Apache
 Group:         Converted/misc
 Summary:       AWS VPN Client for Ubuntu 18.04
@@ -34,21 +34,14 @@ rm -rf ./opt/%{name}/SQLite.Interop.dll # https://gist.github.com/miguelgmalpha/
 sed -i "s#Service/ACVC.GTK.Service#ACVC.GTK.Service#;
         s#Icon=.*#Icon=/opt/awsvpnclient/Resources/acvc-64.png#" ./etc/systemd/system/%{name}.service
 
-rm -rf ./opt/%{name}/libcoreclrtraceptprovider.so \
+rm -rf \
        ./opt/%{name}/libdbgshim.so \
-       ./opt/%{name}/libhostfxr.so \
-       ./opt/%{name}/libhostpolicy.so \
        ./opt/%{name}/libmscordaccore.so \
        ./opt/%{name}/libmscordbi.so \
-       ./opt/%{name}/System.Globalization.Native.so \
        ./opt/%{name}/System.IO.Compression.Native.so \
-       ./opt/%{name}/System.Native.so \
        ./opt/%{name}/System.Net.Http.Native.so \
        ./opt/%{name}/System.Net.Security.Native.so \
-       ./opt/%{name}/System.Security.Cryptography.Native.OpenSsl.so \
        ./opt/%{name}/createdump
-
-rm -rf ./usr/share/pixmaps/acvc-64.png
 
 %install
 mv opt %{buildroot}/
@@ -74,6 +67,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 /opt/%{name}/Resources/acvc-64.png
 
 /usr/share/applications/%{name}.desktop
+/usr/share/pixmaps/acvc-64.png
 %{_presetdir}/70-%{name}.preset
 %{_unitdir}/%{name}.service
 
@@ -83,7 +77,21 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %license /opt/%{name}/Resources/THIRD-PARTY-LICENSES-GTK.txt
 %doc /opt/%{name}/SOS_README.md
 %doc /usr/share/doc/%{name}
-%dir /opt/%{name}
+%dir /opt/%{name}/
+%dir /opt/%{name}/Resources/
+%dir /opt/%{name}/Resources/openvpn
+%dir /opt/%{name}/Service/
+%dir /opt/%{name}/Service/Resources
+%dir /opt/%{name}/Service/Resources/openvpn
+%dir /opt/%{name}/de/
+%dir /opt/%{name}/es/
+%dir /opt/%{name}/fr/
+%dir /opt/%{name}/it/
+%dir /opt/%{name}/ja/
+%dir /opt/%{name}/ko/
+%dir /opt/%{name}/pt-BR/
+%dir /opt/%{name}/zh-Hans/
+%dir /opt/%{name}/zh-Hant/
 
 %post
 %systemd_post %{name}.service
