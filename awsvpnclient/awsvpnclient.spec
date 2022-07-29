@@ -7,12 +7,14 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       3.1.0
-Release:       1
+Release:       2
 License:       Apache
 Group:         Converted/misc
 Summary:       AWS VPN Client for Ubuntu 18.04
 Source0:       https://d20adtppz83p9s.cloudfront.net/GTK/%{version}/awsvpnclient_amd64.deb
 Source1:       70-awsvpnclient.preset
+
+BuildRequires: systemd-rpm-macros
 
 %description
 %{summary}
@@ -27,12 +29,14 @@ find . -iname "*.json" -delete
 mv ./opt/%{name}/Service/Resources/openvpn       ./opt/%{name}/Resources/
 mv ./opt/%{name}/Service/ACVC.GTK.Service{,.dll} ./opt/%{name}/
 rm -rf ./opt/%{name}/Service
-rm -rf ./opt/%{name}/SQLite.Interop.dll # https://gist.github.com/miguelgmalpha/5c9e78d16312d156b0ec1d1c1bb09c1c?permalink_comment_id=4212386#gistcomment-4212386
-                                           # fixes errors:
-                                           # gtk_tree_model_iter_nth_child: assertion 'n >= 0' failed
-                                           # gtk_list_store_get_path: assertion 'iter->stamp == priv->stamp' failed
-sed -i "s#Service/ACVC.GTK.Service#ACVC.GTK.Service#;
-        s#Icon=.*#Icon=/opt/awsvpnclient/Resources/acvc-64.png#" ./etc/systemd/system/%{name}.service
+rm -rf ./opt/%{name}/SQLite.Interop.dll # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=awsvpnclient#n31
+                                        # Workaround for missing compatibility of the SQL library with arch linux:
+                                        # Intentionally break the metrics agent,
+                                        # it will be unable to laod the dynamic lib and wont start but continue with error message
+                                        # fixes errors:
+                                        # gtk_tree_model_iter_nth_child: assertion 'n >= 0' failed
+                                        # gtk_list_store_get_path: assertion 'iter->stamp == priv->stamp' failed
+sed -i "s#Service/ACVC.GTK.Service#ACVC.GTK.Service#;" ./etc/systemd/system/%{name}.service
 
 rm -rf \
        ./opt/%{name}/libdbgshim.so \
@@ -59,7 +63,6 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %attr(0755, root, root) "/opt/%{name}/AWS VPN Client"
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/acvc-openvpn
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/configure-dns
-#%attr(0744, root, root) /opt/awsvpnclient/createdump
 %attr(0755, root, root) /opt/%{name}/ACVC.GTK.Service
 /opt/%{name}/*.dll
 /opt/%{name}/*/*.dll
