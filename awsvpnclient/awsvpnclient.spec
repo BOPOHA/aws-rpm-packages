@@ -8,11 +8,12 @@ BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       3.1.0
 Release:       2
-License:       Apache
+License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client for Ubuntu 18.04
 Source0:       https://d20adtppz83p9s.cloudfront.net/GTK/%{version}/awsvpnclient_amd64.deb
 Source1:       70-awsvpnclient.preset
+Patch0:        awsvpnclient.desktop.patch
 
 BuildRequires: systemd-rpm-macros
 
@@ -22,6 +23,7 @@ BuildRequires: systemd-rpm-macros
 %prep
 %setup -cT
 ar p %{SOURCE0} data.tar.xz | tar -xJ
+%patch
 
 find . -iname "*.a" -delete
 find . -iname "*.pdb" -delete
@@ -55,11 +57,14 @@ mv usr %{buildroot}/
 
 %__install -d %{buildroot}/opt/%{name}/Service/Resources/openvpn
 ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/Resources/openvpn/configure-dns
+%__install -d %{buildroot}/usr/bin/
+ln -s "/opt/%{name}/AWS VPN Client"  %{buildroot}/usr/bin/%{name}
 
 %clean
 
 %files
 %defattr(0644, root, root, 0755)
+/usr/bin/awsvpnclient
 %attr(0755, root, root) "/opt/%{name}/AWS VPN Client"
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/acvc-openvpn
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/configure-dns
@@ -106,7 +111,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
-* Tue Jul 26 2022 Anatolii Vorona  3.1.0-15
+* Tue Jul 26 2022 Anatolii Vorona  3.1.0-2
 - rebuild awsvpnclient_amd64.deb
 - remove unused files
 - remove createdump and its dependencies
