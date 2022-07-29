@@ -6,21 +6,21 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       3.0.0
-Release:       23
+Version:       3.1.0
+Release:       1
 License:       Apache
 Group:         Converted/misc
 Summary:       AWS VPN Client for Ubuntu 18.04
-Source:        data.tar.xz
+Source0:       https://d20adtppz83p9s.cloudfront.net/GTK/%{version}/awsvpnclient_amd64.deb
 Source1:       70-awsvpnclient.preset
 
 %description
 %{summary}
 
 %prep
-%setup -c
-#find . -not -path '*/AWS VPN Client.dll' -not -path '*/ACVC.GTK.Service.dll' -not -path '*/*Core*.dll' -iname "*.dll"  -delete
-#find . -not -path '*/lib*.so' -iname "*.so" -delete
+%setup -cT
+ar p %{SOURCE0} data.tar.xz | tar -xJ
+
 find . -iname "*.a" -delete
 find . -iname "*.pdb" -delete
 find . -iname "*.json" -delete
@@ -106,4 +106,4 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 * Tue Jul 26 2022 Anatolii Vorona  3.1.0-15
 - rebuild awsvpnclient_amd64.deb
 - remove unused files
-- remove createdump and dependencies
+- remove createdump and its dependencies
