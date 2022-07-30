@@ -1,6 +1,8 @@
 #!/bin/bash
+# curl https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/bionic/main/binary-amd64/Packages -O
 set -e -u
-PROJECTNAME=awsvpnclient
+
+PROJECTNAME=workspacesclient
 PROJECTTMPDIR=/tmp/${PROJECTNAME}
 RPM_VERSION=$(rpmspec -q --qf "%{Version}-%{Release}" ${PROJECTNAME}.spec)
 spectool --get-files --directory ${PROJECTTMPDIR} ${PROJECTNAME}.spec
