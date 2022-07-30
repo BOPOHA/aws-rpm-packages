@@ -13,7 +13,7 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       3.1.0
-Release:       3
+Release:       4
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client for Ubuntu 18.04
@@ -47,12 +47,13 @@ rm -rf ./opt/%{name}/SQLite.Interop.dll # https://aur.archlinux.org/cgit/aur.git
 sed -i "s#/opt/awsvpnclient/Service/#/opt/awsvpnclient/#;" ./etc/systemd/system/%{name}.service
 mv ./opt/%{name}/{AWS\ VPN\ Client,AWSVPNClient}
 rm -rf \
-       ./opt/%{name}/libdbgshim.so \
-       ./opt/%{name}/libmscordaccore.so \
-       ./opt/%{name}/libmscordbi.so \
-       ./opt/%{name}/System.IO.Compression.Native.so \
-       ./opt/%{name}/System.Net.Http.Native.so \
        ./opt/%{name}/System.Net.Security.Native.so \
+       ./opt/%{name}/System.Net.Http.Native.so \
+       ./opt/%{name}/System.IO.Compression.Native.so \
+       ./opt/%{name}/libmscordbi.so \
+       ./opt/%{name}/libmscordaccore.so \
+       ./opt/%{name}/libdbgshim.so \
+       ./opt/%{name}/libcoreclrtraceptprovider.so \
        ./opt/%{name}/createdump
 
 %install

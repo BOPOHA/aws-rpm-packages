@@ -5,7 +5,7 @@
 BuildArch:     x86_64
 Name:          workspacesclient
 Version:       4.1.0.1523
-Release:       4
+Release:       5
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 18.04
@@ -25,13 +25,14 @@ rm -rf \
        ./opt/workspacesclient/workspacesclient.deps.json \
        ./opt/workspacesclient/workspacesclient.runtimeconfig.json
 rm -rf \
-       ./opt/workspacesclient/System.IO.Compression.Native.so \
-       ./opt/workspacesclient/System.Net.Http.Native.so \
-       ./opt/workspacesclient/System.Net.Security.Native.so \
-       ./opt/workspacesclient/libcoreclrtraceptprovider.so \
-       ./opt/workspacesclient/libdbgshim.so \
-       ./opt/workspacesclient/libmscordaccore.so \
-       ./opt/workspacesclient/libmscordbi.so
+       ./opt/%{name}/System.Net.Security.Native.so \
+       ./opt/%{name}/System.Net.Http.Native.so \
+       ./opt/%{name}/System.IO.Compression.Native.so \
+       ./opt/%{name}/libmscordbi.so \
+       ./opt/%{name}/libmscordaccore.so \
+       ./opt/%{name}/libdbgshim.so \
+       ./opt/%{name}/libcoreclrtraceptprovider.so \
+       ./opt/%{name}/createdump
 # and leave these libs:
 #       ./opt/workspacesclient/libhostfxr.so \
 #       ./opt/workspacesclient/libhostpolicy.so \
@@ -43,7 +44,6 @@ rm -rf \
 #       ./opt/workspacesclient/libpcoip_core.so
 #       ./opt/workspacesclient/libPcoipCoreWrapper.so \
 #rm -rf opt/workspacesclient/Assets/
-rm -rf opt/workspacesclient/createdump
 
 %install
 mv opt %{buildroot}/
@@ -80,3 +80,4 @@ mv opt %{buildroot}/
 * Sat Jul 30 2022 Anatolii Vorona 4.1.0.1523-3
 - rebuild workspacesclient_amd64.deb
 - remove createdump and its dependencies
+- remove liblttng-ust.so.0 dependency
