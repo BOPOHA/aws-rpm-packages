@@ -5,8 +5,8 @@
 BuildArch:     x86_64
 Name:          workspacesclient
 Version:       4.1.0.1523
-Release:       3
-License:       ASL 2.0
+Release:       4
+License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 18.04
 Source0:       https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/bionic/main/binary-amd64/workspacesclient_%{version}_amd64.deb
@@ -70,6 +70,10 @@ mv opt %{buildroot}/
 %license /opt/%{name}/Licenses/PCoIP/pcoip-linux-version-license.txt
 %license /opt/%{name}/Licenses/third-party-license.txt
 %doc /opt/%{name}/SOS_README.md
+%dir /opt/%{name}/
+%dir /opt/%{name}/Licenses
+%dir /opt/%{name}/Licenses/PCoIP
+%dir /opt/%{name}/Assets
 
 
 %changelog
