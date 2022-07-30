@@ -5,7 +5,7 @@
  Name=AWS VPN Client
  Comment=AWS VPN Client
 -Exec=/opt/awsvpnclient/AWS\ VPN\ Client %u
-+Exec=/usr/bin/awsvpnclient %u
++Exec=/opt/awsvpnclient/AWSVPNClient
  Path=/opt/awsvpnclient
 -Icon=acvc-64.png
 +Icon=acvc-64

@@ -1,4 +1,10 @@
+# Start method called with config file and management port password file contents.
+# Ovpn binary calculated checksum: 506017103194649c81825504261fd0a24e20cb2dba5bb88cc9a4c91b1a52fa41.
+# Ovpn binary actual checksum: 6719be8e3b8b6355a480fd605f385b7a627b2b59eed3f6357cfeb7c33a6b5a5b
+# OvpnBinaryChecksumValidationFailed
+# Disable stripping:
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
+
 %define debug_package %{nil}
 %define _build_id_links none
 %undefine _auto_set_build_flags
@@ -7,7 +13,7 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       3.1.0
-Release:       2
+Release:       3
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client for Ubuntu 18.04
@@ -38,8 +44,8 @@ rm -rf ./opt/%{name}/SQLite.Interop.dll # https://aur.archlinux.org/cgit/aur.git
                                         # fixes errors:
                                         # gtk_tree_model_iter_nth_child: assertion 'n >= 0' failed
                                         # gtk_list_store_get_path: assertion 'iter->stamp == priv->stamp' failed
-sed -i "s#Service/ACVC.GTK.Service#ACVC.GTK.Service#;" ./etc/systemd/system/%{name}.service
-
+sed -i "s#/opt/awsvpnclient/Service/#/opt/awsvpnclient/#;" ./etc/systemd/system/%{name}.service
+mv ./opt/%{name}/{AWS\ VPN\ Client,AWSVPNClient}
 rm -rf \
        ./opt/%{name}/libdbgshim.so \
        ./opt/%{name}/libmscordaccore.so \
@@ -51,21 +57,21 @@ rm -rf \
 
 %install
 mv opt %{buildroot}/
-mv usr %{buildroot}/
-%__install -D etc/systemd/system/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
-%__install -D %{SOURCE1} %{buildroot}%{_presetdir}/70-%{name}.preset
+%__install -Dpm 0644 usr/share/applications/awsvpnclient.desktop %{buildroot}%{_datadir}/applications/awsvpnclient.desktop
+%__install -Dpm 0644 usr/share/doc/awsvpnclient/copyright        %{buildroot}%{_datadir}/doc/awsvpnclient/copyright
+%__install -Dpm 0644 usr/share/pixmaps/acvc-64.png               %{buildroot}%{_datadir}/pixmaps/acvc-64.png
+
+%__install -Dpm 0644 etc/systemd/system/%{name}.service          %{buildroot}%{_unitdir}/%{name}.service
+%__install -Dpm 0644 %{SOURCE1}                                  %{buildroot}%{_presetdir}/70-%{name}.preset
 
 %__install -d %{buildroot}/opt/%{name}/Service/Resources/openvpn
 ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/Resources/openvpn/configure-dns
-%__install -d %{buildroot}/usr/bin/
-ln -s "/opt/%{name}/AWS VPN Client"  %{buildroot}/usr/bin/%{name}
 
 %clean
 
 %files
 %defattr(0644, root, root, 0755)
-/usr/bin/awsvpnclient
-%attr(0755, root, root) "/opt/%{name}/AWS VPN Client"
+%attr(0755, root, root) "/opt/%{name}/AWSVPNClient"
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/acvc-openvpn
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/configure-dns
 %attr(0755, root, root) /opt/%{name}/ACVC.GTK.Service
@@ -84,7 +90,7 @@ ln -s "/opt/%{name}/AWS VPN Client"  %{buildroot}/usr/bin/%{name}
 %license /opt/%{name}/Resources/LINUX-LICENSE.txt
 %license /opt/%{name}/Resources/THIRD-PARTY-LICENSES-GTK.txt
 %doc /opt/%{name}/SOS_README.md
-%doc /usr/share/doc/%{name}
+%doc %{_docdir}/%{name}
 %dir /opt/%{name}/
 %dir /opt/%{name}/Resources/
 %dir /opt/%{name}/Resources/openvpn
