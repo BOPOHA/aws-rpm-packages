@@ -4,13 +4,13 @@
 
 BuildArch:     x86_64
 Name:          workspacesclient
-Version:       4.3.0.1766
+Version:       4.4.0.1808
 Release:       3
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 18.04
-Source0:       https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/bionic/main/binary-amd64/workspacesclient_%{version}_amd64.deb
-Source1:       https://download-ib01.fedoraproject.org/pub/fedora/linux/updates/35/Everything/x86_64/Packages/h/hiredis-0.13.3-17.fc35.x86_64.rpm
+Source0:       https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/focal/main/binary-amd64/workspacesclient_%{version}_amd64.deb
+Source1:       http://archive.ubuntu.com/ubuntu/pool/universe/h/hiredis/libhiredis0.14_0.14.0-6_amd64.deb
 
 BuildRequires: systemd-rpm-macros
 
@@ -28,7 +28,6 @@ rm -rf \
 rm -rf \
        ./opt/%{name}/System.Net.Security.Native.so \
        ./opt/%{name}/System.Net.Http.Native.so \
-       ./opt/%{name}/System.IO.Compression.Native.so \
        ./opt/%{name}/libmscordbi.so \
        ./opt/%{name}/libmscordaccore.so \
        ./opt/%{name}/libdbgshim.so \
@@ -46,14 +45,14 @@ rm -rf \
 #       ./opt/workspacesclient/libPcoipCoreWrapper.so \
 #rm -rf opt/workspacesclient/Assets/
 
-rpm2cpio %{SOURCE1} | cpio -icdv ./usr/lib64/libhiredis.so.0.13
+ar p %{SOURCE1} data.tar.xz | tar -xJ
 
 %install
 mv opt %{buildroot}/
 
 %__install -Dpm 0644 usr/lib/x86_64-linux-gnu/pcoip-client/vchan_plugins/libvchan-plugin-clipboard.so \
         %{buildroot}/usr/lib/x86_64-linux-gnu/pcoip-client/vchan_plugins/libvchan-plugin-clipboard.so
-%__install -Dpm 0644 usr/lib64/libhiredis.so.0.13                %{buildroot}/usr/lib/x86_64-linux-gnu/pcoip-client/libhiredis.so.0.13
+%__install -Dpm 0644 usr/lib/x86_64-linux-gnu/libhiredis.so.0.14 %{buildroot}/usr/lib/x86_64-linux-gnu/pcoip-client/libhiredis.so.0.14
 %__install -Dpm 0644 usr/share/applications/%{name}.desktop      %{buildroot}%{_datadir}/applications/%{name}.desktop
 %__install -Dpm 0644 usr/share/pixmaps/com.amazon.workspaces.svg %{buildroot}%{_datadir}/pixmaps/com.amazon.workspaces.svg
 
@@ -67,7 +66,7 @@ mv opt %{buildroot}/
 /opt/%{name}/appsettings.json
 /opt/%{name}/Assets/*
 
-/usr/lib/x86_64-linux-gnu/pcoip-client/libhiredis.so.0.13
+/usr/lib/x86_64-linux-gnu/pcoip-client/libhiredis.so.0.14
 /usr/lib/x86_64-linux-gnu/pcoip-client/vchan_plugins/libvchan-plugin-clipboard.so
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/com.amazon.workspaces.svg
@@ -82,8 +81,10 @@ mv opt %{buildroot}/
 
 
 %changelog
+* Tue Nov 8 2022 Anatolii Vorona 4.4.0.1808
+- move from bionic to focal binaries
+
 * Mon Nov 7 2022 Anatolii Vorona 4.3.0.1766
-- Ubuntu Linux 20.04 support.
 - Updated PCoIP SDK for Linux.
 - Fixed changing monitor's relative positions issue on WorkSpaces.
 - Minor bug fixes and enhancements.

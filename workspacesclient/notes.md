@@ -13,7 +13,6 @@ diff /tmp/rpm.list /tmp/deb.list
 > /opt/workspacesclient/libmscordaccore.so
 > /opt/workspacesclient/libmscordbi.so
 > /opt/workspacesclient/System.IO.Compression.Native.a
-> /opt/workspacesclient/System.IO.Compression.Native.so
 > /opt/workspacesclient/System.Native.a
 > /opt/workspacesclient/System.Net.Http.Native.a
 > /opt/workspacesclient/System.Net.Http.Native.so
@@ -26,4 +25,9 @@ diff /tmp/rpm.list /tmp/deb.list
 > /opt/workspacesclient/workspacesclient.deps.json
 > /opt/workspacesclient/workspacesclient.pdb
 > /opt/workspacesclient/workspacesclient.runtimeconfig.json
+```
+
+# tail logs
+```shell
+tail ~/.local/share/Amazon\ Web\ Services/Amazon\ WorkSpaces/logs/{,pcoip/}* -n 0 -f 
 ```
