@@ -10,7 +10,7 @@ License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 18.04
 Source0:       https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/focal/main/binary-amd64/workspacesclient_%{version}_amd64.deb
-Source1:       http://archive.ubuntu.com/ubuntu/pool/universe/h/hiredis/libhiredis0.14_0.14.0-6_amd64.deb
+Source1:       https://mirror.us.leaseweb.net/ubuntu/pool/universe/h/hiredis/libhiredis0.14_0.14.0-6_amd64.deb
 
 BuildRequires: systemd-rpm-macros
 
