@@ -4,12 +4,13 @@
 
 BuildArch:     x86_64
 Name:          workspacesclient
-Version:       4.1.0.1523
-Release:       5
+Version:       4.3.0.1766
+Release:       3
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 18.04
 Source0:       https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/bionic/main/binary-amd64/workspacesclient_%{version}_amd64.deb
+Source1:       https://download-ib01.fedoraproject.org/pub/fedora/linux/updates/35/Everything/x86_64/Packages/h/hiredis-0.13.3-17.fc35.x86_64.rpm
 
 BuildRequires: systemd-rpm-macros
 
@@ -45,11 +46,14 @@ rm -rf \
 #       ./opt/workspacesclient/libPcoipCoreWrapper.so \
 #rm -rf opt/workspacesclient/Assets/
 
+rpm2cpio %{SOURCE1} | cpio -icdv ./usr/lib64/libhiredis.so.0.13
+
 %install
 mv opt %{buildroot}/
 
 %__install -Dpm 0644 usr/lib/x86_64-linux-gnu/pcoip-client/vchan_plugins/libvchan-plugin-clipboard.so \
         %{buildroot}/usr/lib/x86_64-linux-gnu/pcoip-client/vchan_plugins/libvchan-plugin-clipboard.so
+%__install -Dpm 0644 usr/lib64/libhiredis.so.0.13                %{buildroot}/usr/lib/x86_64-linux-gnu/pcoip-client/libhiredis.so.0.13
 %__install -Dpm 0644 usr/share/applications/%{name}.desktop      %{buildroot}%{_datadir}/applications/%{name}.desktop
 %__install -Dpm 0644 usr/share/pixmaps/com.amazon.workspaces.svg %{buildroot}%{_datadir}/pixmaps/com.amazon.workspaces.svg
 
@@ -63,6 +67,7 @@ mv opt %{buildroot}/
 /opt/%{name}/appsettings.json
 /opt/%{name}/Assets/*
 
+/usr/lib/x86_64-linux-gnu/pcoip-client/libhiredis.so.0.13
 /usr/lib/x86_64-linux-gnu/pcoip-client/vchan_plugins/libvchan-plugin-clipboard.so
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/com.amazon.workspaces.svg
@@ -77,6 +82,12 @@ mv opt %{buildroot}/
 
 
 %changelog
+* Mon Nov 7 2022 Anatolii Vorona 4.3.0.1766
+- Ubuntu Linux 20.04 support.
+- Updated PCoIP SDK for Linux.
+- Fixed changing monitor's relative positions issue on WorkSpaces.
+- Minor bug fixes and enhancements.
+
 * Sat Jul 30 2022 Anatolii Vorona 4.1.0.1523-3
 - rebuild workspacesclient_amd64.deb
 - remove createdump and its dependencies

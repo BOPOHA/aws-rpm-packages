@@ -1,5 +1,6 @@
 #!/bin/bash
-# curl https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/bionic/main/binary-amd64/Packages -O
+# https://clients.amazonworkspaces.com/linux-install
+# curl https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/focal/main/binary-amd64/Packages -O
 set -e -u
 
 PROJECTNAME=workspacesclient

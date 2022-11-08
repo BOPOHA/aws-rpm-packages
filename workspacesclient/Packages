@@ -1,14 +1,14 @@
 Package: workspacesclient
-Version: 4.1.0.1523
+Version: 4.4.0.1808
 Architecture: amd64
 Maintainer: Amazon WorkSpaces
-Depends: libgtk-3-0, libwebkit2gtk-4.0-37, libsoup2.4-1, libgraphicsmagick++-q16-12
-Filename: dists/bionic/main/binary-amd64/workspacesclient_4.1.0.1523_amd64.deb
-Size: 25949476
-MD5sum: 86c9399c6c24510f05786e07bfaeebc6
-SHA1: 4f80b4e82dd0950865d610b01e1c7b9611e6a5e9
-SHA256: 9ceac838f674c8e04639080d4319e6d5c551f4d27e053102d76501ed4c75cae9
+Depends: libgtk-3-0, libwebkit2gtk-4.0-37, libsoup2.4-1, libgraphicsmagick++-q16-12, libhiredis0.14, libva2
+Filename: dists/focal/main/binary-amd64/workspacesclient_4.4.0.1808_amd64.deb
+Size: 26929608
+MD5sum: ec54a4397486b85800f4dc660a4a797d
+SHA1: e93b0ba1d99c1de568593cca87b7014c443526f0
+SHA256: d24a22dce3285831a5eee929cb9d2f0f6fc4fb9f20c8951e237b4882a960fbc4
 Section: misc
 Priority: optional
-Description: Amazon WorkSpaces Client for Ubuntu 18.04
+Description: Amazon WorkSpaces Client for Ubuntu 20.04
 
