@@ -13,13 +13,14 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       3.1.0
-Release:       4
+Release:       5
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client for Ubuntu 18.04
 Source0:       https://d20adtppz83p9s.cloudfront.net/GTK/%{version}/awsvpnclient_amd64.deb
 Source1:       70-awsvpnclient.preset
 Patch0:        awsvpnclient.desktop.patch
+Patch1:        configure-dns.patch
 
 BuildRequires: systemd-rpm-macros
 
@@ -29,7 +30,8 @@ BuildRequires: systemd-rpm-macros
 %prep
 %setup -cT
 ar p %{SOURCE0} data.tar.xz | tar -xJ
-%patch
+%patch0 -p1
+%patch1 -p1
 
 find . -iname "*.a" -delete
 find . -iname "*.pdb" -delete
@@ -118,6 +120,9 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Tue Dec 13 2022 Anatolii Vorona  3.1.0-5
+- configure-dns is working now
+
 * Tue Jul 26 2022 Anatolii Vorona  3.1.0-2
 - rebuild awsvpnclient_amd64.deb
 - remove unused files

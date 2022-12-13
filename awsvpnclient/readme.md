@@ -7,12 +7,10 @@
 - https://github.com/JonathanxD/openaws-vpn-client
 - https://github.com/samm-git/aws-vpn-client
 
-
-# known issues:
-- configure-dns is not properly checked and may not work at all. patches and suggestions are welcome
-
-
 # must read
 
  - https://smallhacks.wordpress.com/2020/07/08/aws-client-vpn-internals/
- 
+
+# where to check latest version
+
+ - https://docs.aws.amazon.com/vpn/latest/clientvpn-user/client-vpn-connect-linux.html

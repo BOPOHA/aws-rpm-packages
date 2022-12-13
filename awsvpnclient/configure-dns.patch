@@ -1,0 +1,8 @@
+--- /opt/awsvpnclient/Service/Resources/openvpn/configure-dns	2022-05-17 23:51:35.000000000 +0200
++++ /opt/awsvpnclient/Service/Resources/openvpn/configure-dns	2022-12-13 01:17:27.856967686 +0100
+@@ -1,4 +1,5 @@
+ #!/usr/bin/env bash
++PATH=/usr/sbin:/usr/bin:/usr/local/bin
+ 
+ configure_logging() {
+   log_folder="/var/log/aws-vpn-client"
