@@ -4,11 +4,11 @@
 
 BuildArch:     x86_64
 Name:          workspacesclient
-Version:       4.4.0.1808
-Release:       3
+Version:       4.5.0.2006
+Release:       1
 License:       Freely redistributable without restriction
 Group:         Converted/misc
-Summary:       Amazon WorkSpaces Client for Ubuntu 18.04
+Summary:       Amazon WorkSpaces Client for Ubuntu 20.04
 Source0:       https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/focal/main/binary-amd64/workspacesclient_%{version}_amd64.deb
 Source1:       https://mirror.us.leaseweb.net/ubuntu/pool/universe/h/hiredis/libhiredis0.14_0.14.0-6_amd64.deb
 
@@ -73,7 +73,6 @@ mv opt %{buildroot}/
 
 %license /opt/%{name}/Licenses/PCoIP/pcoip-linux-version-license.txt
 %license /opt/%{name}/Licenses/third-party-license.txt
-%doc /opt/%{name}/SOS_README.md
 %dir /opt/%{name}/
 %dir /opt/%{name}/Licenses
 %dir /opt/%{name}/Licenses/PCoIP
@@ -81,6 +80,10 @@ mv opt %{buildroot}/
 
 
 %changelog
+* Thu Dec 29 2022 Anatolii Vorona 4.5.0.2006
+- Resolved the issue of users being unable to disconnect from WorkSpaces when their network connectivity was lost or unavailable.
+- Updated PCoIP SDK for the WorkSpaces Linux client.
+
 * Tue Nov 8 2022 Anatolii Vorona 4.4.0.1808
 - move from bionic to focal binaries
 
