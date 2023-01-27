@@ -12,8 +12,8 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       3.1.0
-Release:       5
+Version:       3.2.0
+Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client for Ubuntu 18.04
@@ -120,6 +120,9 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Fri Jan 27 2023 Anatolii Vorona  3.2.0-1
+- Added support for "verify-x509-name" OpenVPN flag.
+
 * Tue Dec 13 2022 Anatolii Vorona  3.1.0-5
 - configure-dns is working now
 
