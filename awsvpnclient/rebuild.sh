@@ -1,4 +1,9 @@
 #!/bin/bash
+# required packages:
+#  dnf install rpmdevtools rpkg
+# how to check latest version:
+# https://docs.aws.amazon.com/vpn/latest/clientvpn-user/client-vpn-connect-linux.html
+# curl https://d20adtppz83p9s.cloudfront.net/GTK/latest/debian-repo/dists/ubuntu-20.04/main/binary-amd64/Packages -O
 set -e -u
 PROJECTNAME=awsvpnclient
 PROJECTTMPDIR=/tmp/${PROJECTNAME}
