@@ -1,0 +1,26 @@
+--- "/opt/awsvpnclient/AWS VPN Client.runtimeconfig.json"
++++ "/opt/awsvpnclient/AWS VPN Client.runtimeconfig.json"
+@@ -1,6 +1,9 @@
+ {
+   "runtimeOptions": {
+     "tfm": "netcoreapp3.1",
++    "configProperties": {
++      "System.Globalization.Invariant": true
++    },
+     "includedFrameworks": [
+       {
+         "name": "Microsoft.NETCore.App",
+
+--- /opt/awsvpnclient/Service/ACVC.GTK.Service.runtimeconfig.json
++++ /opt/awsvpnclient/Service/ACVC.GTK.Service.runtimeconfig.json
+@@ -1,6 +1,9 @@
+ {
+   "runtimeOptions": {
+     "tfm": "netcoreapp3.1",
++    "configProperties": {
++      "System.Globalization.Invariant": true
++    },
+     "includedFrameworks": [
+       {
+         "name": "Microsoft.NETCore.App",
+

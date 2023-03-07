@@ -1,0 +1,96 @@
+--- /opt/awsvpnclient/Service/ACVC.GTK.Service.deps.json	2023-03-07 16:41:46.587530124 +0100
++++ /opt/awsvpnclient/Service/ACVC.GTK.Service.deps.json	2023-03-07 16:45:35.705954989 +0100
+@@ -667,66 +667,27 @@
+           "System.Globalization.Native.so": {
+             "fileVersion": "0.0.0.0"
+           },
+-          "System.IO.Compression.Native.a": {
+-            "fileVersion": "0.0.0.0"
+-          },
+-          "System.IO.Compression.Native.so": {
+-            "fileVersion": "0.0.0.0"
+-          },
+-          "System.Native.a": {
+-            "fileVersion": "0.0.0.0"
+-          },
+           "System.Native.so": {
+             "fileVersion": "0.0.0.0"
+           },
+-          "System.Net.Http.Native.a": {
+-            "fileVersion": "0.0.0.0"
+-          },
+-          "System.Net.Http.Native.so": {
+-            "fileVersion": "0.0.0.0"
+-          },
+-          "System.Net.Security.Native.a": {
+-            "fileVersion": "0.0.0.0"
+-          },
+-          "System.Net.Security.Native.so": {
+-            "fileVersion": "0.0.0.0"
+-          },
+           "System.Private.CoreLib.dll": {
+             "assemblyVersion": "4.0.0.0",
+             "fileVersion": "4.700.21.56803"
+           },
+-          "System.Security.Cryptography.Native.OpenSsl.a": {
+-            "fileVersion": "0.0.0.0"
+-          },
+           "System.Security.Cryptography.Native.OpenSsl.so": {
+             "fileVersion": "0.0.0.0"
+           },
+-          "createdump": {
+-            "fileVersion": "0.0.0.0"
+-          },
+           "libclrjit.so": {
+             "fileVersion": "0.0.0.0"
+           },
+           "libcoreclr.so": {
+             "fileVersion": "0.0.0.0"
+           },
+-          "libcoreclrtraceptprovider.so": {
+-            "fileVersion": "0.0.0.0"
+-          },
+-          "libdbgshim.so": {
+-            "fileVersion": "0.0.0.0"
+-          },
+           "libhostfxr.so": {
+             "fileVersion": "0.0.0.0"
+           },
+           "libhostpolicy.so": {
+             "fileVersion": "0.0.0.0"
+-          },
+-          "libmscordaccore.so": {
+-            "fileVersion": "0.0.0.0"
+-          },
+-          "libmscordbi.so": {
+-            "fileVersion": "0.0.0.0"
+           }
+         }
+       },
+@@ -908,19 +869,6 @@
+           }
+         }
+       },
+-      "Stub.System.Data.SQLite.Core.NetStandard/1.0.115": {
+-        "runtime": {
+-          "lib/netstandard2.1/System.Data.SQLite.dll": {
+-            "assemblyVersion": "1.0.115.0",
+-            "fileVersion": "1.0.115.0"
+-          }
+-        },
+-        "native": {
+-          "runtimes/linux-x64/native/SQLite.Interop.dll": {
+-            "fileVersion": "0.0.0.0"
+-          }
+-        }
+-      },
+       "SymbolicLinkSupport/1.2.0": {
+         "runtime": {
+           "lib/netstandard1.3/SymbolicLinkSupport.dll": {
+@@ -3166,4 +3114,4 @@
+       "base"
+     ]
+   }
+-}
+\ No newline at end of file
++}
