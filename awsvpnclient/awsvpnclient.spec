@@ -12,15 +12,18 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       3.2.0
+Version:       3.4.0
 Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
-Summary:       AWS VPN Client for Ubuntu 18.04
+Summary:       AWS VPN Client
 Source0:       https://d20adtppz83p9s.cloudfront.net/GTK/%{version}/awsvpnclient_amd64.deb
 Source1:       70-awsvpnclient.preset
 Patch0:        awsvpnclient.desktop.patch
 Patch1:        configure-dns.patch
+Patch2:        awsvpnclient.runtimeconfig.patch
+Patch3:        awsvpnclient.deps.patch
+Patch4:        acvc.gtk..deps.patch
 
 BuildRequires: systemd-rpm-macros
 
@@ -32,12 +35,15 @@ BuildRequires: systemd-rpm-macros
 ar p %{SOURCE0} data.tar.xz | tar -xJ
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 find . -iname "*.a" -delete
 find . -iname "*.pdb" -delete
-find . -iname "*.json" -delete
 mv ./opt/%{name}/Service/Resources/openvpn       ./opt/%{name}/Resources/
 mv ./opt/%{name}/Service/ACVC.GTK.Service{,.dll} ./opt/%{name}/
+mv ./opt/%{name}/Service/*.json                  ./opt/%{name}/
 rm -rf ./opt/%{name}/Service
 rm -rf ./opt/%{name}/SQLite.Interop.dll # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=awsvpnclient#n31
                                         # Workaround for missing compatibility of the SQL library with arch linux:
@@ -81,6 +87,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 /opt/%{name}/*.dll
 /opt/%{name}/*/*.dll
 /opt/%{name}/*.so
+/opt/%{name}/*.json
 /opt/%{name}/Resources/acvc-64.png
 
 /usr/share/applications/%{name}.desktop
@@ -120,6 +127,11 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Tue Mar 7 2023 Anatolii Vorona  3.4.0-1
+- bump version
+- disable Globalization. ICU is needed except if globalization is disabled
+  Client works with libicu versions 67 and 69, and fc37 ships with libicu v71.
+
 * Fri Jan 27 2023 Anatolii Vorona  3.2.0-1
 - Added support for "verify-x509-name" OpenVPN flag.
 
