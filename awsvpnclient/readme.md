@@ -1,6 +1,13 @@
 # last build status
 [![Copr build status](https://copr.fedorainfracloud.org/coprs/vorona/aws-rpm-packages/package/awsvpnclient/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/vorona/aws-rpm-packages/package/awsvpnclient/)
 
+# how to install
+
+```shell
+dnf copr enable vorona/aws-rpm-packages -y
+dnf install awsvpnclient -y && systemctl start awsvpnclient
+```
+
 # known alternatives
 
 - https://gist.github.com/miguelgmalpha/5c9e78d16312d156b0ec1d1c1bb09c1c
