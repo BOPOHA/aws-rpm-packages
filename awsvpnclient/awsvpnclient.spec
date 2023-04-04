@@ -9,11 +9,13 @@
 %define _build_id_links none
 %undefine _auto_set_build_flags
 
+%global __provides_exclude_from  /opt/awsvpnclient/.*\\.so
+%global __requires_exclude_from  /opt/awsvpnclient/.*\\.so
 
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       3.4.0
-Release:       1
+Release:       2
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -25,6 +27,7 @@ Patch2:        awsvpnclient.runtimeconfig.patch
 Patch3:        awsvpnclient.deps.patch
 Patch4:        acvc.gtk..deps.patch
 
+Requires:      openssl1.1
 BuildRequires: systemd-rpm-macros
 
 %description
