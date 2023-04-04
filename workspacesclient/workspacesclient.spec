@@ -2,16 +2,20 @@
 %define _build_id_links none
 %undefine _auto_set_build_flags
 
+%global __provides_exclude_from  ^(/opt/workspacesclient/.*\\.so|/usr/lib/x86_64-linux-gnu/pcoip-client/.*)$
+%global __requires_exclude_from  ^(/opt/workspacesclient/.*\\.so|/usr/lib/x86_64-linux-gnu/pcoip-client/.*)$
+
 BuildArch:     x86_64
 Name:          workspacesclient
 Version:       4.5.0.2006
-Release:       1
+Release:       2
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 20.04
 Source0:       https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/focal/main/binary-amd64/workspacesclient_%{version}_amd64.deb
 Source1:       https://mirror.us.leaseweb.net/ubuntu/pool/universe/h/hiredis/libhiredis0.14_0.14.0-6_amd64.deb
 
+Requires:      openssl1.1
 Requires:      webkit2gtk4.0
 BuildRequires: systemd-rpm-macros
 
