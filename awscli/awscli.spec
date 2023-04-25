@@ -6,8 +6,11 @@
 %global __requires_exclude_from %{_libexecdir}/%{srcname}
 
 Name:           awscli
-Version:        2.11.6
-Release:        4%{?dist}
+# here you can find a new tag
+# https://github.com/aws/aws-cli/tree/v2
+# https://github.com/aws/aws-cli/tags
+Version:        2.11.15
+Release:        1%{?dist}
 Summary:        Universal Command Line Interface for Amazon Web Services
 
 License:        ASL 2.0 and MIT
@@ -58,5 +61,8 @@ ln -sf ../libexec/%{srcname}/aws_completer %{buildroot}%{_bindir}/aws_completer
 %{buildroot}%{_bindir}/aws --version
 
 %changelog
+* Tue Apr 25 2023 Anatolii Vorona - 2.11.15-1
+- bump version; first testing c8/c9 stream and al2023
+
 * Thu Mar 23 2023 Anatolii Vorona - 2.11.5-1
 - init spec aws-cli v2
