@@ -1,12 +1,12 @@
 Package: awsvpnclient
-Version: 3.4.0
+Version: 3.9.0
 Architecture: amd64
 Maintainer: AWS VPN Client
 Filename: pool/ubuntu-20.04/awsvpnclient_amd64.deb
-Size: 56321856
-MD5sum: 11348873f32408f74ebd0fbafaa3ff2f
-SHA1: 8bfc2a6f403fcd499a982263f7e643aff2addbd8
-SHA256: cde8c636adbbb2885318d8a3ead062432609c27af4b0970a7482fc6f47ca336d
+Size: 56343280
+MD5sum: bdfa611b72c1f6ff7df0aa070496f931
+SHA1: 3f644ae22319fb44ae2d3492e0581b37fe8499e1
+SHA256: 2a16b1645a7eefa3824d1d1fd09a7f9cafab2733bbaa8c6987f61a3bd6e38893
 Section: misc
 Priority: optional
 Description: AWS VPN Client for Ubuntu 18.04

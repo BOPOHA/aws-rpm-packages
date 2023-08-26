@@ -14,8 +14,8 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       3.4.0
-Release:       2
+Version:       3.9.0
+Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -36,11 +36,11 @@ BuildRequires: systemd-rpm-macros
 %prep
 %setup -cT
 ar p %{SOURCE0} data.tar.xz | tar -xJ
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
+%patch -P 3 -p1
+%patch -P 4 -p1
 
 find . -iname "*.a" -delete
 find . -iname "*.pdb" -delete
@@ -130,6 +130,12 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Sat Aug 26 2023 Anatolii Vorona - 3.9.0-1
+- bump version
+- improved security posture
+- fixed a connectivity issue when NAT64 is enabled in the client network
+- minor bug fixes and enhancements
+
 * Tue Mar 7 2023 Anatolii Vorona  3.4.0-1
 - bump version
 - disable Globalization. ICU is needed except if globalization is disabled
