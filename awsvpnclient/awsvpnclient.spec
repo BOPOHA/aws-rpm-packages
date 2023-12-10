@@ -14,7 +14,7 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       3.9.0
+Version:       3.11.0
 Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
@@ -130,12 +130,15 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Sun Dec 10 2023 Anatolii Vorona - 3.11.0-1
+- bump version
+- improved accessibility
+
 * Sat Aug 26 2023 Anatolii Vorona - 3.9.0-1
 - bump version
 - improved security posture
 - fixed a connectivity issue when NAT64 is enabled in the client network
 - minor bug fixes and enhancements
-
 * Tue Mar 7 2023 Anatolii Vorona  3.4.0-1
 - bump version
 - disable Globalization. ICU is needed except if globalization is disabled
