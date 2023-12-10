@@ -21,7 +21,7 @@ BuildRequires: make
 BuildRequires: upx
 %if 0%{?el8}
 BuildRequires: python38
-%elif 0%{?fc39}
+%elif 0%{?fc39}%{?fc40}
 %global python3 /usr/bin/python3.11
 BuildRequires:  python3.11-devel
 %else
