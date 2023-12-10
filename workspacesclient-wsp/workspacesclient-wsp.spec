@@ -1,9 +1,10 @@
 %define _build_id_links none
-%global __provides_exclude_from  ^(/usr/lib/x86_64-linux-gnu/workspacesclient/.*\\.so.*|/usr/lib/x86_64-linux-gnu/pcoip-client/.*)$
-%global __requires_exclude_from  ^(/usr/lib/x86_64-linux-gnu/workspacesclient/.*\\.so.*|/usr/lib/x86_64-linux-gnu/pcoip-client/.*)$
-
 %define app_name workspacesclient
 %define app_libs_dir /usr/lib/x86_64-linux-gnu/%{app_name}
+
+%global __provides_exclude_from  ^(%{app_libs_dir}/.*\\.so.*|%{app_libs_dir}/dcv/dcvclientbin)$
+%global __requires_exclude_from  ^(%{app_libs_dir}/.*\\.so.*|%{app_libs_dir}/dcv/dcvclientbin)$
+
 
 BuildArch:     x86_64
 Name:          workspacesclient-wsp
