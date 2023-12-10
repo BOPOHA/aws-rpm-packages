@@ -1,0 +1,9 @@
+Package: workspacesclient
+Version: 2023.1.4537
+Architecture: amd64
+Section: misc
+Priority: optional
+Maintainer: Amazon WorkSpaces
+Installed-Size: 294634
+Depends: libva-drm2, libvdpau1, libgtk2.0-bin, desktop-file-utils, libva-x11-2, libglib2.0-bin
+Description: [generated from Rust crate WorkSpacesClient]
