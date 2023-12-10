@@ -2,9 +2,8 @@
 %define app_name workspacesclient
 %define app_libs_dir /usr/lib/x86_64-linux-gnu/%{app_name}
 
-%global __provides_exclude_from  ^(%{app_libs_dir}/.*\\.so.*|%{app_libs_dir}/dcv/dcvclientbin)$
-%global __requires_exclude_from  ^(%{app_libs_dir}/.*\\.so.*|%{app_libs_dir}/dcv/dcvclientbin)$
-
+%global __provides_exclude_from  %{app_libs_dir}
+%global __requires_exclude_from  %{app_libs_dir}
 
 BuildArch:     x86_64
 Name:          workspacesclient-wsp
