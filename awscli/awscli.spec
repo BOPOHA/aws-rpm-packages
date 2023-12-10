@@ -9,7 +9,7 @@ Name:           awscli
 # here you can find a new tag
 # https://github.com/aws/aws-cli/tree/v2
 # https://github.com/aws/aws-cli/tags
-Version:        2.11.15
+Version:        2.15.0
 Release:        1%{?dist}
 Summary:        Universal Command Line Interface for Amazon Web Services
 
@@ -21,6 +21,9 @@ BuildRequires: make
 BuildRequires: upx
 %if 0%{?el8}
 BuildRequires: python38
+%elif 0%{?fc39}
+%global python3 /usr/bin/python3.11
+BuildRequires:  python3.11-devel
 %else
 BuildRequires: python > 3.8
 %endif
@@ -38,6 +41,7 @@ https://aws.amazon.com/blogs/developer/aws-cli-v2-is-now-generally-available/
 %build
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 %set_build_flags
+export PYTHON=%{python3}
 %_configure --with-download-deps --with-install-type=portable-exe --prefix=%_prefix --libdir=%{_libexecdir}
 %make_build
 
@@ -61,6 +65,9 @@ ln -sf ../libexec/%{srcname}/aws_completer %{buildroot}%{_bindir}/aws_completer
 %{buildroot}%{_bindir}/aws --version
 
 %changelog
+* Sun Dec 10 2023 Anatolii Vorona - 2.15.0-1
+- bump version
+
 * Tue Apr 25 2023 Anatolii Vorona - 2.11.15-1
 - bump version; first testing c8/c9 stream and al2023
 
