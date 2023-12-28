@@ -3,6 +3,10 @@
 #  dnf install rpmdevtools rpkg
 # how to check latest version:
 # https://clients.amazonworkspaces.com/linux-install
+# cd /tmp/workspacesclient-wsp
+# ar p *deb control.tar.xz | tar -xJ
+# ar p *deb data.tar.xz | tar -xJ
+
 set -e -u
 
 PROJECTNAME=workspacesclient-wsp
