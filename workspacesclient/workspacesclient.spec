@@ -7,8 +7,8 @@
 
 BuildArch:     x86_64
 Name:          workspacesclient
-Version:       4.5.0.2006
-Release:       2
+Version:       4.7.0.4312
+Release:       1
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 20.04
@@ -19,36 +19,44 @@ Requires:      openssl1.1
 Requires:      webkit2gtk4.0
 BuildRequires: systemd-rpm-macros
 
+Conflicts:     %{name}-wsp
+
 %description
 %{summary}
 
 %prep
 %setup -cT
 ar p %{SOURCE0} data.tar.xz | tar -xJ
-find . -iname "*.a" -delete
 find . -iname "*.pdb" -delete
 rm -rf \
-       ./opt/workspacesclient/workspacesclient.deps.json \
-       ./opt/workspacesclient/workspacesclient.runtimeconfig.json
+       ./opt/%{name}/workspacesclient.deps.json \
+       ./opt/%{name}/workspacesclient.runtimeconfig.json \
+
+# remove unused trackers
 rm -rf \
-       ./opt/%{name}/System.Net.Security.Native.so \
-       ./opt/%{name}/System.Net.Http.Native.so \
        ./opt/%{name}/libmscordbi.so \
        ./opt/%{name}/libmscordaccore.so \
-       ./opt/%{name}/libdbgshim.so \
        ./opt/%{name}/libcoreclrtraceptprovider.so \
        ./opt/%{name}/createdump
-# and leave these libs:
-#       ./opt/workspacesclient/libhostfxr.so \
-#       ./opt/workspacesclient/libhostpolicy.so \
-#       ./opt/workspacesclient/libcoreclr.so \
-#       ./opt/workspacesclient/System.Globalization.Native.so \
-#       ./opt/workspacesclient/System.Native.so \
-#       ./opt/workspacesclient/libclrjit.so \
-#       ./opt/workspacesclient/System.Security.Cryptography.Native.OpenSsl.so \
-#       ./opt/workspacesclient/libpcoip_core.so
-#       ./opt/workspacesclient/libPcoipCoreWrapper.so \
-#rm -rf opt/workspacesclient/Assets/
+
+# W: files-duplicate
+rm -rf \
+       ./opt/%{name}/libavcodec.so.58 \
+       ./opt/%{name}/libavcodec.so.58.134.100 \
+       ./opt/%{name}/libavdevice.so.58 \
+       ./opt/%{name}/libavdevice.so.58.13.100 \
+       ./opt/%{name}/libavfilter.so.7 \
+       ./opt/%{name}/libavfilter.so.7.110.100 \
+       ./opt/%{name}/libavformat.so.58 \
+       ./opt/%{name}/libavformat.so.58.76.100 \
+       ./opt/%{name}/libavutil.so.56 \
+       ./opt/%{name}/libavutil.so.56.70.100 \
+       ./opt/%{name}/libswresample.so.3 \
+       ./opt/%{name}/libswresample.so.3.9.100 \
+       ./opt/%{name}/libswscale.so.5 \
+       ./opt/%{name}/libswscale.so.5.9.100 \
+       ./opt/%{name}/libwolfssl.so.35 \
+       ./opt/%{name}/libwolfssl.so.35.2.1
 
 ar p %{SOURCE1} data.tar.xz | tar -xJ
 
@@ -85,6 +93,9 @@ mv opt %{buildroot}/
 
 
 %changelog
+* Thu Dec 28 2023 Anatolii Vorona 4.7.0.4312-1
+- bump version
+
 * Thu Dec 29 2022 Anatolii Vorona 4.5.0.2006
 - Resolved the issue of users being unable to disconnect from WorkSpaces when their network connectivity was lost or unavailable.
 - Updated PCoIP SDK for the WorkSpaces Linux client.
