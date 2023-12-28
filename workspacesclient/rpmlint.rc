@@ -1,0 +1,3 @@
+addFilter("E: dir-or-file-in-opt")
+addFilter("W: unstripped-binary-or-object")
+addFilter("E: binary-or-shlib-defines-rpath")

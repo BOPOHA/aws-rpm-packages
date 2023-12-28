@@ -1,0 +1,18 @@
+============================ rpmlint session starts ============================
+rpmlint: 2.4.0
+configuration:
+    /usr/lib/python3.12/site-packages/rpmlint/configdefaults.toml
+    /etc/xdg/rpmlint/fedora-legacy-licenses.toml
+    /etc/xdg/rpmlint/fedora-spdx-licenses.toml
+    /etc/xdg/rpmlint/fedora.toml
+    /etc/xdg/rpmlint/scoring.toml
+    /etc/xdg/rpmlint/users-groups.toml
+    /etc/xdg/rpmlint/warn-on-functions.toml
+rpmlintrc: [PosixPath('rpmlint.rc')]
+checks: 31, packages: 1
+
+workspacesclient.x86_64: W: no-url-tag
+workspacesclient.x86_64: W: no-documentation
+workspacesclient.x86_64: W: crypto-policy-non-compliance-openssl /opt/workspacesclient/libpcoip_core.so SSL_CTX_set_cipher_list
+workspacesclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/workspacesclient/libpcoip_core.so
+ 1 packages and 0 specfiles checked; 0 errors, 4 warnings, 0 badness; has taken 3.8 s 
