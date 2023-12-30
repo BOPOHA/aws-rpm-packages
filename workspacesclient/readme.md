@@ -9,6 +9,13 @@ dnf install workspacesclient -y
 ```
 
 # notes
+
+## tailing logs
+
+```shell
+tail ~/.local/share/Amazon\ Web\ Services/Amazon\ WorkSpaces/logs/{,pcoip/,WSP/}* -n 0 -f
+```
+
 ## libcurl issue
 
 ```shell
