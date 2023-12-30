@@ -265,11 +265,13 @@
 /opt/workspacesclient/libclrgc.so
 /opt/workspacesclient/libclrjit.so
 /opt/workspacesclient/libcoreclr.so
+/opt/workspacesclient/libcurl.so
 /opt/workspacesclient/libhostfxr.so
 /opt/workspacesclient/libhostpolicy.so
 /opt/workspacesclient/libpcoip_core.so
 /opt/workspacesclient/libswresample.so
 /opt/workspacesclient/libswscale.so
+/opt/workspacesclient/libwolfssl.so
 /opt/workspacesclient/mscorlib.dll
 /opt/workspacesclient/netstandard.dll
 /opt/workspacesclient/workspacesclient
