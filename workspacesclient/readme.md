@@ -7,3 +7,19 @@
 dnf copr enable vorona/aws-rpm-packages -y
 dnf install workspacesclient -y
 ```
+
+# notes
+## libcurl issue
+
+```shell
+% ldd libpcoip_core.so 
+ldd: warning: you do not have execution permission for `./libpcoip_core.so'
+./libpcoip_core.so: /lib64/libcurl.so.4: no version information available (required by ./libpcoip_core.so)
+	linux-vdso.so.1 (0x00007fffc81d0000)
+	libcurl.so.4 => /lib64/libcurl.so.4 (0x00007f584b0d5000)
+```
+## libPcoipCoreWrapper issue
+```shell
+% chrpath -l libPcoipCoreWrapper.so 
+libPcoipCoreWrapper.so: no rpath or runpath tag found.
+```
