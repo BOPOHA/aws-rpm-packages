@@ -9,7 +9,7 @@
 BuildArch:     x86_64
 Name:          workspacesclient
 Version:       4.7.0.4312
-Release:       4
+Release:       5
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 20.04
@@ -20,6 +20,7 @@ Source2:       https://curl.haxx.se/download/curl-%{libcurl_version}.tar.gz
 Requires:      openssl1.1
 Requires:      webkit2gtk4.0
 Requires:      bzip2-libs
+BuildRequires: clang, openssl-devel
 BuildRequires: patchelf
 BuildRequires: systemd-rpm-macros
 
@@ -74,7 +75,7 @@ ar p %{SOURCE1} data.tar.xz | tar -xJ
 %setup -a 2 -T -D
 
 %build
-cd %{_builddir}/curl-%{libcurl_version}
+cd curl-%{libcurl_version}
 CC=clang ./configure --with-ssl --enable-versioned-symbols --enable-harden
 make
 ldd lib/.libs/libcurl.so.4.6.0
@@ -87,7 +88,7 @@ mv opt %{buildroot}/
 %__install -Dpm 0644 usr/lib/x86_64-linux-gnu/libhiredis.so.0.14 %{buildroot}/usr/lib/x86_64-linux-gnu/pcoip-client/libhiredis.so.0.14
 %__install -Dpm 0644 usr/share/applications/%{name}.desktop      %{buildroot}%{_datadir}/applications/%{name}.desktop
 %__install -Dpm 0644 usr/share/pixmaps/com.amazon.workspaces.svg %{buildroot}%{_datadir}/pixmaps/com.amazon.workspaces.svg
-%__install -Dpm 0644 %{_builddir}/curl-%{libcurl_version}/lib/.libs/libcurl.so.4.6.0 \
+%__install -Dpm 0644 curl-%{libcurl_version}/lib/.libs/libcurl.so.4.6.0 \
                                                                  %{buildroot}/opt/%{name}/libcurl.so
 
 %clean
@@ -114,7 +115,7 @@ mv opt %{buildroot}/
 
 
 %changelog
-* Sat Dec 30 2023 Anatolii Vorona 4.7.0.4312-4
+* Sat Dec 30 2023 Anatolii Vorona 4.7.0.4312-5
 - builded own libcurl.so instead of portintg chain of Ubuntu 20.04 libs
 - patched rpath and shared lib names for some libs
 - works fine on fc39
