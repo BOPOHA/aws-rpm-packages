@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    purge|remove|upgrade)
+        touch --no-create /usr/share/icons/hicolor || :
+        touch --no-create /usr/share/mime/packages || :
+
+        update-desktop-database || :
+        gtk-update-icon-cache /usr/share/icons/hicolor || :
+        glib-compile-schemas /usr/share/glib-2.0/schemas || :
+        update-mime-database /usr/share/mime || :
+    ;;
+
+    failed-upgrade|abort-install|abort-upgrade|disappear)
+        # do nothing?
+    ;;
+  *)
+      echo "postrm called with unknown argument \`$1'" >&2
+      exit 1
+  ;;
+esac

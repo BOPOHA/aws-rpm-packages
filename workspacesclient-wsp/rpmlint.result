@@ -1,0 +1,37 @@
+============================ rpmlint session starts ============================
+rpmlint: 2.4.0
+configuration:
+    /usr/lib/python3.12/site-packages/rpmlint/configdefaults.toml
+    /etc/xdg/rpmlint/fedora-legacy-licenses.toml
+    /etc/xdg/rpmlint/fedora-spdx-licenses.toml
+    /etc/xdg/rpmlint/fedora.toml
+    /etc/xdg/rpmlint/scoring.toml
+    /etc/xdg/rpmlint/users-groups.toml
+    /etc/xdg/rpmlint/warn-on-functions.toml
+rpmlintrc: [PosixPath('rpmlint.rc')]
+checks: 31, packages: 1
+
+workspacesclient-wsp.x86_64: W: obsolete-not-provided workspacesclient
+workspacesclient-wsp.x86_64: W: no-url-tag
+workspacesclient-wsp.x86_64: W: no-manual-page-for-binary workspacesclient
+workspacesclient-wsp.x86_64: W: library-not-linked-against-libc /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-svg.so
+workspacesclient-wsp.x86_64: W: library-not-linked-against-libc /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstapp.so
+workspacesclient-wsp.x86_64: W: library-not-linked-against-libc /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libcairo-gobject.so.2
+workspacesclient-wsp.x86_64: W: library-not-linked-against-libc /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libgthread-2.0.so.0
+workspacesclient-wsp.x86_64: W: files-duplicate /usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient.dcv-symbolic.svg /usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient-symbolic.svg
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/de_DE/LC_MESSAGES/dcvclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/de_DE/LC_MESSAGES/workspacesclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/es/LC_MESSAGES/dcvclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/es/LC_MESSAGES/workspacesclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/fr/LC_MESSAGES/dcvclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/fr/LC_MESSAGES/workspacesclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/ja/LC_MESSAGES/dcvclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/ja/LC_MESSAGES/workspacesclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/ko/LC_MESSAGES/dcvclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/ko/LC_MESSAGES/workspacesclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/pt_BR/LC_MESSAGES/dcvclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/pt_BR/LC_MESSAGES/workspacesclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/zh_CN/LC_MESSAGES/dcvclient.mo
+workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/zh_CN/LC_MESSAGES/workspacesclient.mo
+workspacesclient-wsp.x86_64: W: crypto-policy-non-compliance-openssl /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gio/modules/libgioopenssl.so SSL_CTX_set_cipher_list
+ 1 packages and 0 specfiles checked; 0 errors, 23 warnings, 0 badness; has taken 5.9 s 
