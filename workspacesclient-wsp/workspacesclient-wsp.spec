@@ -26,6 +26,7 @@ Requires:      harfbuzz-icu
 #Requires:      webkit2gtk4.0
 #Requires:      libicu71
 BuildRequires: systemd-rpm-macros
+BuildRequires: patchelf
 Requires:      /usr/bin/lsb_release
 
 %description
