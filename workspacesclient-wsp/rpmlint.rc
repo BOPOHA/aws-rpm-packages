@@ -1,1 +1,2 @@
 addFilter("W: unstripped-binary-or-object")
+addFilter("E: explicit-lib-dependency")

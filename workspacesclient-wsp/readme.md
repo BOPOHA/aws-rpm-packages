@@ -7,77 +7,64 @@
 dnf copr enable vorona/aws-rpm-packages -y
 dnf install workspacesclient-wsp -y
 ```
+
 # Debugging
 ## sh*t 01
 temporary solution while debugging
 ```shell
-LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/workspacesclient/dcv workspacesclient
-LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/workspacesclient/dcv strace workspacesclient 2>&1 | grep No\ s -A1
-
-PATH=
+/usr/lib/x86_64-linux-gnu/workspacesclient/dcv$ ldd * 2>&1 | grep "not found" -B10
+dcvclient:
+	not a dynamic executable
+dcvclientbin:
+	linux-vdso.so.1 (0x00007ffc711bf000)
+	libdcv.so => not found
+--
+	libgobject-2.0.so.0 => /lib64/libgobject-2.0.so.0 (0x00007fddee132000)
+	libglib-2.0.so.0 => /lib64/libglib-2.0.so.0 (0x00007fddecae0000)
+	libgstapp-1.0.so.0 => /lib64/libgstapp-1.0.so.0 (0x00007fddee11d000)
+	libgstbase-1.0.so.0 => /lib64/libgstbase-1.0.so.0 (0x00007fddeca5c000)
+	libgstreamer-1.0.so.0 => /lib64/libgstreamer-1.0.so.0 (0x00007fddec90c000)
+	libgstaudio-1.0.so.0 => /lib64/libgstaudio-1.0.so.0 (0x00007fddec88c000)
+	libavcodec.so.60 => /lib64/libavcodec.so.60 (0x00007fddeb600000)
+	libavutil.so.58 => /lib64/libavutil.so.58 (0x00007fddea400000)
+	liblz4.so.1 => /lib64/liblz4.so.1 (0x00007fddee0f9000)
+	libsoup-3.0.so.0 => /lib64/libsoup-3.0.so.0 (0x00007fddec7ef000)
+	libturbojpeg.so.0 => not found
+	libpcsclite.so.1 => /lib64/libpcsclite.so.1 (0x00007fddee0eb000)
+	libprotobuf-c.so.1 => /lib64/libprotobuf-c.so.1 (0x00007fddec7e4000)
+	libjson-glib-1.0.so.0 => /lib64/libjson-glib-1.0.so.0 (0x00007fddec7b8000)
+	libGL.so.1 => /lib64/libGL.so.1 (0x00007fddeb579000)
+	libsasl2.so.3 => /lib64/libsasl2.so.3 (0x00007fddeb55a000)
+	libm.so.6 => /lib64/libm.so.6 (0x00007fddea31f000)
+	libdcvwebauthnredirection.so => not found
+--
+	libsystemd.so.0 => /lib64/libsystemd.so.0 (0x00007f958499e000)
+	libbrotlicommon.so.1 => /lib64/libbrotlicommon.so.1 (0x00007f958497b000)
+	libcap.so.2 => /lib64/libcap.so.2 (0x00007f9584971000)
+	liblz4.so.1 => /lib64/liblz4.so.1 (0x00007f958494f000)
+	libzstd.so.1 => /lib64/libzstd.so.1 (0x00007f9584891000)
+	libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00007f958486d000)
+libharfbuzz-icu.so.0:
+ldd: warning: you do not have execution permission for `./libharfbuzz-icu.so.0'
+	linux-vdso.so.1 (0x00007ffe545af000)
+	libharfbuzz.so.0 => /lib64/libharfbuzz.so.0 (0x00007f3379d77000)
+	libicuuc.so.70 => not found
+--
+	libunistring.so.5 => /lib64/libunistring.so.5 (0x00007f71cd384000)
+	libidn2.so.0 => /lib64/libidn2.so.0 (0x00007f71cd362000)
+	libbrotlicommon.so.1 => /lib64/libbrotlicommon.so.1 (0x00007f71cd33f000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f71cdf18000)
+	libblkid.so.1 => /lib64/libblkid.so.1 (0x00007f71cd301000)
+libtiff.so.6:
+ldd: warning: you do not have execution permission for `./libtiff.so.6'
+	linux-vdso.so.1 (0x00007ffdb43f8000)
+	libwebp.so.7 => /lib64/libwebp.so.7 (0x00007f611ee41000)
+	liblzma.so.5 => /lib64/liblzma.so.5 (0x00007f611ee0e000)
+	libjbig.so.0 => not found
 ```
 ## sh*t 02
-maybe something of these things we have to add to the rpm spec
-
 ```shell
-#!/bin/sh
-set -e
+strace -f -s 5120  workspacesclient > /tmp/log 2>&1
 
-case "$1" in
-    configure)
-        touch --no-create /usr/share/icons/hicolor || :
-        touch --no-create /usr/share/mime/packages || :
-
-        update-desktop-database || :
-        gtk-update-icon-cache /usr/share/icons/hicolor || :
-        glib-compile-schemas /usr/share/glib-2.0/schemas || :
-        update-mime-database /usr/share/mime &> /dev/null || :
-
-        arch=$(arch)
-        export LD_LIBRARY_PATH="/usr/lib/${arch}-linux-gnu/workspacesclient/dcv:$LD_LIBRARY_PATH"
-        export PATH="/usr/lib/${arch}-linux-gnu/workspacesclient/dcv:$PATH"
-        gdk-pixbuf-query-loaders /usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gdk-pixbuf-2.0/2.10.0/loaders/*.so > /usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gdk-pixbuf-2.0/2.10.0/loaders.cache
-        gtk-query-immodules-3.0 /usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gtk-3.0/3.0.0/immodules/*.so > /usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gtk-3.0/3.0.0/immodules.cache
-
-        # Hack in order to have dconf working
-        ln -sf "/usr/lib/${arch}-linux-gnu/gio/modules/libdconfsettings.so" "/usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gio/modules/"
-    ;;
-
-    abort-upgrade|abort-remove|abort-deconfigure)
-    ;;
-
-    *)
-        echo "postinst called with unknown argument \`$1'" >&2
-        exit 1
-    ;;
-esac
-```
-
-## sh*t 03
-unincluded PCOIP module only wants to work on Ubuntu 20.04 )))
-```text
-[pid 25572] execve("/home/user/bin/lsb_release", ["lsb_release", "-r"], 0x5570514fc940 /* 73 vars */ <unfinished ...>
-[pid 25551] <... openat resumed>)       = -1 ENOENT (No such file or directory)
-[pid 25548] <... sendmsg resumed>)      = 48
-[pid 25564] futex(0x7fc1dd3683e0, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, {tv_sec=1703726844, tv_nsec=333888292}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
-[pid 25551] openat(AT_FDCWD, "/usr/lib64/libGLX.so.1", O_RDONLY|O_CLOEXEC <unfinished ...>
-[pid 25548] poll([{fd=19, events=POLLIN}, {fd=20, events=POLLIN}], 2, -1 <unfinished ...>
-[pid 25551] <... openat resumed>)       = -1 ENOENT (No such file or directory)
-[pid 25548] <... poll resumed>)         = 1 ([{fd=20, revents=POLLIN}])
-[pid 25551] munmap(0x7fc1dc356000, 86051 <unfinished ...>
-[pid 25548] read(20,  <unfinished ...>
-[pid 25551] <... munmap resumed>)       = 0
-
-[pid 25572] openat(AT_FDCWD, "/home/user/bin/lsb_release", O_RDONLY) = 3
-[pid 25572] newfstatat(AT_FDCWD, "/home/user/bin/lsb_release", {st_mode=S_IFREG|0755, st_size=35, ...}, 0) = 0
-[pid 25572] ioctl(3, TCGETS, 0x7ffeeba5e940) = -1 ENOTTY (Inappropriate ioctl for device)
-[pid 25572] lseek(3, 0, SEEK_CUR)       = 0
-[pid 25551] write(29, "\1\0\0\0\0\0\0\0", 8) = 8
-[pid 25551] openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 34
-[pid 25551] newfstatat(34, "",  <unfinished ...>
-[pid 25536] futex(0x7fc1dd3683e4, FUTEX_WAKE_PRIVATE, 1 <unfinished ...>
-[pid 25572] read(3,  <unfinished ...>
-[pid 25551] <... newfstatat resumed>{st_mode=S_IFREG|0644, st_size=86051, ...}, AT_EMPTY_PATH) = 0
-[pid 25572] <... read resumed>"#!/bin/bash\necho  \"Release:\t20.04\"\n", 80) = 35
-[pid 25564] <... futex resumed>)        = 0
+[pid 74161] <... read resumed>"/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclient: line 18: 74427 Aborted                 (core dumped) \"${dcvclient_bin}\" \"$@\"\n", 8192) = 135
 ```
