@@ -13,7 +13,6 @@ checks: 31, packages: 1
 
 workspacesclient-wsp.x86_64: W: no-url-tag
 workspacesclient-wsp.x86_64: W: no-manual-page-for-binary workspacesclient
-workspacesclient-wsp.x86_64: W: library-not-linked-against-libc /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstapp.so
 workspacesclient-wsp.x86_64: W: library-not-linked-against-libc /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libcairo-gobject.so.2
 workspacesclient-wsp.x86_64: W: files-duplicate /usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient.dcv-symbolic.svg /usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient-symbolic.svg
 workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/de_DE/LC_MESSAGES/dcvclient.mo
@@ -31,4 +30,4 @@ workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/pt_BR/LC_MES
 workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/zh_CN/LC_MESSAGES/dcvclient.mo
 workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/zh_CN/LC_MESSAGES/workspacesclient.mo
 workspacesclient-wsp.x86_64: W: crypto-policy-non-compliance-openssl /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gio/modules/libgioopenssl.so SSL_CTX_set_cipher_list
- 1 packages and 0 specfiles checked; 0 errors, 20 warnings, 0 badness; has taken 7.5 s 
+ 1 packages and 0 specfiles checked; 0 errors, 19 warnings, 0 badness; has taken 4.5 s 

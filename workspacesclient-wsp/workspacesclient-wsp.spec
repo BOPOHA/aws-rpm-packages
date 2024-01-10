@@ -31,7 +31,7 @@ Requires:      /usr/bin/lsb_release
 Requires:      gtk-update-icon-cache
 Requires:      glib2
 Requires:      shared-mime-info
-Requires:      gdk-pixbuf2, gtk3
+Requires:      gdk-pixbuf2, gtk3, gstreamer1
 
 %description
 %{summary}
@@ -59,13 +59,14 @@ patchelf --set-rpath '$ORIGIN' --force-rpath                          .%{app_lib
 #./gdk-pixbuf-query-loaders gdk-pixbuf-2.0/2.10.0/loaders/*.so | sed "s#%{_builddir}/%{name}-%{version}##" > gdk-pixbuf-2.0/2.10.0/loaders.cache
 #./gtk-query-immodules-3.0  gtk-3.0/3.0.0/immodules/*.so       | sed "s#%{_builddir}/%{name}-%{version}##" > gtk-3.0/3.0.0/immodules.cache
 rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-query-loaders,gtk-query-immodules-3.0}
-rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-2.0,gtk-3.0}
+rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-2.0,gtk-3.0,gstreamer-1.0}
 rm -rf .%{app_libs_dir}/dcv/{libgdk_pixbuf-2.0.so.0,libgtk-3.so.0,libgdk-3.so.0}
 rm -rf \
        .%{app_libs_dir}/dcv/libcairo-script-interpreter.so.2 \
        .%{app_libs_dir}/dcv/libgailutil-3.so.0 \
        .%{app_libs_dir}/dcv/libgraphene-1.0.so.0 \
        .%{app_libs_dir}/dcv/libgstallocators-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libgstreamer-1.0.so.0 \
        .%{app_libs_dir}/dcv/libgstvideo-1.0.so.0 \
        .%{app_libs_dir}/dcv/libgthread-2.0.so.0 \
        .%{app_libs_dir}/dcv/libharfbuzz-icu.so.0 \
@@ -76,6 +77,8 @@ rm -rf \
        .%{app_libs_dir}/dcv/librsvg-2.so.2 \
        .%{app_libs_dir}/dcv/libtiff.so.6 \
        .%{app_libs_dir}/dcv/libvpx.so.8
+
+rm -rf .%{app_libs_dir}/dcv/gst-plugin-scanner
 
 %install
 mv usr %{buildroot}/
@@ -108,9 +111,7 @@ fi
 %attr(0755, root, root) %{_bindir}/%{app_name}
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclient
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclientbin
-%attr(0755, root, root) %{app_libs_dir}/dcv/gst-plugin-scanner
 
-%{app_libs_dir}/dcv/gstreamer-1.0/*.so
 %{app_libs_dir}/dcv/gio/modules/libgioopenssl.so
 %{app_libs_dir}/dcv/sasl2/*.so
 %{app_libs_dir}/dcv/*.so{,.*}
@@ -126,6 +127,7 @@ fi
 %changelog
 * Thu Jan 11 2024 Anatolii Vorona 2023.2.4580-6
 - remove unused libs
+- replace gstreamer-1.0 with system libs
 
 * Wed Jan 10 2024 Anatolii Vorona 2023.2.4580-5
 - replace gdk-pixbuf-2.0/gtk-3.0 with system libs

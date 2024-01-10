@@ -2,18 +2,6 @@
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclient
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclientbin
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gio/modules/libgioopenssl.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gst-plugin-scanner
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstapp.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstaudioconvert.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstaudioresample.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstcoreelements.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstcutter.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstopus.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstpulseaudio.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstvideo4linux2.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstvideoconvertscale.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstvideorate.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gstreamer-1.0/libgstvpx.so
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libatk-1.0.so.0
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libavcodec.so.60
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libavutil.so.58
@@ -34,7 +22,6 @@
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libgstapp-1.0.so.0
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libgstaudio-1.0.so.0
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libgstbase-1.0.so.0
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libgstreamer-1.0.so.0
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libharfbuzz.so.0
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libjpeg.so.62
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libjson-glib-1.0.so.0
