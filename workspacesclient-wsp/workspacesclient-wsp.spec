@@ -59,24 +59,62 @@ patchelf --set-rpath '$ORIGIN' --force-rpath                          .%{app_lib
 #./gdk-pixbuf-query-loaders gdk-pixbuf-2.0/2.10.0/loaders/*.so | sed "s#%{_builddir}/%{name}-%{version}##" > gdk-pixbuf-2.0/2.10.0/loaders.cache
 #./gtk-query-immodules-3.0  gtk-3.0/3.0.0/immodules/*.so       | sed "s#%{_builddir}/%{name}-%{version}##" > gtk-3.0/3.0.0/immodules.cache
 rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-query-loaders,gtk-query-immodules-3.0}
-rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-2.0,gtk-3.0,gstreamer-1.0}
+rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-2.0,gtk-3.0,gstreamer-1.0,gio,sasl2}
 rm -rf .%{app_libs_dir}/dcv/{libgdk_pixbuf-2.0.so.0,libgtk-3.so.0,libgdk-3.so.0}
 rm -rf \
+       .%{app_libs_dir}/dcv/libatk-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libavcodec.so.60 \
+       .%{app_libs_dir}/dcv/libavutil.so.58 \
+       .%{app_libs_dir}/dcv/libcairo-gobject.so.2 \
        .%{app_libs_dir}/dcv/libcairo-script-interpreter.so.2 \
+       .%{app_libs_dir}/dcv/libcairo.so.2 \
+       .%{app_libs_dir}/dcv/libepoxy.so.0 \
+       .%{app_libs_dir}/dcv/libexpat.so.1 \
+       .%{app_libs_dir}/dcv/libffi.so.8 \
+       .%{app_libs_dir}/dcv/libfontconfig.so.1 \
+       .%{app_libs_dir}/dcv/libfreetype.so.6 \
+       .%{app_libs_dir}/dcv/libfribidi.so.0 \
        .%{app_libs_dir}/dcv/libgailutil-3.so.0 \
+       .%{app_libs_dir}/dcv/libgio-2.0.so.0 \
+       .%{app_libs_dir}/dcv/libglib-2.0.so.0 \
+       .%{app_libs_dir}/dcv/libgmodule-2.0.so.0 \
+       .%{app_libs_dir}/dcv/libgobject-2.0.so.0 \
        .%{app_libs_dir}/dcv/libgraphene-1.0.so.0 \
        .%{app_libs_dir}/dcv/libgstallocators-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libgstapp-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libgstaudio-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libgstbase-1.0.so.0 \
        .%{app_libs_dir}/dcv/libgstreamer-1.0.so.0 \
        .%{app_libs_dir}/dcv/libgstvideo-1.0.so.0 \
        .%{app_libs_dir}/dcv/libgthread-2.0.so.0 \
        .%{app_libs_dir}/dcv/libharfbuzz-icu.so.0 \
+       .%{app_libs_dir}/dcv/libharfbuzz.so.0 \
        .%{app_libs_dir}/dcv/libharfbuzz-subset.so.0 \
+       .%{app_libs_dir}/dcv/libjpeg.so.62 \
+       .%{app_libs_dir}/dcv/libjson-glib-1.0.so.0 \
        .%{app_libs_dir}/dcv/liblmdb.so \
+       .%{app_libs_dir}/dcv/liblz4.so.1 \
+       .%{app_libs_dir}/dcv/libnghttp2.so.14 \
        .%{app_libs_dir}/dcv/libopus.so.0 \
+       .%{app_libs_dir}/dcv/liborc-0.4.so.0 \
+       .%{app_libs_dir}/dcv/libpango-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libpangocairo-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libpangoft2-1.0.so.0 \
        .%{app_libs_dir}/dcv/libpangoxft-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libpcre2-8.so.0 \
+       .%{app_libs_dir}/dcv/libpixman-1.so.0 \
+       .%{app_libs_dir}/dcv/libprotobuf-c.so.1 \
+       .%{app_libs_dir}/dcv/libpsl.so.5 \
        .%{app_libs_dir}/dcv/librsvg-2.so.2 \
+       .%{app_libs_dir}/dcv/libsasl2.so.3 \
+       .%{app_libs_dir}/dcv/libsoup-3.0.so.0 \
        .%{app_libs_dir}/dcv/libtiff.so.6 \
-       .%{app_libs_dir}/dcv/libvpx.so.8
+       .%{app_libs_dir}/dcv/libturbojpeg.so.0 \
+       .%{app_libs_dir}/dcv/libvpx.so.8 \
+       .%{app_libs_dir}/dcv/libwayland-client.so.0 \
+       .%{app_libs_dir}/dcv/libwayland-cursor.so.0 \
+       .%{app_libs_dir}/dcv/libwayland-egl.so.1 \
+       .%{app_libs_dir}/dcv/libz.so.1
 
 rm -rf .%{app_libs_dir}/dcv/gst-plugin-scanner
 
@@ -112,9 +150,8 @@ fi
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclient
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclientbin
 
-%{app_libs_dir}/dcv/gio/modules/libgioopenssl.so
-%{app_libs_dir}/dcv/sasl2/*.so
-%{app_libs_dir}/dcv/*.so{,.*}
+%{app_libs_dir}/dcv/libdcv.so
+%{app_libs_dir}/dcv/libdcvwebauthnredirection.so
 
 %{_datadir}/applications/*.desktop
 %{_datadir}/glib-2.0/schemas/com.amazon.workspacesclient.dcv.gschema.xml
@@ -128,6 +165,7 @@ fi
 * Thu Jan 11 2024 Anatolii Vorona 2023.2.4580-6
 - remove unused libs
 - replace gstreamer-1.0 with system libs
+- remove all the rest libs....
 
 * Wed Jan 10 2024 Anatolii Vorona 2023.2.4580-5
 - replace gdk-pixbuf-2.0/gtk-3.0 with system libs
