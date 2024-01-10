@@ -68,3 +68,33 @@ strace -f -s 5120  workspacesclient > /tmp/log 2>&1
 
 [pid 74161] <... read resumed>"/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclient: line 18: 74427 Aborted                 (core dumped) \"${dcvclient_bin}\" \"$@\"\n", 8192) = 135
 ```
+
+```shell
+# vi /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclient
+echo "$@" >> /tmp/log1
+:x
+```
+```shell
+/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclient --log-level info --disable-prompt-reconnect --disable-quic-probe --connection-block-retry-attempts 30 --standalone --auth-token eyJoaWdobGFuZGVyUENBQ2VydCI6IiIsImhpZ2hsYW5kZXJQQ0FDUkwiOiIiLCJrZXlCbG9iIjoiZW1Rd0xreHhHd0toTnQwQjFqSEZ2YnZIMVI4U3gzYXZtNWgwZTJkbWVUcFYycnFvU3BvVDFoL3ZuUFJ2Nkpnb1lrVUwvVjh0TTlXSzdYVkYvU200VVkxdVpiT2o2c2JtOTc0dXFwT2tCTFEveElkZUVuS1I3YkI2SlBMYitwM0VvOStkUHlmVEZNS09tcnE5dFQxZmRtQTFnOGh6Zm9EZXQ0akNhZDdsWkh5QlpwUmdEZTV0emwzRHh6aFRJaUhkYWxrdGszQ2J0T2hNOGx1aHR3bVZaRElNL1BQZHVqaTBWMEFhV2lQb2YveUUyRWl1eEFhWDg1cTdVcVpQRnE5bGVjdGdMYVBFNXpocjhOc0xMRkt1Q0VNOFovcjlXU0ovWklFTkRVQ3pId3RRQ3c5NUlrVThwbk5Pc29DWml3c3hMNG80dFhjTzV2ZXNGVDRMM1E3NW5RPT0iLCJjcmVkQmxvYiI6ImQ1alI5WVRBT3pwQS90Rlh0b0ZaVzBJMU4yWHBKVzVoWmlYelFsYkoxRUlsOUpGL0ZrNndGZ08rSlYvTExhWmZqZXgwMW1keHhQcm9uWXpuNit5R0xGVTlhVlVxYnUwTHVKb0ZPVlhqYWR5RzJRZEc5S2ZTTlZoTUNQNUVhYlZkN2ZKYWVjdE9Ta1g3WktIeGtCS2ExZz09In0= dcv://4a8089d0-993f-11ec-8602-064a2aad87df-3.prod.us-west-2.highlander.aws.a2z.com:4195?gatewayToken=7563e502-bb01-4902-80ed-fd994e3735f1#prod-us-west-2-02002f87-9c38-4801-8821-a1484cd9580c --transport websocket
+Gtk-Message: 01:45:25.226: Failed to load module "canberra-gtk-module"
+Gtk-Message: 01:45:25.226: Failed to load module "pk-gtk-module"
+Gtk-Message: 01:45:25.227: Failed to load module "canberra-gtk-module"
+Gtk-Message: 01:45:25.227: Failed to load module "pk-gtk-module"
+2024-01-10 00:45:25,228600 [ 79637:79637 ] INFO  application - Starting DCV viewer version 2023.1 (r0) - 97ad23db840efdc5f8c3bf92fe1b6f98b077a1b1
+2024-01-10 00:45:25,228779 [ 79637:79637 ] INFO  application - No metrics reporter available, metrics will be ignored
+2024-01-10 00:45:25,228868 [ 79637:79637 ] INFO  application - Starting up application
+2024-01-10 00:45:25,229219 [ 79637:79637 ] INFO  application - Loaded CSS
+2024-01-10 00:45:25,234049 [ 79637:79637 ] INFO  certificate-store - Known hosts file: ~/.local/share/NICE/dcvclient/known_hosts.json
+2024-01-10 00:45:25,234090 [ 79637:79637 ] INFO  certificate-store - Known hosts file does not exist yet
+2024-01-10 00:45:25,234106 [ 79637:79637 ] INFO  certificates - Initializing root certificates
+2024-01-10 00:45:25,234176 [ 79637:79637 ] INFO  system-resource-monitor - Start monitoring system resources
+Fontconfig error: Cannot load default config file: No such file: (null)
+2024-01-10 00:45:25,268381 [ 79637:79637 ] WARN  Gtk - Could not load a pixbuf from /org/gtk/libgtk/icons/16x16/status/open-menu-symbolic.symbolic.png.
+This may indicate that pixbuf loaders or the mime database could not be found.
+2024-01-10 00:45:25,268587 [ 79637:79637 ] INFO  stderr - **
+Gtk:ERROR:../gtk/gtkiconhelper.c:495:ensure_surface_for_gicon: assertion failed (error == NULL): Failed to load /org/gtk/libgtk/icons/16x16/status/image-missing.png: Unrecognized image file format (gdk-pixbuf-error-quark, 3)
+
+Bail out! Gtk:ERROR:../gtk/gtkiconhelper.c:495:ensure_surface_for_gicon: assertion failed (error == NULL): Failed to load /org/gtk/libgtk/icons/16x16/status/image-missing.png: Unrecognized image file format (gdk-pixbuf-error-quark, 3)
+/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclient: line 23: 79637 Aborted                 (core dumped) "${dcvclient_bin}" "$@"
+
+```

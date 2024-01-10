@@ -8,7 +8,7 @@
 BuildArch:     x86_64
 Name:          workspacesclient-wsp
 Version:       2023.2.4580
-Release:       4
+Release:       5
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 22.04
@@ -28,6 +28,10 @@ Requires:      harfbuzz-icu
 BuildRequires: systemd-rpm-macros
 BuildRequires: patchelf
 Requires:      /usr/bin/lsb_release
+Requires:      gtk-update-icon-cache
+Requires:      glib2
+Requires:      shared-mime-info
+Requires:      gdk-pixbuf2, gtk3
 
 %description
 %{summary}
@@ -50,11 +54,40 @@ patchelf --set-rpath '$ORIGIN' --force-rpath                          .%{app_lib
 patchelf --replace-needed libjbig.so.0       libjbig.so.2.1           .%{app_libs_dir}/dcv/libtiff.so.6
 #patchelf --replace-needed libicuuc.so.70     libicuuc.so.71           .%{app_libs_dir}/dcv/libharfbuzz-icu.so.0
 
+# Caches
+#cd .%{app_libs_dir}/dcv/
+#./gdk-pixbuf-query-loaders gdk-pixbuf-2.0/2.10.0/loaders/*.so | sed "s#%{_builddir}/%{name}-%{version}##" > gdk-pixbuf-2.0/2.10.0/loaders.cache
+#./gtk-query-immodules-3.0  gtk-3.0/3.0.0/immodules/*.so       | sed "s#%{_builddir}/%{name}-%{version}##" > gtk-3.0/3.0.0/immodules.cache
+rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-query-loaders,gtk-query-immodules-3.0}
+rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-2.0,gtk-3.0}
+rm -rf .%{app_libs_dir}/dcv/{libgdk_pixbuf-2.0.so.0,libgtk-3.so.0,libgdk-3.so.0}
+
 %install
 mv usr %{buildroot}/
 rm %{buildroot}%{app_libs_dir}/dcv/libharfbuzz-icu.so.0
 #ln -s ../../../../..%{_libdir}/libharfbuzz-icu.so.0 %{buildroot}%{app_libs_dir}/dcv/libharfbuzz-icu.so.0
 #ln -s ../../../../..%{_libdir}/libjbig.so.2.1       %{buildroot}%{app_libs_dir}/dcv/libjbig.so.0
+
+%post
+# nothing is here
+
+%postun
+if [ $1 -eq 0 ] ; then
+    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
+
+if [ $1 -eq 0 ] ; then
+  /usr/bin/glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+fi
+
+if [ $1 -eq 0 ] ; then
+  /usr/bin/update-mime-database %{_datadir}/mime &> /dev/null || :
+fi
+
+%posttrans
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+/usr/bin/glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
+/usr/bin/update-mime-database %{_datadir}/mime &>/dev/null || :
 
 %clean
 
@@ -63,13 +96,13 @@ rm %{buildroot}%{app_libs_dir}/dcv/libharfbuzz-icu.so.0
 %attr(0755, root, root) %{_bindir}/%{app_name}
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclient
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclientbin
-%attr(0755, root, root) %{app_libs_dir}/dcv/gdk-pixbuf-query-loaders
+#%attr(0755, root, root) %{app_libs_dir}/dcv/gdk-pixbuf-query-loaders
 %attr(0755, root, root) %{app_libs_dir}/dcv/gst-plugin-scanner
-%attr(0755, root, root) %{app_libs_dir}/dcv/gtk-query-immodules-3.0
+#%attr(0755, root, root) %{app_libs_dir}/dcv/gtk-query-immodules-3.0
 
 %{app_libs_dir}/dcv/gstreamer-1.0/*.so
-%{app_libs_dir}/dcv/gdk-pixbuf-2.0/2.10.0/loaders/*.so
-%{app_libs_dir}/dcv/gtk-3.0/3.0.0/immodules/*.so
+#%{app_libs_dir}/dcv/gdk-pixbuf-2.0/2.10.0/loaders/*.so
+#%{app_libs_dir}/dcv/gtk-3.0/3.0.0/immodules/*.so
 %{app_libs_dir}/dcv/gio/modules/libgioopenssl.so
 %{app_libs_dir}/dcv/sasl2/*.so
 %{app_libs_dir}/dcv/*.so{,.*}
@@ -83,6 +116,10 @@ rm %{buildroot}%{app_libs_dir}/dcv/libharfbuzz-icu.so.0
 %license %{_datadir}/doc/%{app_name}/copyright
 
 %changelog
+* Wed Jan 10 2024 Anatolii Vorona 2023.2.4580-5
+- replace gdk-pixbuf-2.0/gtk-3.0 with system libs
+- first working version...
+
 * Tue Jan 9 2024 Anatolii Vorona 2023.2.4580-4
 - patched rpath and shared lib names for some libs
 - still WIP
