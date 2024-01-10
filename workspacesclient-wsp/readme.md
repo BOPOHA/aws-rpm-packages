@@ -98,3 +98,34 @@ Bail out! Gtk:ERROR:../gtk/gtkiconhelper.c:495:ensure_surface_for_gicon: asserti
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclient: line 23: 79637 Aborted                 (core dumped) "${dcvclient_bin}" "$@"
 
 ```
+
+## cleanin unused libs
+```shell
+/usr/lib/x86_64-linux-gnu/workspacesclient/dcv$ find . -type f  -exec ldd {} \; 2>&1 | grep workspacesclient | grep -o "\./.* " | sed "s/ $//" | sort | uniq > /tmp/libs.txt
+/usr/lib/x86_64-linux-gnu/workspacesclient/dcv$ ls ./*.so* >> /tmp/libs.txt 
+/usr/lib/x86_64-linux-gnu/workspacesclient/dcv$ sort /tmp/libs.txt | uniq -c | grep -v ' 2 '| sed "s/ 1 //; s/$/ \\\/" 
+     ./libcairo-script-interpreter.so.2 \
+     ./libgailutil-3.so.0 \
+     ./libgraphene-1.0.so.0 \
+     ./libgstallocators-1.0.so.0 \
+     ./libgstvideo-1.0.so.0 \
+     ./libgthread-2.0.so.0 \
+     ./libharfbuzz-subset.so.0 \
+     ./liblmdb.so \
+     ./libopus.so.0 \
+     ./libpangoxft-1.0.so.0 \
+     ./librsvg-2.so.2 \
+     ./libtiff.so.6 \
+     ./libvpx.so.8 \
+
+```
+
+## check
+```shell
+cd /usr/lib/x86_64-linux-gnu/workspacesclient/dcv
+ldd * 2>&1 | grep "not found" -B10
+
+find . -type f  -exec ldd {} \; 2>&1 | grep workspacesclient | grep -o "\./.* " | sed "s/ $//" | sort | uniq > /tmp/libs.txt
+ls ./*.so* >> /tmp/libs.txt 
+sort /tmp/libs.txt | uniq -c | grep -v ' 2 '| sed "s/ 1 //; s/$/ \\\/" 
+```

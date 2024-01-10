@@ -8,7 +8,7 @@
 BuildArch:     x86_64
 Name:          workspacesclient-wsp
 Version:       2023.2.4580
-Release:       5
+Release:       6
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 22.04
@@ -51,7 +51,7 @@ patchelf --set-rpath '$ORIGIN' --force-rpath                          .%{app_lib
 patchelf --set-rpath '$ORIGIN' --force-rpath                          .%{app_libs_dir}/dcv/libdcv.so
 #patchelf --set-rpath '$ORIGIN' --force-rpath                          .%{app_libs_dir}/dcv/libharfbuzz-icu.so.0
 #patchelf --set-rpath '$ORIGIN' --force-rpath                          .%{app_libs_dir}/dcv/libicuuc.so.70
-patchelf --replace-needed libjbig.so.0       libjbig.so.2.1           .%{app_libs_dir}/dcv/libtiff.so.6
+#patchelf --replace-needed libjbig.so.0       libjbig.so.2.1           .%{app_libs_dir}/dcv/libtiff.so.6
 #patchelf --replace-needed libicuuc.so.70     libicuuc.so.71           .%{app_libs_dir}/dcv/libharfbuzz-icu.so.0
 
 # Caches
@@ -61,12 +61,24 @@ patchelf --replace-needed libjbig.so.0       libjbig.so.2.1           .%{app_lib
 rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-query-loaders,gtk-query-immodules-3.0}
 rm -rf .%{app_libs_dir}/dcv/{gdk-pixbuf-2.0,gtk-3.0}
 rm -rf .%{app_libs_dir}/dcv/{libgdk_pixbuf-2.0.so.0,libgtk-3.so.0,libgdk-3.so.0}
+rm -rf \
+       .%{app_libs_dir}/dcv/libcairo-script-interpreter.so.2 \
+       .%{app_libs_dir}/dcv/libgailutil-3.so.0 \
+       .%{app_libs_dir}/dcv/libgraphene-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libgstallocators-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libgstvideo-1.0.so.0 \
+       .%{app_libs_dir}/dcv/libgthread-2.0.so.0 \
+       .%{app_libs_dir}/dcv/libharfbuzz-icu.so.0 \
+       .%{app_libs_dir}/dcv/libharfbuzz-subset.so.0 \
+       .%{app_libs_dir}/dcv/liblmdb.so \
+       .%{app_libs_dir}/dcv/libopus.so.0 \
+       .%{app_libs_dir}/dcv/libpangoxft-1.0.so.0 \
+       .%{app_libs_dir}/dcv/librsvg-2.so.2 \
+       .%{app_libs_dir}/dcv/libtiff.so.6 \
+       .%{app_libs_dir}/dcv/libvpx.so.8
 
 %install
 mv usr %{buildroot}/
-rm %{buildroot}%{app_libs_dir}/dcv/libharfbuzz-icu.so.0
-#ln -s ../../../../..%{_libdir}/libharfbuzz-icu.so.0 %{buildroot}%{app_libs_dir}/dcv/libharfbuzz-icu.so.0
-#ln -s ../../../../..%{_libdir}/libjbig.so.2.1       %{buildroot}%{app_libs_dir}/dcv/libjbig.so.0
 
 %post
 # nothing is here
@@ -96,13 +108,9 @@ fi
 %attr(0755, root, root) %{_bindir}/%{app_name}
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclient
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclientbin
-#%attr(0755, root, root) %{app_libs_dir}/dcv/gdk-pixbuf-query-loaders
 %attr(0755, root, root) %{app_libs_dir}/dcv/gst-plugin-scanner
-#%attr(0755, root, root) %{app_libs_dir}/dcv/gtk-query-immodules-3.0
 
 %{app_libs_dir}/dcv/gstreamer-1.0/*.so
-#%{app_libs_dir}/dcv/gdk-pixbuf-2.0/2.10.0/loaders/*.so
-#%{app_libs_dir}/dcv/gtk-3.0/3.0.0/immodules/*.so
 %{app_libs_dir}/dcv/gio/modules/libgioopenssl.so
 %{app_libs_dir}/dcv/sasl2/*.so
 %{app_libs_dir}/dcv/*.so{,.*}
@@ -116,6 +124,9 @@ fi
 %license %{_datadir}/doc/%{app_name}/copyright
 
 %changelog
+* Thu Jan 11 2024 Anatolii Vorona 2023.2.4580-6
+- remove unused libs
+
 * Wed Jan 10 2024 Anatolii Vorona 2023.2.4580-5
 - replace gdk-pixbuf-2.0/gtk-3.0 with system libs
 - first working version...
