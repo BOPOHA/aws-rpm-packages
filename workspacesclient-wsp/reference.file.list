@@ -1,8 +1,8 @@
 /usr/bin/workspacesclient
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclient
 /usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclientbin
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libdcv.so
-/usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libdcvwebauthnredirection.so
+/usr/lib64/libdcv.so
+/usr/lib64/libdcvwebauthnredirection.so
 /usr/share/applications/com.amazon.workspacesclient.desktop
 /usr/share/doc/workspacesclient/copyright
 /usr/share/glib-2.0/schemas/com.amazon.workspacesclient.dcv.gschema.xml

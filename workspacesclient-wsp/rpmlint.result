@@ -12,20 +12,8 @@ rpmlintrc: [PosixPath('rpmlint.rc')]
 checks: 31, packages: 1
 
 workspacesclient-wsp.x86_64: W: no-url-tag
+workspacesclient-wsp.x86_64: W: no-soname /usr/lib64/libdcvwebauthnredirection.so
 workspacesclient-wsp.x86_64: W: no-manual-page-for-binary workspacesclient
+workspacesclient-wsp.x86_64: E: invalid-soname /usr/lib64/libdcv.so libdcv.so
 workspacesclient-wsp.x86_64: W: files-duplicate /usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient.dcv-symbolic.svg /usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient-symbolic.svg
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/de_DE/LC_MESSAGES/dcvclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/de_DE/LC_MESSAGES/workspacesclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/es/LC_MESSAGES/dcvclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/es/LC_MESSAGES/workspacesclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/fr/LC_MESSAGES/dcvclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/fr/LC_MESSAGES/workspacesclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/ja/LC_MESSAGES/dcvclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/ja/LC_MESSAGES/workspacesclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/ko/LC_MESSAGES/dcvclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/ko/LC_MESSAGES/workspacesclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/pt_BR/LC_MESSAGES/dcvclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/pt_BR/LC_MESSAGES/workspacesclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/zh_CN/LC_MESSAGES/dcvclient.mo
-workspacesclient-wsp.x86_64: W: file-not-in-%lang /usr/share/locale/zh_CN/LC_MESSAGES/workspacesclient.mo
- 1 packages and 0 specfiles checked; 0 errors, 17 warnings, 0 badness; has taken 1.5 s 
+ 1 packages and 0 specfiles checked; 1 errors, 4 warnings, 1 badness; has taken 1.4 s 
