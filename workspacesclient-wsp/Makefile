@@ -9,7 +9,7 @@ RPM_VERSION=$(shell rpmspec -q --qf "%{Version}-%{Release}" ${PROJECTNAME}.spec)
 clean:
 	rm -rf $(PROJECTTMPDIR)
 
-matadata: srpm
+metadata: srpm
 	# https://clients.amazonworkspaces.com/linux-install
 	rm -rf metadata && mkdir metadata
 	ar p $(PROJECTTMPDIR)/*deb control.tar.xz | tar -xJC metadata/
