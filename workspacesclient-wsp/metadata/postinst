@@ -1,0 +1,32 @@
+
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        touch --no-create /usr/share/icons/hicolor || :
+        touch --no-create /usr/share/mime/packages || :
+
+        update-desktop-database || :
+        gtk-update-icon-cache /usr/share/icons/hicolor || :
+        glib-compile-schemas /usr/share/glib-2.0/schemas || :
+        update-mime-database /usr/share/mime &> /dev/null || :
+
+        arch=$(arch)
+        export LD_LIBRARY_PATH="/usr/lib/${arch}-linux-gnu/workspacesclient/dcv:$LD_LIBRARY_PATH"
+        export PATH="/usr/lib/${arch}-linux-gnu/workspacesclient/dcv:$PATH"
+        gdk-pixbuf-query-loaders /usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gdk-pixbuf-2.0/2.10.0/loaders/*.so > /usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gdk-pixbuf-2.0/2.10.0/loaders.cache
+        gtk-query-immodules-3.0 /usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gtk-3.0/3.0.0/immodules/*.so > /usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gtk-3.0/3.0.0/immodules.cache
+
+        # Hack in order to have dconf working
+        ln -sf "/usr/lib/${arch}-linux-gnu/gio/modules/libdconfsettings.so" "/usr/lib/${arch}-linux-gnu/workspacesclient/dcv/gio/modules/"
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
