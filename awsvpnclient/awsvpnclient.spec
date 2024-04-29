@@ -14,7 +14,7 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       3.11.0
+Version:       3.12.2
 Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
@@ -130,6 +130,12 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Mon Apr 29 2024 Cott Lang - 3.12.2-1
+- bump version
+- Resolved a SAML authentication issue with Chromium-based browsers since version 123.
+- Improved security posture.
+- Fixed connectivity issues for some LAN configurations.
+
 * Sun Dec 10 2023 Anatolii Vorona - 3.11.0-1
 - bump version
 - improved accessibility
