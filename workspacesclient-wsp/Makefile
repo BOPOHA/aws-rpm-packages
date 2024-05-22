@@ -1,10 +1,12 @@
 # required packages:
-# dnf install rpmdevtools rpkg
+# dnf install rpmdevtools rpkg rpmlint
 .PHONY: fc rpmbuild srpm spec metadata clean
+.DEFAULT_GOAL := all
 
 PROJECTNAME=workspacesclient-wsp
 PROJECTTMPDIR=/tmp/$(PROJECTNAME)
 RPM_VERSION=$(shell rpmspec -q --qf "%{Version}-%{Release}" ${PROJECTNAME}.spec)
+FEDORA_VERSION=$(shell rpm -E %fedora)
 
 clean:
 	rm -rf $(PROJECTTMPDIR)
@@ -29,4 +31,6 @@ rpmbuild: srpm
 	ls -lah ~/rpmbuild/RPMS/x86_64/$(PROJECTNAME)-$(RPM_VERSION).x86_64.rpm
 
 fc: srpm
-	mock --no-clean --dnf -r fedora-39-x86_64 --resultdir=rpm-results  $(PROJECTTMPDIR)/$(PROJECTNAME)-${RPM_VERSION}.src.rpm
+	mock --no-clean --dnf -r fedora-$(FEDORA_VERSION)-x86_64 --resultdir=rpm-results  $(PROJECTTMPDIR)/$(PROJECTNAME)-${RPM_VERSION}.src.rpm
+
+all: clean metadata spec rpmbuild

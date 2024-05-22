@@ -4,8 +4,8 @@
 
 BuildArch:     x86_64
 Name:          workspacesclient-wsp
-Version:       2023.2.4580
-Release:       7
+Version:       2024.0.4661
+Release:       1
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 22.04
@@ -36,7 +36,6 @@ mv usr/share %{buildroot}/usr/
 %__install .%{app_libs_dir}/dcv/dcvclient                    %{buildroot}/%{app_libs_dir}/dcv/dcvclient
 %__install .%{app_libs_dir}/dcv/dcvclientbin                 %{buildroot}/%{app_libs_dir}/dcv/dcvclientbin
 %__install .%{app_libs_dir}/dcv/libdcv.so                    %{buildroot}/%{_libdir}/libdcv.so
-%__install .%{app_libs_dir}/dcv/libdcvwebauthnredirection.so %{buildroot}/%{_libdir}/libdcvwebauthnredirection.so
 
 %post
 # nothing is here
@@ -67,7 +66,6 @@ fi
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclient
 %attr(0755, root, root) %{app_libs_dir}/dcv/dcvclientbin
 %attr(0755, root, root) %{_libdir}/libdcv.so
-%attr(0755, root, root) %{_libdir}/libdcvwebauthnredirection.so
 
 %{_datadir}/applications/*.desktop
 %{_datadir}/glib-2.0/schemas/com.amazon.workspacesclient.dcv.gschema.xml
@@ -84,6 +82,10 @@ fi
 %license %{_datadir}/doc/%{app_name}/copyright
 
 %changelog
+* Tue May 21 2024 Claer 2024.0.4661-1
+- update to 2024.0 version
+- removed webauthn redirection library as it is distributed as plugin now
+
 * Thu Jan 11 2024 Anatolii Vorona 2023.2.4580-7
 - spec refactoring, cleaning, polishing
 
