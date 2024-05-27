@@ -3,7 +3,7 @@
 .PHONY: fc rpmbuild srpm spec metadata clean
 .DEFAULT_GOAL := all
 
-PROJECTNAME=workspacesclient-wsp
+PROJECTNAME=$(notdir $(CURDIR))
 PROJECTTMPDIR=/tmp/$(PROJECTNAME)
 RPM_VERSION=$(shell rpmspec -q --qf "%{Version}-%{Release}" ${PROJECTNAME}.spec)
 FEDORA_VERSION=$(shell rpm -E %fedora)
@@ -14,7 +14,7 @@ clean:
 metadata: srpm
 	# https://clients.amazonworkspaces.com/linux-install
 	rm -rf metadata && mkdir metadata
-	ar p $(PROJECTTMPDIR)/*deb control.tar.xz | tar -xJC metadata/
+	ar p $(PROJECTTMPDIR)/new_*deb control.tar.xz | tar -xJC metadata/
 	(cd $(PROJECTTMPDIR) && sha256sum *.deb) > checksums.sha256
 
 spec:
