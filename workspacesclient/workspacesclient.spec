@@ -9,7 +9,7 @@
 BuildArch:     x86_64
 Name:          workspacesclient
 Version:       4.7.0.4312
-Release:       5
+Release:       6
 License:       Freely redistributable without restriction
 Group:         Converted/misc
 Summary:       Amazon WorkSpaces Client for Ubuntu 20.04
@@ -115,6 +115,9 @@ mv opt %{buildroot}/
 
 
 %changelog
+* Mon May 27 2024 Anatolii Vorona 4.7.0.4312-6
+- mass rebuild to refresh fc40
+
 * Sat Dec 30 2023 Anatolii Vorona 4.7.0.4312-5
 - builded own libcurl.so instead of portintg chain of Ubuntu 20.04 libs
 - patched rpath and shared lib names for some libs

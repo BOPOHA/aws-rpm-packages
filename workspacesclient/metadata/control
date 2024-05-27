@@ -1,0 +1,9 @@
+Package: workspacesclient
+Version: 4.7.0.4312
+Section: misc
+Priority: optional
+Architecture: amd64
+Depends: libgtk-3-0, libwebkit2gtk-4.0-37, libsoup2.4-1, libgraphicsmagick++-q16-12, libhiredis0.14, libva2 
+Maintainer: Amazon WorkSpaces
+Description: Amazon WorkSpaces Client for Ubuntu 20.04
+

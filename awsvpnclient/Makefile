@@ -12,10 +12,10 @@ clean:
 	rm -rf $(PROJECTTMPDIR)
 
 metadata: srpm
-	# https://clients.amazonworkspaces.com/linux-install
-	curl https://d3nt0h4h6pmmc4.cloudfront.net/ubuntu/dists/focal/main/binary-amd64/Packages -O
+	# https://docs.aws.amazon.com/vpn/latest/clientvpn-user/client-vpn-connect-linux.html
+	curl https://d20adtppz83p9s.cloudfront.net/GTK/latest/debian-repo/dists/ubuntu-20.04/main/binary-amd64/Packages -O
 	rm -rf metadata && mkdir metadata
-	ar p $(PROJECTTMPDIR)/$(PROJECTNAME)*deb control.tar.xz | tar -xJC metadata/
+	ar p $(PROJECTTMPDIR)/*deb control.tar.xz | tar -xJC metadata/
 	(cd $(PROJECTTMPDIR) && sha256sum *.deb) > checksums.sha256
 
 spec:

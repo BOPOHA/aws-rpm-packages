@@ -9,7 +9,7 @@ Name:           awscli
 # here you can find a new tag
 # https://github.com/aws/aws-cli/tree/v2
 # https://github.com/aws/aws-cli/tags
-Version:        2.15.4
+Version:        2.15.58
 Release:        1%{?dist}
 Summary:        Universal Command Line Interface for Amazon Web Services
 
@@ -30,6 +30,8 @@ BuildRequires: python > 3.8
 %global python3 /usr/bin/python3.11
 BuildRequires:  python3.11-devel
 %endif
+
+Conflicts: awscli2
 
 %description
 The AWS Command Line Interface (AWS CLI) is a unified tool to manage your AWS services.
@@ -68,6 +70,9 @@ ln -sf ../libexec/%{srcname}/aws_completer %{buildroot}%{_bindir}/aws_completer
 %{buildroot}%{_bindir}/aws --version
 
 %changelog
+* Mon May 27 2024 Anatolii Vorona - 2.15.58-1
+- bump version
+
 * Wed Dec 27 2023 Anatolii Vorona - 2.15.4-1
 - bump version
 - fixing build for c8 stream

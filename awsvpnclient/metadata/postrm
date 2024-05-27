@@ -1,0 +1,13 @@
+#!/bin/bash
+set -x
+
+LOG_FOLDER="/var/log/aws-vpn-client"
+mkdir -p $LOG_FOLDER
+LOG_FILE=$LOG_FOLDER/postrm.log
+
+# Remove service
+sudo systemctl stop awsvpnclient >> $LOG_FILE 2>&1
+sudo systemctl disable awsvpnclient >> $LOG_FILE 2>&1
+sudo systemctl daemon-reload >> $LOG_FILE 2>&1
+sudo systemctl reset-failed >> $LOG_FILE 2>&1
+

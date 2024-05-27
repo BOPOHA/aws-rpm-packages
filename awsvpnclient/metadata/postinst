@@ -1,0 +1,12 @@
+#!/bin/bash
+set -x
+set -e
+
+LOG_FOLDER="/var/log/aws-vpn-client"
+mkdir -p $LOG_FOLDER
+LOG_FILE=$LOG_FOLDER/postinst.log
+
+# Start awsvpnclient.service
+sudo systemctl enable awsvpnclient >> $LOG_FILE 2>&1
+sudo systemctl start awsvpnclient >> $LOG_FILE 2>&1
+
