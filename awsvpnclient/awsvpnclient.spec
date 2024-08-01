@@ -130,7 +130,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
-* Thu Aug 1 2024 Cott Lang - 3.14.0
+* Thu Aug 1 2024 Cott Lang - 3.14.0-1
 - Updated the OpenVPN and OpenSSL libraries.
 
 * Mon May 27 2024 Anatolii Vorona - 3.13.0-1
