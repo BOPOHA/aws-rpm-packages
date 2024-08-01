@@ -18,4 +18,4 @@ awsvpnclient.x86_64: W: files-duplicate /opt/awsvpnclient/AWS VPN Client.runtime
 awsvpnclient.x86_64: E: env-script-interpreter /opt/awsvpnclient/Resources/openvpn/configure-dns /usr/bin/env bash
 awsvpnclient.x86_64: W: crypto-policy-non-compliance-openssl /opt/awsvpnclient/Resources/openvpn/acvc-openvpn SSL_CTX_set_cipher_list
 awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Resources/openvpn/acvc-openvpn
- 1 packages and 0 specfiles checked; 2 errors, 5 warnings, 260 filtered, 2 badness; has taken 2.2 s 
+ 1 packages and 0 specfiles checked; 2 errors, 5 warnings, 260 filtered, 2 badness; has taken 2.3 s 
