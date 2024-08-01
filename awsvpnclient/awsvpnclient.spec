@@ -14,7 +14,7 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       3.13.0
+Version:       3.14.0
 Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
@@ -130,6 +130,9 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Thu Aug 1 2024 Cott Lang - 3.14.0
+- Updated the OpenVPN and OpenSSL libraries.
+
 * Mon May 27 2024 Anatolii Vorona - 3.13.0-1
 - bump version
 - Automatically reconnect when local area network ranges change.
