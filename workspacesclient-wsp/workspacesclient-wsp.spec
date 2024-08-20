@@ -4,15 +4,15 @@
 
 BuildArch:     x86_64
 Name:          workspacesclient-wsp
-Version:       2024.0.4661
+Version:       2024.4.5074
 Release:       1
 License:       Freely redistributable without restriction
 Group:         Converted/misc
-Summary:       Amazon WorkSpaces Client for Ubuntu 22.04
+Summary:       Amazon WorkSpaces Client for Ubuntu 22.04 - WSP only
 Source0:       https://d3nt0h4h6pmmc4.cloudfront.net/new_workspacesclient_jammy_amd64.deb
 Source1:       checksums.sha256
 
-Conflicts:     %{name}-wsp
+Conflicts:     workspacesclient
 BuildRequires: systemd-rpm-macros
 Requires:      /usr/bin/lsb_release
 Requires:      gtk-update-icon-cache, glib2, shared-mime-info
@@ -82,6 +82,9 @@ fi
 %license %{_datadir}/doc/%{app_name}/copyright
 
 %changelog
+* Tue Aug 20 2024 Claer 2024.4.5074-1
+- update to 2024.4 version
+
 * Tue May 21 2024 Claer 2024.0.4661-1
 - update to 2024.0 version
 - removed webauthn redirection library as it is distributed as plugin now
