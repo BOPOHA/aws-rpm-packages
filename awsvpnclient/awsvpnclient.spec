@@ -15,7 +15,7 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       4.1.0
-Release:       6
+Release:       7
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -73,6 +73,7 @@ mv opt %{buildroot}/
 %__install -d %{buildroot}/opt/%{name}/Service/Resources/openvpn
 ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/Resources/openvpn/configure-dns
 ( cd %{buildroot}/opt/%{name}/Resources/openvpn/ && ./openssl fipsinstall -out fipsmodule.cnf -module ./fips.so )
+ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
 %clean
 
 %files
@@ -98,6 +99,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %{_unitdir}/%{name}.service
 
 /opt/%{name}/Service/Resources/openvpn/configure-dns
+/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
 
 %license /opt/%{name}/Resources/LINUX-LICENSE.txt
 %license /opt/%{name}/Resources/THIRD-PARTY-LICENSES-GTK.txt
@@ -128,7 +130,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
-* Sat Nov 16 2024 AV - 4.1.0-6
+* Sat Nov 16 2024 AV - 4.1.0-7
 - bumb version
 
 * Thu Aug 1 2024 Cott Lang - 3.14.0-1

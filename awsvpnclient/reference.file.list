@@ -52,6 +52,7 @@
 /opt/awsvpnclient/Service/Resources
 /opt/awsvpnclient/Service/Resources/openvpn
 /opt/awsvpnclient/Service/Resources/openvpn/configure-dns
+/opt/awsvpnclient/Service/Resources/openvpn/fipsmodule.cnf
 /opt/awsvpnclient/SymbolicLinkSupport.dll
 /opt/awsvpnclient/System.AppContext.dll
 /opt/awsvpnclient/System.Buffers.dll
