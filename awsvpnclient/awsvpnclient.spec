@@ -10,12 +10,12 @@
 %undefine _auto_set_build_flags
 
 %global __provides_exclude_from  /opt/awsvpnclient/.*\\.so
-%global __requires_exclude_from  /opt/awsvpnclient/.*\\.so
+%global __requires_exclude_from  ^/opt/awsvpnclient/(.*\\.so|Resources/openvpn/.*)$
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       3.14.0
-Release:       1
+Version:       4.1.0
+Release:       7
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -27,7 +27,6 @@ Patch2:        awsvpnclient.runtimeconfig.patch
 Patch3:        awsvpnclient.deps.patch
 Patch4:        acvc.gtk..deps.patch
 
-Requires:      openssl1.1
 BuildRequires: systemd-rpm-macros
 
 %description
@@ -35,9 +34,8 @@ BuildRequires: systemd-rpm-macros
 
 %prep
 %setup -cT
-ar p %{SOURCE0} data.tar.xz | tar -xJ
+ar p %{SOURCE0} data.tar.zst | tar --zstd -x
 %patch -P 0 -p1
-%patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
 %patch -P 4 -p1
@@ -58,12 +56,8 @@ rm -rf ./opt/%{name}/SQLite.Interop.dll # https://aur.archlinux.org/cgit/aur.git
 sed -i "s#/opt/awsvpnclient/Service/#/opt/awsvpnclient/#;" ./etc/systemd/system/%{name}.service
 mv ./opt/%{name}/{AWS\ VPN\ Client,AWSVPNClient}
 rm -rf \
-       ./opt/%{name}/System.Net.Security.Native.so \
-       ./opt/%{name}/System.Net.Http.Native.so \
-       ./opt/%{name}/System.IO.Compression.Native.so \
        ./opt/%{name}/libmscordbi.so \
        ./opt/%{name}/libmscordaccore.so \
-       ./opt/%{name}/libdbgshim.so \
        ./opt/%{name}/libcoreclrtraceptprovider.so \
        ./opt/%{name}/createdump
 
@@ -78,7 +72,8 @@ mv opt %{buildroot}/
 
 %__install -d %{buildroot}/opt/%{name}/Service/Resources/openvpn
 ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/Resources/openvpn/configure-dns
-
+( cd %{buildroot}/opt/%{name}/Resources/openvpn/ && ./openssl fipsinstall -out fipsmodule.cnf -module ./fips.so )
+ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
 %clean
 
 %files
@@ -86,10 +81,15 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %attr(0755, root, root) "/opt/%{name}/AWSVPNClient"
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/acvc-openvpn
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/configure-dns
+%attr(0755, root, root) /opt/%{name}/Resources/openvpn/openssl
+%attr(0755, root, root) /opt/%{name}/Resources/openvpn/ld-musl-x86_64.so.1
+%attr(0755, root, root) /opt/%{name}/Resources/openvpn/*.so
 %attr(0755, root, root) /opt/%{name}/ACVC.GTK.Service
 /opt/%{name}/*.dll
+/opt/%{name}/*.dylib
 /opt/%{name}/*/*.dll
 /opt/%{name}/*.so
+/opt/%{name}/Resources/openvpn/*.cnf
 /opt/%{name}/*.json
 /opt/%{name}/Resources/acvc-64.png
 
@@ -99,10 +99,10 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %{_unitdir}/%{name}.service
 
 /opt/%{name}/Service/Resources/openvpn/configure-dns
+/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
 
 %license /opt/%{name}/Resources/LINUX-LICENSE.txt
 %license /opt/%{name}/Resources/THIRD-PARTY-LICENSES-GTK.txt
-%doc /opt/%{name}/SOS_README.md
 %doc %{_docdir}/%{name}
 %dir /opt/%{name}/
 %dir /opt/%{name}/Resources/
@@ -130,6 +130,9 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Sat Nov 16 2024 AV - 4.1.0-7
+- bumb version
+
 * Thu Aug 1 2024 Cott Lang - 3.14.0-1
 - Updated the OpenVPN and OpenSSL libraries.
 

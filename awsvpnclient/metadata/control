@@ -1,8 +1,8 @@
 Package: awsvpnclient
-Version: 3.14.0
+Version: 4.1.0
 Section: misc
 Priority: optional
 Architecture: amd64
 Maintainer: AWS VPN Client
-Description: AWS VPN Client for Ubuntu 18.04
+Description: AWS VPN Client for Ubuntu
 

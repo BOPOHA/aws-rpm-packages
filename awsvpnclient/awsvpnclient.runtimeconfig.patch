@@ -1,26 +1,21 @@
 --- "/opt/awsvpnclient/AWS VPN Client.runtimeconfig.json"
 +++ "/opt/awsvpnclient/AWS VPN Client.runtimeconfig.json"
-@@ -1,6 +1,9 @@
- {
-   "runtimeOptions": {
-     "tfm": "netcoreapp3.1",
-+    "configProperties": {
-+      "System.Globalization.Invariant": true
-+    },
-     "includedFrameworks": [
-       {
-         "name": "Microsoft.NETCore.App",
+@@ -8,6 +8,7 @@
+       }
+     ],
+     "configProperties": {
++      "System.Globalization.Invariant": true,
+       "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
+     }
 
 --- /opt/awsvpnclient/Service/ACVC.GTK.Service.runtimeconfig.json
 +++ /opt/awsvpnclient/Service/ACVC.GTK.Service.runtimeconfig.json
-@@ -1,6 +1,9 @@
- {
-   "runtimeOptions": {
-     "tfm": "netcoreapp3.1",
-+    "configProperties": {
-+      "System.Globalization.Invariant": true
-+    },
-     "includedFrameworks": [
-       {
-         "name": "Microsoft.NETCore.App",
-
+@@ -8,6 +8,7 @@
+       }
+     ],
+     "configProperties": {
++      "System.Globalization.Invariant": true,
+       "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
+     }

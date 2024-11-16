@@ -15,7 +15,7 @@ metadata: srpm
 	# https://docs.aws.amazon.com/vpn/latest/clientvpn-user/client-vpn-connect-linux.html
 	curl https://d20adtppz83p9s.cloudfront.net/GTK/latest/debian-repo/dists/ubuntu-20.04/main/binary-amd64/Packages -O
 	rm -rf metadata && mkdir metadata
-	ar p $(PROJECTTMPDIR)/*deb control.tar.xz | tar -xJC metadata/
+	ar p $(PROJECTTMPDIR)/*deb control.tar.zst | tar --zstd -xC metadata/
 	(cd $(PROJECTTMPDIR) && sha256sum *.deb) > checksums.sha256
 
 spec:
