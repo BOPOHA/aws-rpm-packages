@@ -38,6 +38,10 @@
 /opt/awsvpnclient/Resources/openvpn
 /opt/awsvpnclient/Resources/openvpn/acvc-openvpn
 /opt/awsvpnclient/Resources/openvpn/configure-dns
+/opt/awsvpnclient/Resources/openvpn/fips.so
+/opt/awsvpnclient/Resources/openvpn/fipsmodule.cnf
+/opt/awsvpnclient/Resources/openvpn/ld-musl-x86_64.so.1
+/opt/awsvpnclient/Resources/openvpn/libc.so
 /opt/awsvpnclient/Resources/openvpn/openssl
 /opt/awsvpnclient/Resources/openvpn/openssl.cnf
 /opt/awsvpnclient/Serilog.Sinks.Console.dll
