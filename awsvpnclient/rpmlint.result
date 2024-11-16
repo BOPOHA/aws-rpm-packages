@@ -11,9 +11,12 @@ configuration:
 rpmlintrc: [PosixPath('rpmlint.rc')]
 checks: 32, packages: 1
 
+awsvpnclient.x86_64: W: symlink-to-binary-with-shebang /opt/awsvpnclient/Service/Resources/openvpn/configure-dns is a link to a script (/opt/awsvpnclient/Resources/openvpn/configure-dns) but missing requires for /usr/bin/env
 awsvpnclient.x86_64: W: no-url-tag
 awsvpnclient.x86_64: W: files-duplicate /opt/awsvpnclient/AWS VPN Client.runtimeconfig.json /opt/awsvpnclient/ACVC.GTK.Service.runtimeconfig.json
 awsvpnclient.x86_64: E: env-script-interpreter /opt/awsvpnclient/Resources/openvpn/configure-dns /usr/bin/env bash
 awsvpnclient.x86_64: W: crypto-policy-non-compliance-openssl /opt/awsvpnclient/Resources/openvpn/acvc-openvpn SSL_CTX_set_cipher_list
+awsvpnclient.x86_64: W: crypto-policy-non-compliance-openssl /opt/awsvpnclient/Resources/openvpn/openssl SSL_CTX_set_cipher_list
 awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Resources/openvpn/acvc-openvpn
- 1 packages and 0 specfiles checked; 1 errors, 4 warnings, 266 filtered, 1 badness; has taken 2.4 s 
+awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Resources/openvpn/openssl
+ 1 packages and 0 specfiles checked; 1 errors, 7 warnings, 269 filtered, 1 badness; has taken 3.2 s 

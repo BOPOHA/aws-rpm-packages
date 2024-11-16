@@ -10,12 +10,12 @@
 %undefine _auto_set_build_flags
 
 %global __provides_exclude_from  /opt/awsvpnclient/.*\\.so
-%global __requires_exclude_from  /opt/awsvpnclient/.*\\.so
+%global __requires_exclude_from  ^/opt/awsvpnclient/(.*\\.so|Resources/openvpn/.*)$
 
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       4.1.0
-Release:       3
+Release:       4
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -28,7 +28,6 @@ Patch3:        awsvpnclient.deps.patch
 Patch4:        acvc.gtk..deps.patch
 
 BuildRequires: systemd-rpm-macros
-BuildRequires: patchelf
 
 %description
 %{summary}
@@ -61,13 +60,10 @@ rm -rf \
        ./opt/%{name}/Resources/openvpn/fips.so \
        ./opt/%{name}/Resources/openvpn/ld-musl-x86_64.so.1 \
        ./opt/%{name}/Resources/openvpn/libc.so \
-       ./opt/%{name}/Resources/openvpn/openssl* \
        ./opt/%{name}/libmscordbi.so \
        ./opt/%{name}/libmscordaccore.so \
        ./opt/%{name}/libcoreclrtraceptprovider.so \
        ./opt/%{name}/createdump
-
-patchelf --replace-needed libc.so libc.so.6 ./opt/%{name}/Resources/openvpn/acvc-openvpn
 
 %install
 mv opt %{buildroot}/
@@ -88,11 +84,13 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %attr(0755, root, root) "/opt/%{name}/AWSVPNClient"
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/acvc-openvpn
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/configure-dns
+%attr(0755, root, root) /opt/%{name}/Resources/openvpn/openssl
 %attr(0755, root, root) /opt/%{name}/ACVC.GTK.Service
 /opt/%{name}/*.dll
 /opt/%{name}/*.dylib
 /opt/%{name}/*/*.dll
 /opt/%{name}/*.so
+/opt/%{name}/Resources/openvpn/openssl.cnf
 /opt/%{name}/*.json
 /opt/%{name}/Resources/acvc-64.png
 
@@ -132,7 +130,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
-* Sat Nov 16 2024 AV - 4.1.0-3
+* Sat Nov 16 2024 AV - 4.1.0-4
 - bumb version
 
 * Thu Aug 1 2024 Cott Lang - 3.14.0-1
