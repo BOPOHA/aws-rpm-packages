@@ -81,13 +81,13 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/acvc-openvpn
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/configure-dns
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/openssl
+%attr(0755, root, root) /opt/%{name}/Resources/openvpn/ld-musl-x86_64.so.1
+%attr(0755, root, root) /opt/%{name}/Resources/openvpn/*.so
 %attr(0755, root, root) /opt/%{name}/ACVC.GTK.Service
 /opt/%{name}/*.dll
 /opt/%{name}/*.dylib
 /opt/%{name}/*/*.dll
 /opt/%{name}/*.so
-/opt/%{name}/Resources/openvpn/*.so
-/opt/%{name}/Resources/openvpn/ld-musl-x86_64.so.1
 /opt/%{name}/Resources/openvpn/*.cnf
 /opt/%{name}/*.json
 /opt/%{name}/Resources/acvc-64.png
