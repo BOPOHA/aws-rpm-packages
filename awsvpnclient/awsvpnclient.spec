@@ -15,7 +15,7 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       4.1.0
-Release:       1
+Release:       2
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -29,6 +29,7 @@ Patch4:        acvc.gtk..deps.patch
 
 Requires:      openssl1.1
 BuildRequires: systemd-rpm-macros
+BuildRequires: patchelf
 
 %description
 %{summary}
@@ -44,7 +45,6 @@ ar p %{SOURCE0} data.tar.zst | tar --zstd -x
 
 find . -iname "*.a" -delete
 find . -iname "*.pdb" -delete
-find . -iname "*.dylib" -delete # wtf, really??? Mach-O shared libraries
 mv ./opt/%{name}/Service/Resources/openvpn       ./opt/%{name}/Resources/
 mv ./opt/%{name}/Service/ACVC.GTK.Service{,.dll} ./opt/%{name}/
 mv ./opt/%{name}/Service/*.json                  ./opt/%{name}/
@@ -68,6 +68,8 @@ rm -rf \
        ./opt/%{name}/libcoreclrtraceptprovider.so \
        ./opt/%{name}/createdump
 
+patchelf --replace-needed libc.so libc.so.6 ./opt/%{name}/Resources/openvpn/acvc-openvpn
+
 %install
 mv opt %{buildroot}/
 %__install -Dpm 0644 usr/share/applications/awsvpnclient.desktop %{buildroot}%{_datadir}/applications/awsvpnclient.desktop
@@ -89,6 +91,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %attr(0755, root, root) /opt/%{name}/Resources/openvpn/configure-dns
 %attr(0755, root, root) /opt/%{name}/ACVC.GTK.Service
 /opt/%{name}/*.dll
+/opt/%{name}/*.dylib
 /opt/%{name}/*/*.dll
 /opt/%{name}/*.so
 /opt/%{name}/*.json
@@ -130,7 +133,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
-* Sat Nov 16 2024 AV - 4.1.0-1
+* Sat Nov 16 2024 AV - 4.1.0-2
 - bumb version
 
 * Thu Aug 1 2024 Cott Lang - 3.14.0-1
