@@ -15,7 +15,7 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       4.1.0
-Release:       2
+Release:       3
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -27,7 +27,6 @@ Patch2:        awsvpnclient.runtimeconfig.patch
 Patch3:        awsvpnclient.deps.patch
 Patch4:        acvc.gtk..deps.patch
 
-Requires:      openssl1.1
 BuildRequires: systemd-rpm-macros
 BuildRequires: patchelf
 
@@ -133,7 +132,7 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
-* Sat Nov 16 2024 AV - 4.1.0-2
+* Sat Nov 16 2024 AV - 4.1.0-3
 - bumb version
 
 * Thu Aug 1 2024 Cott Lang - 3.14.0-1
