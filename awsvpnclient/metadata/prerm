@@ -1,0 +1,6 @@
+#!/bin/bash
+set -x
+
+rm -Rf /opt/awsvpnclient/Service/Resources/openvpn/fipsmodule.cnf
+rm -Rf /opt/awsvpnclient/ConnectionInfoFiles
+

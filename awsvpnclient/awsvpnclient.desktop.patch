@@ -1,11 +1,11 @@
---- /usr/share/applications/awsvpnclient.desktop	2022-05-17 23:51:35.000000000 +0200
-+++ /usr/share/applications/awsvpnclient.desktop	2022-05-17 23:51:35.000000000 +0200
-@@ -3,10 +3,10 @@
+--- /usr/share/applications/awsvpnclient.desktop	2024-08-01 02:00:00.000000000 +0200
++++ /usr/share/applications/awsvpnclient.desktop	2024-08-01 02:00:00.000000000 +0200
+@@ -3,11 +3,10 @@
  Encoding=UTF-8
  Name=AWS VPN Client
  Comment=AWS VPN Client
--Exec=/opt/awsvpnclient/AWS\ VPN\ Client %u
-+Exec=/opt/awsvpnclient/AWSVPNClient
+-Exec="/opt/awsvpnclient/AWS\sVPN\sClient" %u
++Exec=/opt/awsvpnclient/AWSVPNClient %u
  Path=/opt/awsvpnclient
 -Icon=acvc-64.png
 +Icon=acvc-64
@@ -13,4 +13,4 @@
 -Categories=Network;VPN;
 +Categories=Network;X-VPN;
  Keywords=vpn;aws;
- 
+-StartupWMClass=AWS VPN Client

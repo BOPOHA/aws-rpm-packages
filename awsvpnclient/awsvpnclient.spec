@@ -14,7 +14,7 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       3.14.0
+Version:       4.1.0
 Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
@@ -35,7 +35,7 @@ BuildRequires: systemd-rpm-macros
 
 %prep
 %setup -cT
-ar p %{SOURCE0} data.tar.xz | tar -xJ
+ar p %{SOURCE0} data.tar.zst | tar --zstd -x
 %patch -P 0 -p1
 %patch -P 1 -p1
 %patch -P 2 -p1
@@ -44,6 +44,7 @@ ar p %{SOURCE0} data.tar.xz | tar -xJ
 
 find . -iname "*.a" -delete
 find . -iname "*.pdb" -delete
+find . -iname "*.dylib" -delete # wtf, really??? Mach-O shared libraries
 mv ./opt/%{name}/Service/Resources/openvpn       ./opt/%{name}/Resources/
 mv ./opt/%{name}/Service/ACVC.GTK.Service{,.dll} ./opt/%{name}/
 mv ./opt/%{name}/Service/*.json                  ./opt/%{name}/
@@ -58,12 +59,12 @@ rm -rf ./opt/%{name}/SQLite.Interop.dll # https://aur.archlinux.org/cgit/aur.git
 sed -i "s#/opt/awsvpnclient/Service/#/opt/awsvpnclient/#;" ./etc/systemd/system/%{name}.service
 mv ./opt/%{name}/{AWS\ VPN\ Client,AWSVPNClient}
 rm -rf \
-       ./opt/%{name}/System.Net.Security.Native.so \
-       ./opt/%{name}/System.Net.Http.Native.so \
-       ./opt/%{name}/System.IO.Compression.Native.so \
+       ./opt/%{name}/Resources/openvpn/fips.so \
+       ./opt/%{name}/Resources/openvpn/ld-musl-x86_64.so.1 \
+       ./opt/%{name}/Resources/openvpn/libc.so \
+       ./opt/%{name}/Resources/openvpn/openssl* \
        ./opt/%{name}/libmscordbi.so \
        ./opt/%{name}/libmscordaccore.so \
-       ./opt/%{name}/libdbgshim.so \
        ./opt/%{name}/libcoreclrtraceptprovider.so \
        ./opt/%{name}/createdump
 
@@ -102,7 +103,6 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 
 %license /opt/%{name}/Resources/LINUX-LICENSE.txt
 %license /opt/%{name}/Resources/THIRD-PARTY-LICENSES-GTK.txt
-%doc /opt/%{name}/SOS_README.md
 %doc %{_docdir}/%{name}
 %dir /opt/%{name}/
 %dir /opt/%{name}/Resources/
@@ -130,6 +130,9 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Sat Nov 16 2024 AV - 4.1.0-1
+- bumb version
+
 * Thu Aug 1 2024 Cott Lang - 3.14.0-1
 - Updated the OpenVPN and OpenSSL libraries.
 

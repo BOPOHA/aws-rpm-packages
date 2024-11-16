@@ -10,3 +10,10 @@ LOG_FILE=$LOG_FOLDER/postinst.log
 sudo systemctl enable awsvpnclient >> $LOG_FILE 2>&1
 sudo systemctl start awsvpnclient >> $LOG_FILE 2>&1
 
+OPENVPN_PATH=/opt/awsvpnclient/Service/Resources/openvpn
+pushd $OPENVPN_PATH
+export LD_LIBRARY_PATH=$OPENVPN_PATH
+$OPENVPN_PATH/openssl \
+    fipsinstall \
+    -out /opt/awsvpnclient/Service/Resources/openvpn/fipsmodule.cnf \
+    -module $OPENVPN_PATH/fips.so >> $LOG_FILE 2>&1

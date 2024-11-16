@@ -1,56 +1,20 @@
 --- /opt/awsvpnclient/Service/ACVC.GTK.Service.deps.json	2023-03-07 16:41:46.587530124 +0100
 +++ /opt/awsvpnclient/Service/ACVC.GTK.Service.deps.json	2023-03-07 16:45:35.705954989 +0100
-@@ -667,66 +667,27 @@
-           "System.Globalization.Native.so": {
-             "fileVersion": "0.0.0.0"
-           },
--          "System.IO.Compression.Native.a": {
--            "fileVersion": "0.0.0.0"
--          },
--          "System.IO.Compression.Native.so": {
--            "fileVersion": "0.0.0.0"
--          },
--          "System.Native.a": {
--            "fileVersion": "0.0.0.0"
--          },
-           "System.Native.so": {
-             "fileVersion": "0.0.0.0"
-           },
--          "System.Net.Http.Native.a": {
--            "fileVersion": "0.0.0.0"
--          },
--          "System.Net.Http.Native.so": {
--            "fileVersion": "0.0.0.0"
--          },
--          "System.Net.Security.Native.a": {
--            "fileVersion": "0.0.0.0"
--          },
--          "System.Net.Security.Native.so": {
--            "fileVersion": "0.0.0.0"
--          },
-           "System.Private.CoreLib.dll": {
-             "assemblyVersion": "4.0.0.0",
-             "fileVersion": "4.700.21.56803"
-           },
--          "System.Security.Cryptography.Native.OpenSsl.a": {
--            "fileVersion": "0.0.0.0"
--          },
-           "System.Security.Cryptography.Native.OpenSsl.so": {
-             "fileVersion": "0.0.0.0"
-           },
+@@ -694,9 +694,6 @@
+           }
+         },
+         "native": {
 -          "createdump": {
 -            "fileVersion": "0.0.0.0"
 -          },
-           "libclrjit.so": {
+           "libSystem.Globalization.Native.so": {
              "fileVersion": "0.0.0.0"
            },
+@@ -721,20 +718,11 @@
            "libcoreclr.so": {
              "fileVersion": "0.0.0.0"
            },
 -          "libcoreclrtraceptprovider.so": {
--            "fileVersion": "0.0.0.0"
--          },
--          "libdbgshim.so": {
 -            "fileVersion": "0.0.0.0"
 -          },
            "libhostfxr.so": {
@@ -67,30 +31,83 @@
            }
          }
        },
-@@ -908,19 +869,6 @@
+@@ -976,28 +964,6 @@
            }
          }
        },
--      "Stub.System.Data.SQLite.Core.NetStandard/1.0.115": {
+-      "System.Data.SQLite/1.0.115": {
+-        "dependencies": {
+-          "System.Data.SQLite.Core": "1.0.115",
+-          "System.Data.SQLite.EF6": "1.0.115"
+-        }
+-      },
+-      "System.Data.SQLite.Core/1.0.115": {
+-        "dependencies": {
+-          "Stub.System.Data.SQLite.Core.NetStandard": "1.0.115"
+-        }
+-      },
+-      "System.Data.SQLite.EF6/1.0.115": {
+-        "dependencies": {
+-          "EntityFramework": "6.4.4"
+-        },
 -        "runtime": {
--          "lib/netstandard2.1/System.Data.SQLite.dll": {
+-          "lib/netstandard2.1/System.Data.SQLite.EF6.dll": {
 -            "assemblyVersion": "1.0.115.0",
 -            "fileVersion": "1.0.115.0"
 -          }
--        },
--        "native": {
--          "runtimes/linux-x64/native/SQLite.Interop.dll": {
--            "fileVersion": "0.0.0.0"
--          }
 -        }
 -      },
-       "SymbolicLinkSupport/1.2.0": {
-         "runtime": {
-           "lib/netstandard1.3/SymbolicLinkSupport.dll": {
-@@ -3166,4 +3114,4 @@
-       "base"
-     ]
-   }
--}
-\ No newline at end of file
-+}
+       "System.Diagnostics.DiagnosticSource/4.7.1": {},
+       "System.Drawing.Common/4.7.0": {
+         "dependencies": {
+@@ -1226,8 +1192,6 @@
+           "Serilog.Sinks.File": "5.0.0",
+           "Serilog.Sinks.File.Header": "1.0.2",
+           "SymbolicLinkSupport": "1.2.0",
+-          "System.Data.SQLite": "1.0.115",
+-          "System.Data.SQLite.Core": "1.0.115",
+           "System.IO.FileSystem.AccessControl": "5.0.0",
+           "System.Runtime.InteropServices": "4.3.0",
+           "System.ServiceModel.Http": "4.8.1",
+@@ -1541,13 +1505,6 @@
+       "path": "serilog.sinks.file.header/1.0.2",
+       "hashPath": "serilog.sinks.file.header.1.0.2.nupkg.sha512"
+     },
+-    "Stub.System.Data.SQLite.Core.NetStandard/1.0.115": {
+-      "type": "package",
+-      "serviceable": true,
+-      "sha512": "sha512-afpVRUKjuLZ17W2iv779YORpWQN40rJ82g/ASC6Yq1J4emO+8hL316AISf5nJWfXecygLdqevzXxQZR7z2yRww==",
+-      "path": "stub.system.data.sqlite.core.netstandard/1.0.115",
+-      "hashPath": "stub.system.data.sqlite.core.netstandard.1.0.115.nupkg.sha512"
+-    },
+     "SymbolicLinkSupport/1.2.0": {
+       "type": "package",
+       "serviceable": true,
+@@ -1583,27 +1540,6 @@
+       "path": "system.data.sqlclient/4.8.1",
+       "hashPath": "system.data.sqlclient.4.8.1.nupkg.sha512"
+     },
+-    "System.Data.SQLite/1.0.115": {
+-      "type": "package",
+-      "serviceable": true,
+-      "sha512": "sha512-aUVnApBCZ+8VNzTquKAd0CbDl2fMofeMQuRPBdYDHgmEn7n38RZ600MpsbeAEPXvLNocWI/T88mALMDAqeTX1w==",
+-      "path": "system.data.sqlite/1.0.115",
+-      "hashPath": "system.data.sqlite.1.0.115.nupkg.sha512"
+-    },
+-    "System.Data.SQLite.Core/1.0.115": {
+-      "type": "package",
+-      "serviceable": true,
+-      "sha512": "sha512-OuzSKnAnXtbsB7MUddjLiLAUEuEu8kJco3jWllZs+zgYmuiK5VHUHafD74C65HwnnmWVHUvFBrJ0NDAKINuGNQ==",
+-      "path": "system.data.sqlite.core/1.0.115",
+-      "hashPath": "system.data.sqlite.core.1.0.115.nupkg.sha512"
+-    },
+-    "System.Data.SQLite.EF6/1.0.115": {
+-      "type": "package",
+-      "serviceable": true,
+-      "sha512": "sha512-dzPRxNdxj5/k7hd3Qd3aZxYROHy+cqhiv4NJjsdhD8lnJ7zcoXiy36AyYe85nsohxuodYjuYHj0pMzGaC28B7A==",
+-      "path": "system.data.sqlite.ef6/1.0.115",
+-      "hashPath": "system.data.sqlite.ef6.1.0.115.nupkg.sha512"
+-    },
+     "System.Diagnostics.DiagnosticSource/4.7.1": {
+       "type": "package",
+       "serviceable": true,

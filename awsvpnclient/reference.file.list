@@ -38,7 +38,6 @@
 /opt/awsvpnclient/Resources/openvpn
 /opt/awsvpnclient/Resources/openvpn/acvc-openvpn
 /opt/awsvpnclient/Resources/openvpn/configure-dns
-/opt/awsvpnclient/SOS_README.md
 /opt/awsvpnclient/Serilog.Sinks.Console.dll
 /opt/awsvpnclient/Serilog.Sinks.File.Header.dll
 /opt/awsvpnclient/Serilog.Sinks.File.dll
@@ -86,9 +85,10 @@
 /opt/awsvpnclient/System.Drawing.Primitives.dll
 /opt/awsvpnclient/System.Drawing.dll
 /opt/awsvpnclient/System.Dynamic.Runtime.dll
+/opt/awsvpnclient/System.Formats.Asn1.dll
+/opt/awsvpnclient/System.Formats.Tar.dll
 /opt/awsvpnclient/System.Globalization.Calendars.dll
 /opt/awsvpnclient/System.Globalization.Extensions.dll
-/opt/awsvpnclient/System.Globalization.Native.so
 /opt/awsvpnclient/System.Globalization.dll
 /opt/awsvpnclient/System.IO.Compression.Brotli.dll
 /opt/awsvpnclient/System.IO.Compression.FileSystem.dll
@@ -110,7 +110,7 @@
 /opt/awsvpnclient/System.Linq.Queryable.dll
 /opt/awsvpnclient/System.Linq.dll
 /opt/awsvpnclient/System.Memory.dll
-/opt/awsvpnclient/System.Native.so
+/opt/awsvpnclient/System.Net.Http.Json.dll
 /opt/awsvpnclient/System.Net.Http.dll
 /opt/awsvpnclient/System.Net.HttpListener.dll
 /opt/awsvpnclient/System.Net.Mail.dll
@@ -118,6 +118,7 @@
 /opt/awsvpnclient/System.Net.NetworkInformation.dll
 /opt/awsvpnclient/System.Net.Ping.dll
 /opt/awsvpnclient/System.Net.Primitives.dll
+/opt/awsvpnclient/System.Net.Quic.dll
 /opt/awsvpnclient/System.Net.Requests.dll
 /opt/awsvpnclient/System.Net.Security.dll
 /opt/awsvpnclient/System.Net.ServicePoint.dll
@@ -153,8 +154,8 @@
 /opt/awsvpnclient/System.Runtime.CompilerServices.VisualC.dll
 /opt/awsvpnclient/System.Runtime.Extensions.dll
 /opt/awsvpnclient/System.Runtime.Handles.dll
+/opt/awsvpnclient/System.Runtime.InteropServices.JavaScript.dll
 /opt/awsvpnclient/System.Runtime.InteropServices.RuntimeInformation.dll
-/opt/awsvpnclient/System.Runtime.InteropServices.WindowsRuntime.dll
 /opt/awsvpnclient/System.Runtime.InteropServices.dll
 /opt/awsvpnclient/System.Runtime.Intrinsics.dll
 /opt/awsvpnclient/System.Runtime.Loader.dll
@@ -164,8 +165,6 @@
 /opt/awsvpnclient/System.Runtime.Serialization.Primitives.dll
 /opt/awsvpnclient/System.Runtime.Serialization.Xml.dll
 /opt/awsvpnclient/System.Runtime.Serialization.dll
-/opt/awsvpnclient/System.Runtime.WindowsRuntime.UI.Xaml.dll
-/opt/awsvpnclient/System.Runtime.WindowsRuntime.dll
 /opt/awsvpnclient/System.Runtime.dll
 /opt/awsvpnclient/System.Security.AccessControl.dll
 /opt/awsvpnclient/System.Security.Claims.dll
@@ -173,13 +172,13 @@
 /opt/awsvpnclient/System.Security.Cryptography.Cng.dll
 /opt/awsvpnclient/System.Security.Cryptography.Csp.dll
 /opt/awsvpnclient/System.Security.Cryptography.Encoding.dll
-/opt/awsvpnclient/System.Security.Cryptography.Native.OpenSsl.so
 /opt/awsvpnclient/System.Security.Cryptography.OpenSsl.dll
 /opt/awsvpnclient/System.Security.Cryptography.Pkcs.dll
 /opt/awsvpnclient/System.Security.Cryptography.Primitives.dll
 /opt/awsvpnclient/System.Security.Cryptography.ProtectedData.dll
 /opt/awsvpnclient/System.Security.Cryptography.X509Certificates.dll
 /opt/awsvpnclient/System.Security.Cryptography.Xml.dll
+/opt/awsvpnclient/System.Security.Cryptography.dll
 /opt/awsvpnclient/System.Security.Permissions.dll
 /opt/awsvpnclient/System.Security.Principal.Windows.dll
 /opt/awsvpnclient/System.Security.Principal.dll
@@ -237,6 +236,12 @@
 /opt/awsvpnclient/ja/AWSVPNClient.Core.resources.dll
 /opt/awsvpnclient/ko
 /opt/awsvpnclient/ko/AWSVPNClient.Core.resources.dll
+/opt/awsvpnclient/libSystem.Globalization.Native.so
+/opt/awsvpnclient/libSystem.IO.Compression.Native.so
+/opt/awsvpnclient/libSystem.Native.so
+/opt/awsvpnclient/libSystem.Net.Security.Native.so
+/opt/awsvpnclient/libSystem.Security.Cryptography.Native.OpenSsl.so
+/opt/awsvpnclient/libclrgc.so
 /opt/awsvpnclient/libclrjit.so
 /opt/awsvpnclient/libcoreclr.so
 /opt/awsvpnclient/libhostfxr.so
