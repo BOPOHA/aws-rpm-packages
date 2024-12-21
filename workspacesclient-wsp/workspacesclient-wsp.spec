@@ -1,10 +1,11 @@
+%global debug_package %{nil}
 %define _build_id_links none
 %define app_name workspacesclient
 %define app_libs_dir /usr/lib/x86_64-linux-gnu/%{app_name}
 
 BuildArch:     x86_64
 Name:          workspacesclient-wsp
-Version:       2024.4.5074
+Version:       2024.7.5140
 Release:       1
 License:       Freely redistributable without restriction
 Group:         Converted/misc
@@ -82,6 +83,13 @@ fi
 %license %{_datadir}/doc/%{app_name}/copyright
 
 %changelog
+* Sat Nov 16 2024 AV 2024.7.5140-1
+- update to 2024.7 version
+- Renamed WSP protocol to Amazon DCV protocol.
+- Added support for streaming over port 443 for TCP and UDP protocols on DCV WorkSpaces.
+- Added support for certificate-based authentication that enables a single sign-on login experience, with fewer user prompts.
+- Bug fixes and enhancements.
+
 * Tue Aug 20 2024 Claer 2024.4.5074-1
 - update to 2024.4 version
 
