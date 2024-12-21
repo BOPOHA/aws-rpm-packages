@@ -84,9 +84,9 @@ fc3c99aaf46a84bcb71a7720764fb9f6  usr/share/icons/hicolor/32x32/apps/com.amazon.
 cdc483b5c6c246a1678e1a4de3a73b7a  usr/share/icons/hicolor/512x512/apps/com.amazon.workspacesclient.dcv.png
 f8ba62ba4b6c172f40a8a9c9ad18e377  usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient-symbolic.svg
 f8ba62ba4b6c172f40a8a9c9ad18e377  usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient.dcv-symbolic.svg
-8183388c1993d17a320e10b411154370  usr/share/glib-2.0/schemas/com.amazon.workspacesclient.dcv.gschema.xml
-41659053e6f76e3660524ec889dd1277  usr/share/glib-2.0/schemas/com.amazon.workspacesclient.gschema.xml
-6f60d1c057027954d97b22f1b31e8b71  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libdcv.so
+6f83c147635db06a04d66ff589f99a9e  usr/share/glib-2.0/schemas/com.amazon.workspacesclient.dcv.gschema.xml
+61750fc6a781e1b253ddae689a1be393  usr/share/glib-2.0/schemas/com.amazon.workspacesclient.gschema.xml
+212804254099a451e55a2d0b55079b8b  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/libdcv.so
 eb03b53d994d3c21a3e05be721177ef7  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/liblmdb.so
 bf4b6606671653fa8dc0519ba87fc231  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-gif.so
 fdca4f30880be499100b2d0c7dd30488  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-jpeg.so
@@ -125,9 +125,9 @@ b15fbf327c3c52f182a36f8ca8e7e5d2  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/
 7b98232bb335aa62da5ea59e7a3d2a2a  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/sasl2/libplain.so
 e699e1fcbab56b7123c2b862043d7d17  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/sasl2/libsasldb.so
 d93312c5d332ee91c4df3e44bae60a02  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/sasl2/libscram.so
-034809b145f7d230b0b092501811ac71  usr/bin/workspacesclient
+dd652863701e6ebb62311d0977f15de7  usr/bin/workspacesclient
 ad08281c70d313ab660f01e7e2c8e7e0  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gdk-pixbuf-query-loaders
 18ee66d90761acbd00f2b154699ca099  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gst-plugin-scanner
-8473185d68a4dfd1d09a493fead0a555  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclientbin
+f56fc490787b8a8a574ba02892d6f49b  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclientbin
 e655c3e5d8ffe342dcf61f9b5c429399  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/dcvclient
 e242b7ca64ef752c4a9e789704a1bad7  usr/lib/x86_64-linux-gnu/workspacesclient/dcv/gtk-query-immodules-3.0

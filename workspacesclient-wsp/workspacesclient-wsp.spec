@@ -5,7 +5,7 @@
 
 BuildArch:     x86_64
 Name:          workspacesclient-wsp
-Version:       2024.7.5140
+Version:       2024.8.5191
 Release:       1
 License:       Freely redistributable without restriction
 Group:         Converted/misc
@@ -83,6 +83,9 @@ fi
 %license %{_datadir}/doc/%{app_name}/copyright
 
 %changelog
+* Sat Dec 21 2024 AV 2024.8.5191-1
+- bump version, there are no any release notes
+
 * Sat Nov 16 2024 AV 2024.7.5140-1
 - update to 2024.7 version
 - Renamed WSP protocol to Amazon DCV protocol.

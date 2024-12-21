@@ -15,4 +15,4 @@ workspacesclient-wsp.x86_64: W: no-url-tag
 workspacesclient-wsp.x86_64: W: no-manual-page-for-binary workspacesclient
 workspacesclient-wsp.x86_64: E: invalid-soname /usr/lib64/libdcv.so libdcv.so
 workspacesclient-wsp.x86_64: W: files-duplicate /usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient.dcv-symbolic.svg /usr/share/icons/hicolor/symbolic/apps/com.amazon.workspacesclient-symbolic.svg
- 1 packages and 0 specfiles checked; 1 errors, 3 warnings, 40 filtered, 1 badness; has taken 1.6 s 
+ 1 packages and 0 specfiles checked; 1 errors, 3 warnings, 40 filtered, 1 badness; has taken 1.0 s 
