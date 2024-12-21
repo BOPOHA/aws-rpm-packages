@@ -15,7 +15,7 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       4.1.0
-Release:       7
+Release:       8
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -74,6 +74,10 @@ mv opt %{buildroot}/
 ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/Resources/openvpn/configure-dns
 ( cd %{buildroot}/opt/%{name}/Resources/openvpn/ && ./openssl fipsinstall -out fipsmodule.cnf -module ./fips.so )
 ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
+
+mkdir -p %{buildroot}/usr/bin
+ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
+
 %clean
 
 %files
@@ -100,6 +104,8 @@ ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service
 
 /opt/%{name}/Service/Resources/openvpn/configure-dns
 /opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
+
+/usr/bin/ip
 
 %license /opt/%{name}/Resources/LINUX-LICENSE.txt
 %license /opt/%{name}/Resources/THIRD-PARTY-LICENSES-GTK.txt
@@ -130,6 +136,9 @@ ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Sat Dec 21 2024 AV - 4.1.0-8
+- added symlink for /usr/sbin/ip, because they have hash validation for at least configure-dns and acvc-openvpn
+
 * Sat Nov 16 2024 AV - 4.1.0-7
 - bumb version
 

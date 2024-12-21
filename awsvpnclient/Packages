@@ -2,7 +2,7 @@ Package: awsvpnclient
 Version: 4.1.0
 Architecture: amd64
 Maintainer: AWS VPN Client
-Filename: pool/ubuntu-20.04/awsvpnclient_amd64.deb
+Filename: pool/ubuntu/awsvpnclient_amd64.deb
 Size: 67736954
 MD5sum: f71a11a113f88d5657476274b8df4c4a
 SHA1: 522d3f43dd6889a1c47540f24327884b9d452b96
