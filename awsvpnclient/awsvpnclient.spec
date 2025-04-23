@@ -75,6 +75,11 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 ( cd %{buildroot}/opt/%{name}/Resources/openvpn/ && ./openssl fipsinstall -out fipsmodule.cnf -module ./fips.so )
 ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
 
+%if 0%{?fc40}%{?fc41}
+mkdir -p %{buildroot}/usr/bin
+ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
+%endif
+
 %clean
 
 %files
@@ -101,6 +106,10 @@ ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service
 
 /opt/%{name}/Service/Resources/openvpn/configure-dns
 /opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
+
+%if 0%{?fc40}%{?fc41}
+/usr/bin/ip
+%endif
 
 %license /opt/%{name}/Resources/LINUX-LICENSE.txt
 %license /opt/%{name}/Resources/THIRD-PARTY-LICENSES-GTK.txt
