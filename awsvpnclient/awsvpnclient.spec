@@ -14,8 +14,8 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       4.1.0
-Release:       9
+Version:       5.2.0
+Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
