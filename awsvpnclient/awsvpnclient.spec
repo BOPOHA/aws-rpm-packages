@@ -15,7 +15,7 @@
 BuildArch:     x86_64
 Name:          awsvpnclient
 Version:       4.1.0
-Release:       8
+Release:       9
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -75,9 +75,6 @@ ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/
 ( cd %{buildroot}/opt/%{name}/Resources/openvpn/ && ./openssl fipsinstall -out fipsmodule.cnf -module ./fips.so )
 ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
 
-mkdir -p %{buildroot}/usr/bin
-ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
-
 %clean
 
 %files
@@ -104,8 +101,6 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 
 /opt/%{name}/Service/Resources/openvpn/configure-dns
 /opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
-
-/usr/bin/ip
 
 %license /opt/%{name}/Resources/LINUX-LICENSE.txt
 %license /opt/%{name}/Resources/THIRD-PARTY-LICENSES-GTK.txt
@@ -136,6 +131,9 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Wed Apr 23 2025 JO - 4.1.0-9
+- Fixed conflict with /usr/sbin/ip on Fedora 42
+
 * Sat Dec 21 2024 AV - 4.1.0-8
 - added symlink for /usr/sbin/ip, because they have hash validation for at least configure-dns and acvc-openvpn
 

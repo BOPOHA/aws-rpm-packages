@@ -263,7 +263,6 @@
 /opt/awsvpnclient/zh-Hans/AWSVPNClient.Core.resources.dll
 /opt/awsvpnclient/zh-Hant
 /opt/awsvpnclient/zh-Hant/AWSVPNClient.Core.resources.dll
-/usr/bin/ip
 /usr/lib/systemd/system-preset/70-awsvpnclient.preset
 /usr/lib/systemd/system/awsvpnclient.service
 /usr/share/applications/awsvpnclient.desktop
