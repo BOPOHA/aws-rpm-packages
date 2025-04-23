@@ -27,4 +27,4 @@ awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Re
 awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Resources/openvpn/ld-musl-x86_64.so.1
 awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Resources/openvpn/libc.so
 awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Resources/openvpn/openssl
- 1 packages and 0 specfiles checked; 4 errors, 12 warnings, 276 filtered, 4 badness; has taken 6.6 s 
+ 1 packages and 0 specfiles checked; 4 errors, 12 warnings, 278 filtered, 4 badness; has taken 4.0 s 

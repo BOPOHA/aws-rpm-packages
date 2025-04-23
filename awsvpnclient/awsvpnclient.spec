@@ -24,7 +24,7 @@ Source1:       70-awsvpnclient.preset
 Patch0:        awsvpnclient.desktop.patch
 Patch1:        configure-dns.patch
 Patch2:        awsvpnclient.runtimeconfig.patch
-#Patch3:        awsvpnclient.deps.patch
+Patch3:        awsvpnclient.deps.patch
 Patch4:        acvc.gtk..deps.patch
 
 BuildRequires: systemd-rpm-macros
@@ -37,7 +37,7 @@ BuildRequires: systemd-rpm-macros
 ar p %{SOURCE0} data.tar.zst | tar --zstd -x
 %patch -P 0 -p1
 %patch -P 2 -p1
-#%patch -P 3 -p1
+%patch -P 3 -p1
 %patch -P 4 -p1
 
 find . -iname "*.a" -delete
@@ -98,6 +98,8 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 /opt/%{name}/Resources/openvpn/*.cnf
 /opt/%{name}/*.json
 /opt/%{name}/Resources/acvc-64.png
+/opt/%{name}/Resources/green-dot.png
+/opt/%{name}/Resources/grey-dot.png
 
 /usr/share/applications/%{name}.desktop
 /usr/share/pixmaps/acvc-64.png
@@ -140,6 +142,9 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Wed Apr 23 2025 AV - 5.2.0-1
+- bumb version
+
 * Wed Apr 23 2025 JO - 4.1.0-9
 - Fixed conflict with /usr/sbin/ip on Fedora 42
 

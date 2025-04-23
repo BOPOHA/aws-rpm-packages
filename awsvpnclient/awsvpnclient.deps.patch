@@ -1,5 +1,5 @@
---- "/opt/awsvpnclient/AWS VPN Client.deps.json"	2023-03-07 16:10:12.674752986 +0100
-+++ "/opt/awsvpnclient/AWS VPN Client.deps.json"	2023-03-07 16:29:38.741012201 +0100
+--- "/opt/awsvpnclient/AWS VPN Client.deps.json"	2025-04-02 22:10:29.000000000 +0200
++++ "/opt/awsvpnclient/AWS VPN Client.deps.json"	2025-04-23 23:21:45.980187275 +0200
 @@ -11,8 +11,6 @@
          "dependencies": {
            "AWSVPNClient.Core": "2.0.0",
@@ -7,7 +7,7 @@
 -          "System.Data.SQLite": "1.0.115",
 -          "System.Data.SQLite.Core": "1.0.115",
            "AWSVPNClient.Core.Reference": "2.0.0.0",
-           "runtimepack.Microsoft.NETCore.App.Runtime.linux-x64": "8.0.10"
+           "runtimepack.Microsoft.NETCore.App.Runtime.linux-x64": "8.0.14"
          },
 @@ -696,9 +694,6 @@
            }
@@ -40,7 +40,27 @@
            }
          }
        },
-@@ -1058,28 +1044,6 @@
+@@ -1016,19 +1002,6 @@
+           }
+         }
+       },
+-      "Stub.System.Data.SQLite.Core.NetStandard/1.0.115": {
+-        "runtime": {
+-          "lib/netstandard2.1/System.Data.SQLite.dll": {
+-            "assemblyVersion": "1.0.115.0",
+-            "fileVersion": "1.0.115.0"
+-          }
+-        },
+-        "native": {
+-          "runtimes/linux-x64/native/SQLite.Interop.dll": {
+-            "fileVersion": "0.0.0.0"
+-          }
+-        }
+-      },
+       "SymbolicLinkSupport/1.2.0": {
+         "runtime": {
+           "lib/netstandard1.3/SymbolicLinkSupport.dll": {
+@@ -1071,28 +1044,6 @@
            }
          }
        },
@@ -69,7 +89,7 @@
        "System.Diagnostics.DiagnosticSource/4.7.1": {},
        "System.Drawing.Common/4.7.0": {
          "dependencies": {
-@@ -1308,8 +1272,6 @@
+@@ -1321,8 +1272,6 @@
            "Serilog.Sinks.File": "5.0.0",
            "Serilog.Sinks.File.Header": "1.0.2",
            "SymbolicLinkSupport": "1.2.0",
@@ -78,7 +98,7 @@
            "System.IO.FileSystem.AccessControl": "5.0.0",
            "System.Runtime.InteropServices": "4.3.0",
            "System.ServiceModel.Http": "4.8.1",
-@@ -1672,13 +1634,6 @@
+@@ -1685,13 +1634,6 @@
        "path": "serilog.sinks.file.header/1.0.2",
        "hashPath": "serilog.sinks.file.header.1.0.2.nupkg.sha512"
      },
@@ -92,7 +112,7 @@
      "SymbolicLinkSupport/1.2.0": {
        "type": "package",
        "serviceable": true,
-@@ -1714,27 +1669,6 @@
+@@ -1727,27 +1669,6 @@
        "path": "system.data.sqlclient/4.8.1",
        "hashPath": "system.data.sqlclient.4.8.1.nupkg.sha512"
      },
