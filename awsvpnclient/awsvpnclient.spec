@@ -24,7 +24,7 @@ Source1:       70-awsvpnclient.preset
 Patch0:        awsvpnclient.desktop.patch
 Patch1:        configure-dns.patch
 Patch2:        awsvpnclient.runtimeconfig.patch
-Patch3:        awsvpnclient.deps.patch
+#Patch3:        awsvpnclient.deps.patch
 Patch4:        acvc.gtk..deps.patch
 
 BuildRequires: systemd-rpm-macros
@@ -37,7 +37,7 @@ BuildRequires: systemd-rpm-macros
 ar p %{SOURCE0} data.tar.zst | tar --zstd -x
 %patch -P 0 -p1
 %patch -P 2 -p1
-%patch -P 3 -p1
+#%patch -P 3 -p1
 %patch -P 4 -p1
 
 find . -iname "*.a" -delete
