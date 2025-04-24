@@ -14,8 +14,8 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       4.1.0
-Release:       9
+Version:       5.2.0
+Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -98,6 +98,8 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 /opt/%{name}/Resources/openvpn/*.cnf
 /opt/%{name}/*.json
 /opt/%{name}/Resources/acvc-64.png
+/opt/%{name}/Resources/green-dot.png
+/opt/%{name}/Resources/grey-dot.png
 
 /usr/share/applications/%{name}.desktop
 /usr/share/pixmaps/acvc-64.png
@@ -140,6 +142,9 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Wed Apr 23 2025 AV - 5.2.0-1
+- bumb version
+
 * Wed Apr 23 2025 JO - 4.1.0-9
 - Fixed conflict with /usr/sbin/ip on Fedora 42
 

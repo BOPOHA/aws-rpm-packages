@@ -35,6 +35,8 @@
 /opt/awsvpnclient/Resources/LINUX-LICENSE.txt
 /opt/awsvpnclient/Resources/THIRD-PARTY-LICENSES-GTK.txt
 /opt/awsvpnclient/Resources/acvc-64.png
+/opt/awsvpnclient/Resources/green-dot.png
+/opt/awsvpnclient/Resources/grey-dot.png
 /opt/awsvpnclient/Resources/openvpn
 /opt/awsvpnclient/Resources/openvpn/acvc-openvpn
 /opt/awsvpnclient/Resources/openvpn/configure-dns
