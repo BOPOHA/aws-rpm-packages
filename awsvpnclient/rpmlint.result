@@ -1,8 +1,7 @@
 ============================ rpmlint session starts ============================
-rpmlint: 2.6.1
+rpmlint: 2.7.0
 configuration:
     /usr/lib/python3.13/site-packages/rpmlint/configdefaults.toml
-    /etc/xdg/rpmlint/fedora-legacy-licenses.toml
     /etc/xdg/rpmlint/fedora-spdx-licenses.toml
     /etc/xdg/rpmlint/fedora.toml
     /etc/xdg/rpmlint/scoring.toml
@@ -13,12 +12,11 @@ checks: 32, packages: 1
 
 awsvpnclient.x86_64: W: symlink-to-binary-with-shebang /opt/awsvpnclient/Service/Resources/openvpn/configure-dns is a link to a script (/opt/awsvpnclient/Resources/openvpn/configure-dns) but missing requires for /usr/bin/env
 awsvpnclient.x86_64: W: no-url-tag
-awsvpnclient.x86_64: W: no-manual-page-for-binary ip
+awsvpnclient.x86_64: W: invalid-license ASL 2.0
 awsvpnclient.x86_64: E: files-duplicated-waste 719748
 awsvpnclient.x86_64: W: files-duplicate /opt/awsvpnclient/AWS VPN Client.runtimeconfig.json /opt/awsvpnclient/ACVC.GTK.Service.runtimeconfig.json
 awsvpnclient.x86_64: W: files-duplicate /opt/awsvpnclient/Resources/openvpn/libc.so /opt/awsvpnclient/Resources/openvpn/ld-musl-x86_64.so.1
 awsvpnclient.x86_64: E: env-script-interpreter /opt/awsvpnclient/Resources/openvpn/configure-dns /usr/bin/env bash
-awsvpnclient.x86_64: W: dangling-symlink /usr/bin/ip /usr/sbin/ip
 awsvpnclient.x86_64: W: crypto-policy-non-compliance-openssl /opt/awsvpnclient/Resources/openvpn/acvc-openvpn SSL_CTX_set_cipher_list
 awsvpnclient.x86_64: W: crypto-policy-non-compliance-openssl /opt/awsvpnclient/Resources/openvpn/openssl SSL_CTX_set_cipher_list
 awsvpnclient.x86_64: E: call-to-mktemp /opt/awsvpnclient/Resources/openvpn/ld-musl-x86_64.so.1
@@ -27,4 +25,4 @@ awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Re
 awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Resources/openvpn/ld-musl-x86_64.so.1
 awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Resources/openvpn/libc.so
 awsvpnclient.x86_64: W: binary-or-shlib-calls-gethostbyname /opt/awsvpnclient/Resources/openvpn/openssl
- 1 packages and 0 specfiles checked; 4 errors, 12 warnings, 278 filtered, 4 badness; has taken 4.0 s 
+ 1 packages and 0 specfiles checked; 4 errors, 11 warnings, 275 filtered, 4 badness; has taken 2.1 s 

@@ -17,13 +17,12 @@
 /opt/awsvpnclient/AtkSharp.dll
 /opt/awsvpnclient/Autofac.dll
 /opt/awsvpnclient/CairoSharp.dll
-/opt/awsvpnclient/EntityFramework.SqlServer.dll
-/opt/awsvpnclient/EntityFramework.dll
 /opt/awsvpnclient/GLibSharp.dll
 /opt/awsvpnclient/GdkSharp.dll
 /opt/awsvpnclient/GioSharp.dll
 /opt/awsvpnclient/GtkSharp.dll
 /opt/awsvpnclient/Microsoft.CSharp.dll
+/opt/awsvpnclient/Microsoft.Data.Sqlite.dll
 /opt/awsvpnclient/Microsoft.VisualBasic.Core.dll
 /opt/awsvpnclient/Microsoft.VisualBasic.dll
 /opt/awsvpnclient/Microsoft.Win32.Primitives.dll
@@ -46,6 +45,9 @@
 /opt/awsvpnclient/Resources/openvpn/libc.so
 /opt/awsvpnclient/Resources/openvpn/openssl
 /opt/awsvpnclient/Resources/openvpn/openssl.cnf
+/opt/awsvpnclient/SQLitePCLRaw.batteries_v2.dll
+/opt/awsvpnclient/SQLitePCLRaw.core.dll
+/opt/awsvpnclient/SQLitePCLRaw.provider.e_sqlite3.dll
 /opt/awsvpnclient/Serilog.Sinks.Console.dll
 /opt/awsvpnclient/Serilog.Sinks.File.Header.dll
 /opt/awsvpnclient/Serilog.Sinks.File.dll
@@ -58,7 +60,6 @@
 /opt/awsvpnclient/SymbolicLinkSupport.dll
 /opt/awsvpnclient/System.AppContext.dll
 /opt/awsvpnclient/System.Buffers.dll
-/opt/awsvpnclient/System.CodeDom.dll
 /opt/awsvpnclient/System.Collections.Concurrent.dll
 /opt/awsvpnclient/System.Collections.Immutable.dll
 /opt/awsvpnclient/System.Collections.NonGeneric.dll
@@ -70,15 +71,11 @@
 /opt/awsvpnclient/System.ComponentModel.Primitives.dll
 /opt/awsvpnclient/System.ComponentModel.TypeConverter.dll
 /opt/awsvpnclient/System.ComponentModel.dll
-/opt/awsvpnclient/System.Configuration.ConfigurationManager.dll
 /opt/awsvpnclient/System.Configuration.dll
 /opt/awsvpnclient/System.Console.dll
 /opt/awsvpnclient/System.Core.dll
 /opt/awsvpnclient/System.Data.Common.dll
 /opt/awsvpnclient/System.Data.DataSetExtensions.dll
-/opt/awsvpnclient/System.Data.SQLite.EF6.dll
-/opt/awsvpnclient/System.Data.SQLite.dll
-/opt/awsvpnclient/System.Data.SqlClient.dll
 /opt/awsvpnclient/System.Data.dll
 /opt/awsvpnclient/System.Diagnostics.Contracts.dll
 /opt/awsvpnclient/System.Diagnostics.Debug.dll
@@ -184,7 +181,6 @@
 /opt/awsvpnclient/System.Security.Cryptography.OpenSsl.dll
 /opt/awsvpnclient/System.Security.Cryptography.Pkcs.dll
 /opt/awsvpnclient/System.Security.Cryptography.Primitives.dll
-/opt/awsvpnclient/System.Security.Cryptography.ProtectedData.dll
 /opt/awsvpnclient/System.Security.Cryptography.X509Certificates.dll
 /opt/awsvpnclient/System.Security.Cryptography.Xml.dll
 /opt/awsvpnclient/System.Security.Cryptography.dll
@@ -255,6 +251,7 @@
 /opt/awsvpnclient/libclrgc.so
 /opt/awsvpnclient/libclrjit.so
 /opt/awsvpnclient/libcoreclr.so
+/opt/awsvpnclient/libe_sqlite3.so
 /opt/awsvpnclient/libhostfxr.so
 /opt/awsvpnclient/libhostpolicy.so
 /opt/awsvpnclient/mscorlib.dll
@@ -265,7 +262,6 @@
 /opt/awsvpnclient/zh-Hans/AWSVPNClient.Core.resources.dll
 /opt/awsvpnclient/zh-Hant
 /opt/awsvpnclient/zh-Hant/AWSVPNClient.Core.resources.dll
-/usr/bin/ip
 /usr/lib/systemd/system-preset/70-awsvpnclient.preset
 /usr/lib/systemd/system/awsvpnclient.service
 /usr/share/applications/awsvpnclient.desktop
