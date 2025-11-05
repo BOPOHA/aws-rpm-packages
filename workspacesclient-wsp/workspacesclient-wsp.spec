@@ -3,7 +3,7 @@
 %define app_name workspacesclient
 %define app_libs_dir /usr/lib/x86_64-linux-gnu/%{app_name}
 
-BuildArch:     x86_64
+ExclusiveArch: x86_64
 Name:          workspacesclient-wsp
 Version:       2024.8.5191
 Release:       1

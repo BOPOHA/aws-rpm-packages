@@ -12,7 +12,7 @@
 %global __provides_exclude_from  /opt/awsvpnclient/.*\\.so
 %global __requires_exclude_from  ^/opt/awsvpnclient/(.*\\.so|Resources/openvpn/.*)$
 
-BuildArch:     x86_64
+ExclusiveArch: x86_64
 Name:          awsvpnclient
 Version:       5.3.1
 Release:       1

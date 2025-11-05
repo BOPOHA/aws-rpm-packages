@@ -6,7 +6,7 @@
 %global __provides_exclude_from  ^(/opt/workspacesclient/.*\\.so|/usr/lib/x86_64-linux-gnu/pcoip-client/.*)$
 %global __requires_exclude_from  ^(/opt/workspacesclient/.*\\.so|/usr/lib/x86_64-linux-gnu/pcoip-client/.*)$
 
-BuildArch:     x86_64
+ExclusiveArch: x86_64
 Name:          workspacesclient
 Version:       4.7.0.4312
 Release:       6
