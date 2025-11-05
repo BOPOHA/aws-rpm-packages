@@ -14,7 +14,7 @@
 
 BuildArch:     x86_64
 Name:          awsvpnclient
-Version:       5.2.0
+Version:       5.3.1
 Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
@@ -142,6 +142,9 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Tue Nov 4 2025 AV - 5.3.1-1
+- bumb version
+
 * Wed Apr 23 2025 AV - 5.2.0-1
 - bumb version
 
