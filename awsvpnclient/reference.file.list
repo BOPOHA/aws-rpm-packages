@@ -1,3 +1,4 @@
+/etc/systemd/system/awsvpnclient.service.d/override.conf
 /opt/awsvpnclient
 /opt/awsvpnclient/ACVC.GTK.Service
 /opt/awsvpnclient/ACVC.GTK.Service.deps.json
@@ -7,6 +8,7 @@
 /opt/awsvpnclient/AWS VPN Client.dll
 /opt/awsvpnclient/AWS VPN Client.runtimeconfig.json
 /opt/awsvpnclient/AWSSDK.CloudWatch.dll
+/opt/awsvpnclient/AWSSDK.CloudWatchLogs.dll
 /opt/awsvpnclient/AWSSDK.CognitoIdentity.dll
 /opt/awsvpnclient/AWSSDK.Core.dll
 /opt/awsvpnclient/AWSSDK.Pinpoint.dll
@@ -20,9 +22,14 @@
 /opt/awsvpnclient/GLibSharp.dll
 /opt/awsvpnclient/GdkSharp.dll
 /opt/awsvpnclient/GioSharp.dll
+/opt/awsvpnclient/Google.Protobuf.dll
+/opt/awsvpnclient/Grpc.Core.Api.dll
+/opt/awsvpnclient/Grpc.Net.Client.dll
+/opt/awsvpnclient/Grpc.Net.Common.dll
 /opt/awsvpnclient/GtkSharp.dll
 /opt/awsvpnclient/Microsoft.CSharp.dll
 /opt/awsvpnclient/Microsoft.Data.Sqlite.dll
+/opt/awsvpnclient/Microsoft.Extensions.Logging.Abstractions.dll
 /opt/awsvpnclient/Microsoft.VisualBasic.Core.dll
 /opt/awsvpnclient/Microsoft.VisualBasic.dll
 /opt/awsvpnclient/Microsoft.Win32.Primitives.dll
@@ -107,6 +114,7 @@
 /opt/awsvpnclient/System.IO.FileSystem.dll
 /opt/awsvpnclient/System.IO.IsolatedStorage.dll
 /opt/awsvpnclient/System.IO.MemoryMappedFiles.dll
+/opt/awsvpnclient/System.IO.Pipelines.dll
 /opt/awsvpnclient/System.IO.Pipes.AccessControl.dll
 /opt/awsvpnclient/System.IO.Pipes.dll
 /opt/awsvpnclient/System.IO.UnmanagedMemoryStream.dll
@@ -227,8 +235,10 @@
 /opt/awsvpnclient/System.Xml.XmlSerializer.dll
 /opt/awsvpnclient/System.Xml.dll
 /opt/awsvpnclient/System.dll
+/opt/awsvpnclient/Tmds.DBus.Protocol.dll
 /opt/awsvpnclient/Tmds.DBus.dll
 /opt/awsvpnclient/WindowsBase.dll
+/opt/awsvpnclient/awsvpnclient-dbus.conf
 /opt/awsvpnclient/de
 /opt/awsvpnclient/de/AWSVPNClient.Core.resources.dll
 /opt/awsvpnclient/es

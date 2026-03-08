@@ -14,7 +14,7 @@
 
 ExclusiveArch: x86_64
 Name:          awsvpnclient
-Version:       5.3.1
+Version:       5.3.2
 Release:       1
 License:       ASL 2.0
 Group:         Converted/misc
@@ -45,14 +45,11 @@ find . -iname "*.pdb" -delete
 mv ./opt/%{name}/Service/Resources/openvpn       ./opt/%{name}/Resources/
 mv ./opt/%{name}/Service/ACVC.GTK.Service{,.dll} ./opt/%{name}/
 mv ./opt/%{name}/Service/*.json                  ./opt/%{name}/
+mv ./opt/%{name}/Service/System.IO.Pipelines.dll ./opt/%{name}/
+rm ./opt/%{name}/Tmds.DBus.dll
+mv ./opt/%{name}/Service/Tmds.DBus.{Protocol.,}dll ./opt/%{name}/
 rm -rf ./opt/%{name}/Service
-rm -rf ./opt/%{name}/SQLite.Interop.dll # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=awsvpnclient#n31
-                                        # Workaround for missing compatibility of the SQL library with arch linux:
-                                        # Intentionally break the metrics agent,
-                                        # it will be unable to laod the dynamic lib and wont start but continue with error message
-                                        # fixes errors:
-                                        # gtk_tree_model_iter_nth_child: assertion 'n >= 0' failed
-                                        # gtk_list_store_get_path: assertion 'iter->stamp == priv->stamp' failed
+rm -rf ./opt/%{name}/libe_sqlite3.so
 sed -i "s#/opt/awsvpnclient/Service/#/opt/awsvpnclient/#;" ./etc/systemd/system/%{name}.service
 mv ./opt/%{name}/{AWS\ VPN\ Client,AWSVPNClient}
 rm -rf \
@@ -74,6 +71,7 @@ mv opt %{buildroot}/
 ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/Resources/openvpn/configure-dns
 ( cd %{buildroot}/opt/%{name}/Resources/openvpn/ && ./openssl fipsinstall -out fipsmodule.cnf -module ./fips.so )
 ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
+ln -s /usr/lib64/libsqlite3.so %{buildroot}/opt/%{name}/libe_sqlite3.so
 
 %if 0%{?fc40}%{?fc41}
 mkdir -p %{buildroot}/usr/bin
@@ -100,6 +98,7 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 /opt/%{name}/Resources/acvc-64.png
 /opt/%{name}/Resources/green-dot.png
 /opt/%{name}/Resources/grey-dot.png
+/opt/%{name}/awsvpnclient-dbus.conf
 
 /usr/share/applications/%{name}.desktop
 /usr/share/pixmaps/acvc-64.png
@@ -142,6 +141,9 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Thu Mar 5 2026 AV - 5.3.2-1
+- bump version
+
 * Tue Nov 4 2025 AV - 5.3.1-1
 - bumb version
 

@@ -1,5 +1,5 @@
 Package: awsvpnclient
-Version: 5.3.1
+Version: 5.3.2
 Section: misc
 Priority: optional
 Architecture: amd64
