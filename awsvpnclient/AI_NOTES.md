@@ -41,3 +41,9 @@ enable awsvpnclient.service
 - The upstream DEB ships `/opt/awsvpnclient/Service/System.IO.Pipelines.dll`.
 - RPM packaging must move it out of `Service/` before that directory is removed.
 - Spec now includes: `mv ./opt/%{name}/Service/System.IO.Pipelines.dll ./opt/%{name}/`
+
+## RPM linting
+- Check symlink warnings in `rpmlint.result` and fix them in the spec.
+- If `libe_sqlite3.so` points to system SQLite, use a file-level dependency (e.g. `/usr/%{_lib}/libsqlite3.so`).
+- `rpmlint.rc` filters are used for:
+  - `env-script-interpreter` on `configure-dns` (file hash must not change)

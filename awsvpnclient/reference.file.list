@@ -1,4 +1,3 @@
-/etc/systemd/system/awsvpnclient.service.d/override.conf
 /opt/awsvpnclient
 /opt/awsvpnclient/ACVC.GTK.Service
 /opt/awsvpnclient/ACVC.GTK.Service.deps.json
@@ -274,6 +273,7 @@
 /opt/awsvpnclient/zh-Hant/AWSVPNClient.Core.resources.dll
 /usr/lib/systemd/system-preset/70-awsvpnclient.preset
 /usr/lib/systemd/system/awsvpnclient.service
+/usr/lib/systemd/system/awsvpnclient.service.d/override.conf
 /usr/share/applications/awsvpnclient.desktop
 /usr/share/doc/awsvpnclient
 /usr/share/doc/awsvpnclient/copyright
