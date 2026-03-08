@@ -21,6 +21,7 @@ Group:         Converted/misc
 Summary:       AWS VPN Client
 Source0:       https://d20adtppz83p9s.cloudfront.net/GTK/%{version}/awsvpnclient_amd64.deb
 Source1:       70-awsvpnclient.preset
+Source2:       awsvpnclient.service.override.conf
 Patch0:        awsvpnclient.desktop.patch
 Patch1:        configure-dns.patch
 Patch2:        awsvpnclient.runtimeconfig.patch
@@ -66,6 +67,7 @@ mv opt %{buildroot}/
 
 %__install -Dpm 0644 etc/systemd/system/%{name}.service          %{buildroot}%{_unitdir}/%{name}.service
 %__install -Dpm 0644 %{SOURCE1}                                  %{buildroot}%{_presetdir}/70-%{name}.preset
+%__install -Dpm 0644 %{SOURCE2}                                  %{buildroot}/etc/systemd/system/%{name}.service.d/override.conf
 
 %__install -d %{buildroot}/opt/%{name}/Service/Resources/openvpn
 ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/Resources/openvpn/configure-dns
@@ -104,6 +106,7 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 /usr/share/pixmaps/acvc-64.png
 %{_presetdir}/70-%{name}.preset
 %{_unitdir}/%{name}.service
+/etc/systemd/system/%{name}.service.d/override.conf
 
 /opt/%{name}/Service/Resources/openvpn/configure-dns
 /opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
