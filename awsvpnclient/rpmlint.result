@@ -11,4 +11,4 @@ configuration:
 rpmlintrc: [PosixPath('rpmlint.rc')]
 checks: 32, packages: 1
 
- 1 packages and 0 specfiles checked; 0 errors, 0 warnings, 296 filtered, 0 badness; has taken 3.8 s 
+ 1 packages and 0 specfiles checked; 0 errors, 0 warnings, 295 filtered, 0 badness; has taken 3.8 s

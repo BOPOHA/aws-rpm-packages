@@ -246,6 +246,7 @@
 /opt/awsvpnclient/fr/AWSVPNClient.Core.resources.dll
 /opt/awsvpnclient/gtk_routing_table_listener.dylib
 /opt/awsvpnclient/gtk_routing_table_utils.dylib
+/opt/awsvpnclient/hook.so
 /opt/awsvpnclient/it
 /opt/awsvpnclient/it/AWSVPNClient.Core.resources.dll
 /opt/awsvpnclient/ja
@@ -260,7 +261,6 @@
 /opt/awsvpnclient/libclrgc.so
 /opt/awsvpnclient/libclrjit.so
 /opt/awsvpnclient/libcoreclr.so
-/opt/awsvpnclient/libe_sqlite3.so
 /opt/awsvpnclient/libhostfxr.so
 /opt/awsvpnclient/libhostpolicy.so
 /opt/awsvpnclient/mscorlib.dll

@@ -1,2 +1,4 @@
 */rpm-results
 /.idea/
+
+/awsvpnclient/hooks/*.so
