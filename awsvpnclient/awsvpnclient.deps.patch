@@ -1,14 +1,6 @@
---- "/opt/awsvpnclient/AWS VPN Client.deps.json"	2025-04-02 22:10:29.000000000 +0200
-+++ "/opt/awsvpnclient/AWS VPN Client.deps.json"	2025-04-23 23:21:45.980187275 +0200
-@@ -11,7 +11,6 @@
-         "dependencies": {
-           "AWSVPNClient.Core": "2.0.0",
-           "GtkSharp": "3.22.25.128",
--          "Microsoft.Data.Sqlite": "9.0.7",
-           "AWSVPNClient.Core.Reference": "2.0.0.0",
-           "runtimepack.Microsoft.NETCore.App.Runtime.linux-x64": "8.0.17"
-         },
-@@ -695,9 +694,6 @@
+--- "/opt/awsvpnclient/AWS VPN Client.deps.json"
++++ "/opt/awsvpnclient/AWS VPN Client.deps.json"
+@@ -695,9 +695,6 @@
            }
          },
          "native": {
@@ -18,7 +10,7 @@
            "libSystem.Globalization.Native.so": {
              "fileVersion": "0.0.0.0"
            },
-@@ -722,20 +718,11 @@
+@@ -722,20 +719,11 @@
            "libcoreclr.so": {
              "fileVersion": "0.0.0.0"
            },
@@ -39,140 +31,10 @@
            }
          }
        },
-@@ -882,24 +869,6 @@
-           }
-         }
-       },
--      "Microsoft.Data.Sqlite/9.0.7": {
--        "dependencies": {
--          "Microsoft.Data.Sqlite.Core": "9.0.7",
--          "SQLitePCLRaw.bundle_e_sqlite3": "2.1.10",
--          "SQLitePCLRaw.core": "2.1.10"
--        }
--      },
--      "Microsoft.Data.Sqlite.Core/9.0.7": {
--        "dependencies": {
--          "SQLitePCLRaw.core": "2.1.10"
--        },
--        "runtime": {
--          "lib/net8.0/Microsoft.Data.Sqlite.dll": {
--            "assemblyVersion": "9.0.7.0",
--            "fileVersion": "9.0.725.31607"
--          }
--        }
--      },
-       "Microsoft.NETCore.Platforms/5.0.0": {},
-       "Microsoft.NETCore.Targets/1.1.0": {},
-       "Microsoft.Win32.Registry/5.0.0": {
-@@ -1003,47 +972,6 @@
-           }
-         }
-       },
--      "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
--        "dependencies": {
--          "SQLitePCLRaw.lib.e_sqlite3": "2.1.10",
--          "SQLitePCLRaw.provider.e_sqlite3": "2.1.10"
--        },
--        "runtime": {
--          "lib/netstandard2.0/SQLitePCLRaw.batteries_v2.dll": {
--            "assemblyVersion": "2.1.10.2445",
--            "fileVersion": "2.1.10.2445"
--          }
--        }
--      },
--      "SQLitePCLRaw.core/2.1.10": {
--        "dependencies": {
--          "System.Memory": "4.5.3"
--        },
--        "runtime": {
--          "lib/netstandard2.0/SQLitePCLRaw.core.dll": {
--            "assemblyVersion": "2.1.10.2445",
--            "fileVersion": "2.1.10.2445"
--          }
--        }
--      },
--      "SQLitePCLRaw.lib.e_sqlite3/2.1.10": {
--        "native": {
--          "runtimes/linux-x64/native/libe_sqlite3.so": {
--            "fileVersion": "0.0.0.0"
--          }
--        }
--      },
--      "SQLitePCLRaw.provider.e_sqlite3/2.1.10": {
--        "dependencies": {
--          "SQLitePCLRaw.core": "2.1.10"
--        },
--        "runtime": {
--          "lib/net6.0/SQLitePCLRaw.provider.e_sqlite3.dll": {
--            "assemblyVersion": "2.1.10.2445",
--            "fileVersion": "2.1.10.2445"
--          }
--        }
--      },
-       "SymbolicLinkSupport/1.2.0": {
-         "runtime": {
-           "lib/netstandard1.3/SymbolicLinkSupport.dll": {
-@@ -1266,7 +1194,6 @@
-           "AWSSDK.Pinpoint": "3.7.2.1",
-           "AWSSDK.S3": "3.7.3.1",
-           "Autofac": "6.2.0",
--          "Microsoft.Data.Sqlite": "9.0.7",
-           "Microsoft.Win32.Registry": "5.0.0",
-           "Newtonsoft.Json": "13.0.1",
-           "Serilog": "2.10.0",
-@@ -1454,20 +1381,6 @@
-       "path": "gtksharp/3.22.25.128",
-       "hashPath": "gtksharp.3.22.25.128.nupkg.sha512"
-     },
--    "Microsoft.Data.Sqlite/9.0.7": {
--      "type": "package",
--      "serviceable": true,
--      "sha512": "sha512-zPyE8rASXQALTOHI/flV1YzCErlnuDm9Wv7jxYhC1KkheWBMJRJ95Yl8ZqXPa/8R16DJ3IZn8KnOVcqs3bYBmA==",
--      "path": "microsoft.data.sqlite/9.0.7",
--      "hashPath": "microsoft.data.sqlite.9.0.7.nupkg.sha512"
--    },
--    "Microsoft.Data.Sqlite.Core/9.0.7": {
--      "type": "package",
--      "serviceable": true,
--      "sha512": "sha512-yjlU0Wu0tAexFPlo/bbkYFMWyEkVHqr5AONyh91YJ4KH+hys+eAzHQxd14aZwtQOgpJ5s9r3QL9+tVJww8w69Q==",
--      "path": "microsoft.data.sqlite.core/9.0.7",
--      "hashPath": "microsoft.data.sqlite.core.9.0.7.nupkg.sha512"
--    },
-     "Microsoft.NETCore.Platforms/5.0.0": {
-       "type": "package",
-       "serviceable": true,
-@@ -1608,34 +1521,6 @@
-       "path": "serilog.sinks.file.header/1.0.2",
-       "hashPath": "serilog.sinks.file.header.1.0.2.nupkg.sha512"
-     },
--    "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
--      "type": "package",
--      "serviceable": true,
--      "sha512": "sha512-UxWuisvZ3uVcVOLJQv7urM/JiQH+v3TmaJc1BLKl5Dxfm/nTzTUrqswCqg/INiYLi61AXnHo1M1JPmPqqLnAdg==",
--      "path": "sqlitepclraw.bundle_e_sqlite3/2.1.10",
--      "hashPath": "sqlitepclraw.bundle_e_sqlite3.2.1.10.nupkg.sha512"
--    },
--    "SQLitePCLRaw.core/2.1.10": {
--      "type": "package",
--      "serviceable": true,
--      "sha512": "sha512-Ii8JCbC7oiVclaE/mbDEK000EFIJ+ShRPwAvvV89GOZhQ+ZLtlnSWl6ksCNMKu/VGXA4Nfi2B7LhN/QFN9oBcw==",
--      "path": "sqlitepclraw.core/2.1.10",
--      "hashPath": "sqlitepclraw.core.2.1.10.nupkg.sha512"
--    },
--    "SQLitePCLRaw.lib.e_sqlite3/2.1.10": {
--      "type": "package",
--      "serviceable": true,
--      "sha512": "sha512-mAr69tDbnf3QJpRy2nJz8Qdpebdil00fvycyByR58Cn9eARvR+UiG2Vzsp+4q1tV3ikwiYIjlXCQFc12GfebbA==",
--      "path": "sqlitepclraw.lib.e_sqlite3/2.1.10",
--      "hashPath": "sqlitepclraw.lib.e_sqlite3.2.1.10.nupkg.sha512"
--    },
--    "SQLitePCLRaw.provider.e_sqlite3/2.1.10": {
--      "type": "package",
--      "serviceable": true,
--      "sha512": "sha512-uZVTi02C1SxqzgT0HqTWatIbWGb40iIkfc3FpFCpE/r7g6K0PqzDUeefL6P6HPhDtc6BacN3yQysfzP7ks+wSQ==",
--      "path": "sqlitepclraw.provider.e_sqlite3/2.1.10",
--      "hashPath": "sqlitepclraw.provider.e_sqlite3.2.1.10.nupkg.sha512"
--    },
-     "SymbolicLinkSupport/1.2.0": {
-       "type": "package",
-       "serviceable": true,
+@@ -3241,4 +3229,4 @@
+       "base"
+     ]
+   }
+-}
+\ No newline at end of file
++}

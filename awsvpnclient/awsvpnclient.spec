@@ -9,25 +9,31 @@
 %define _build_id_links none
 %undefine _auto_set_build_flags
 
-%global __provides_exclude_from  /opt/awsvpnclient/.*\\.so
-%global __requires_exclude_from  ^/opt/awsvpnclient/(.*\\.so|Resources/openvpn/.*)$
+%global __provides_exclude_from  /opt/awsvpnclient/.*\\.(so|dll|dylib)
+%global __requires_exclude_from  ^/opt/awsvpnclient/(.*\\.(so|dll|dylib)|Resources/openvpn/.*)$
 
 ExclusiveArch: x86_64
 Name:          awsvpnclient
-Version:       5.3.1
-Release:       1
+Version:       5.3.2
+Release:       2%{?dist}
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
+URL:           https://aws.amazon.com/vpn/
 Source0:       https://d20adtppz83p9s.cloudfront.net/GTK/%{version}/awsvpnclient_amd64.deb
 Source1:       70-awsvpnclient.preset
+Source2:       awsvpnclient.service.override.conf
+Source3:       hook0.c
 Patch0:        awsvpnclient.desktop.patch
 Patch1:        configure-dns.patch
 Patch2:        awsvpnclient.runtimeconfig.patch
 Patch3:        awsvpnclient.deps.patch
 Patch4:        acvc.gtk..deps.patch
 
+BuildRequires: gcc
 BuildRequires: systemd-rpm-macros
+Requires:      /usr/%{_lib}/libsqlite3.so
+Requires:      /usr/bin/env
 
 %description
 %{summary}
@@ -45,14 +51,11 @@ find . -iname "*.pdb" -delete
 mv ./opt/%{name}/Service/Resources/openvpn       ./opt/%{name}/Resources/
 mv ./opt/%{name}/Service/ACVC.GTK.Service{,.dll} ./opt/%{name}/
 mv ./opt/%{name}/Service/*.json                  ./opt/%{name}/
+mv ./opt/%{name}/Service/System.IO.Pipelines.dll ./opt/%{name}/
+rm ./opt/%{name}/Tmds.DBus.dll
+mv ./opt/%{name}/Service/Tmds.DBus.{Protocol.,}dll ./opt/%{name}/
 rm -rf ./opt/%{name}/Service
-rm -rf ./opt/%{name}/SQLite.Interop.dll # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=awsvpnclient#n31
-                                        # Workaround for missing compatibility of the SQL library with arch linux:
-                                        # Intentionally break the metrics agent,
-                                        # it will be unable to laod the dynamic lib and wont start but continue with error message
-                                        # fixes errors:
-                                        # gtk_tree_model_iter_nth_child: assertion 'n >= 0' failed
-                                        # gtk_list_store_get_path: assertion 'iter->stamp == priv->stamp' failed
+rm -rf ./opt/%{name}/libe_sqlite3.so
 sed -i "s#/opt/awsvpnclient/Service/#/opt/awsvpnclient/#;" ./etc/systemd/system/%{name}.service
 mv ./opt/%{name}/{AWS\ VPN\ Client,AWSVPNClient}
 rm -rf \
@@ -60,6 +63,9 @@ rm -rf \
        ./opt/%{name}/libmscordaccore.so \
        ./opt/%{name}/libcoreclrtraceptprovider.so \
        ./opt/%{name}/createdump
+
+%build
+gcc -shared -fPIC -o hook.so %{SOURCE3} -ldl
 
 %install
 mv opt %{buildroot}/
@@ -69,11 +75,14 @@ mv opt %{buildroot}/
 
 %__install -Dpm 0644 etc/systemd/system/%{name}.service          %{buildroot}%{_unitdir}/%{name}.service
 %__install -Dpm 0644 %{SOURCE1}                                  %{buildroot}%{_presetdir}/70-%{name}.preset
+%__install -Dpm 0644 %{SOURCE2}                                  %{buildroot}%{_unitdir}/%{name}.service.d/override.conf
+%__install -Dpm 0644 hook.so                                     %{buildroot}/opt/%{name}/hook.so
 
 %__install -d %{buildroot}/opt/%{name}/Service/Resources/openvpn
 ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/Resources/openvpn/configure-dns
 ( cd %{buildroot}/opt/%{name}/Resources/openvpn/ && ./openssl fipsinstall -out fipsmodule.cnf -module ./fips.so )
 ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
+### ln -s ../../usr/%{_lib}/libsqlite3.so %{buildroot}/opt/%{name}/libe_sqlite3.so
 
 %if 0%{?fc40}%{?fc41}
 mkdir -p %{buildroot}/usr/bin
@@ -100,11 +109,13 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 /opt/%{name}/Resources/acvc-64.png
 /opt/%{name}/Resources/green-dot.png
 /opt/%{name}/Resources/grey-dot.png
+/opt/%{name}/awsvpnclient-dbus.conf
 
 /usr/share/applications/%{name}.desktop
 /usr/share/pixmaps/acvc-64.png
 %{_presetdir}/70-%{name}.preset
 %{_unitdir}/%{name}.service
+%{_unitdir}/%{name}.service.d/override.conf
 
 /opt/%{name}/Service/Resources/openvpn/configure-dns
 /opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
@@ -142,6 +153,13 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Thu Mar 12 2026 AV - 5.3.2-2
+- add hook build and preload override
+- exclude .dll/.dylib auto-requires
+
+* Thu Mar 5 2026 AV - 5.3.2-1
+- bump version
+
 * Tue Nov 4 2025 AV - 5.3.1-1
 - bumb version
 

@@ -56,6 +56,11 @@ ACVC.Core.OpenVpn.OvpnResourcesChecksumValidationFailedException: Ovpn resources
 - https://github.com/JonathanxD/openaws-vpn-client
 - https://github.com/samm-git/aws-vpn-client
 
+# alternatives for non-RPM based systems
+- https://github.com/AddG0/awsvpnclient-nix
+- https://github.com/Tebro/awsvpn-flake
+- https://aur.archlinux.org/packages/awsvpnclient
+
 # must read
 
  - https://smallhacks.wordpress.com/2020/07/08/aws-client-vpn-internals/
