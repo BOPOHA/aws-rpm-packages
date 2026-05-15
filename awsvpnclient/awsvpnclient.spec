@@ -15,7 +15,7 @@
 ExclusiveArch: x86_64
 Name:          awsvpnclient
 Version:       5.3.2
-Release:       2%{?dist}
+Release:       3%{?dist}
 License:       ASL 2.0
 Group:         Converted/misc
 Summary:       AWS VPN Client
@@ -32,7 +32,7 @@ Patch4:        acvc.gtk..deps.patch
 
 BuildRequires: gcc
 BuildRequires: systemd-rpm-macros
-Requires:      /usr/%{_lib}/libsqlite3.so
+Requires:      sqlite-libs
 Requires:      /usr/bin/env
 
 %description
@@ -153,6 +153,9 @@ ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Fri May 15 2026 AV - 5.3.2-3
+- fix sqlite dep: require sqlite-libs instead of unversioned libsqlite3.so path (Fedora 44)
+
 * Thu Mar 12 2026 AV - 5.3.2-2
 - add hook build and preload override
 - exclude .dll/.dylib auto-requires
