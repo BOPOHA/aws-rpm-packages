@@ -1,13 +1,14 @@
 Package: awsvpnclient
-Version: 5.3.2
+Version: 6.2.0
 Architecture: amd64
-Maintainer: AWS VPN Client
+Maintainer: AWS VPN Client <aws-vpn-client@amazon.com>
+Depends: libc6 (>= 2.31), libgtk-3-0, libnss3, libxss1, libxtst6, libasound2, libdrm2, libgbm1, libnotify4
 Filename: pool/ubuntu/awsvpnclient_amd64.deb
-Size: 64007030
-MD5sum: 550360eca8036aecc4d2badb37c42471
-SHA1: e554aafab5895ad8d91ac47ccdf1fc20004f920b
-SHA256: 89e4b9f2c9f7def37167f5f137f4ff9c6c5246fd6e0a7244b70c196a17683569
-Section: misc
-Priority: optional
-Description: AWS VPN Client for Ubuntu
+Size: 141933056
+MD5sum: a953cb02c0abd5c62bcf7ba8befcd955
+SHA1: cc1ebc9c0b6e36977c98d815b1dbf62bf027041c
+SHA256: 2779a8af748addc2e6f5061c8ea89ec9f7cb00a6f455af3a3da17dcf8b40abb7
+Description: AWS VPN Client
+ AWS VPN Client provides secure VPN connectivity using AWS Client VPN.
+ Installs a privileged background daemon and a command-line interface.
 

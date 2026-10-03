@@ -1,13 +1,51 @@
 #!/bin/bash
-set -x
+# Pre-install: stop existing daemon if running
+set -e
+DAEMON="aws-client-vpn-daemon"
 
-LOG_FOLDER="/var/log/aws-vpn-client"
-mkdir -p $LOG_FOLDER
-LOG_FILE=$LOG_FOLDER/preinst.log
+if /usr/bin/systemctl is-active --quiet "$DAEMON" 2>/dev/null; then
+    echo "Stopping existing ${DAEMON}..."
+    /usr/bin/systemctl stop "$DAEMON" || true
+fi
 
-# Remove service
-sudo systemctl stop awsvpnclient >> $LOG_FILE 2>&1
-sudo systemctl disable awsvpnclient >> $LOG_FILE 2>&1
-sudo systemctl daemon-reload >> $LOG_FILE 2>&1
-sudo systemctl reset-failed >> $LOG_FILE 2>&1
+if /usr/bin/systemctl is-enabled --quiet "$DAEMON" 2>/dev/null; then
+    /usr/bin/systemctl disable "$DAEMON" || true
+fi
 
+# --- Clean up legacy 5.x.x artifacts not handled by dpkg ---
+LOG_FOLDER="/var/log/awsvpnclient"
+/bin/mkdir -p "$LOG_FOLDER"
+LOG_FILE="$LOG_FOLDER/preinst.log"
+
+# Stop legacy service (dpkg also runs old preinst which does this,
+# but belt-and-suspenders in case old scripts fail)
+if /usr/bin/systemctl is-active --quiet awsvpnclient 2>/dev/null; then
+    echo "Stopping legacy awsvpnclient service..." >> "$LOG_FILE" 2>&1
+    /usr/bin/systemctl stop awsvpnclient >> "$LOG_FILE" 2>&1 || true
+    /usr/bin/systemctl disable awsvpnclient >> "$LOG_FILE" 2>&1 || true
+fi
+
+# Kill legacy GUI (may still be running)
+/usr/bin/pkill -x "AWS VPN Client" >> "$LOG_FILE" 2>&1 || true
+
+# Remove legacy systemd unit (new package uses a different service filename)
+if [ -f "/etc/systemd/system/awsvpnclient.service" ]; then
+    /bin/rm -f "/etc/systemd/system/awsvpnclient.service" >> "$LOG_FILE" 2>&1
+fi
+
+# Remove legacy D-Bus config (new client uses UDS + gRPC, not D-Bus)
+/bin/rm -f "/opt/awsvpnclient/awsvpnclient-dbus.conf" >> "$LOG_FILE" 2>&1 || true
+
+# Reload systemd to pick up unit file removal
+/usr/bin/systemctl daemon-reload >> "$LOG_FILE" 2>&1 || true
+
+# Remove legacy runtime files from user home directories
+for USER_HOME in /home/*; do
+    LEGACY_DIR="${USER_HOME}/.config/AWSVPNClient"
+    if [ -d "${LEGACY_DIR}" ]; then
+        /bin/rm -f "${LEGACY_DIR}"/ovpn-mgmt-* 2>/dev/null || true
+        /bin/rm -rf "${LEGACY_DIR}/TemporaryCredentials" 2>/dev/null || true
+    fi
+done
+
+exit 0

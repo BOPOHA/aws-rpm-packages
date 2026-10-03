@@ -18,7 +18,7 @@ metadata: srpm
 	# dists/ubuntu -> 22.04
 	curl https://d20adtppz83p9s.cloudfront.net/GTK/latest/debian-repo/dists/ubuntu/main/binary-amd64/Packages -sO
 	rm -rf metadata && mkdir metadata
-	ar p $(PROJECTTMPDIR)/*deb control.tar.zst | tar --zstd -xC metadata/
+	ar p $(PROJECTTMPDIR)/*deb control.tar.gz | tar -z -xC metadata/
 	(cd $(PROJECTTMPDIR) && sha256sum *.deb) > checksums.sha256
 
 spec:
@@ -37,10 +37,8 @@ rpmbuild: srpm
 deps-patches:
 	@echo "Generating deps patches from deb contents in $(DEBDATA_DIR)"
 	rm -rf "$(DEBDATA_DIR)" && mkdir -p "$(DEBDATA_DIR)"
-	ar p $(PROJECTTMPDIR)/*deb data.tar.zst | tar --zstd -xC "$(DEBDATA_DIR)"
+	ar p $(PROJECTTMPDIR)/*deb data.tar.gz | tar -z -xC "$(DEBDATA_DIR)"
 	find "$(DEBDATA_DIR)/opt/$(PROJECTNAME)/" -type f | sed "s#^\$(DEBDATA_DIR)##"> deb.file.list
-	bash ./remove-sqlite-from-deps.sh "$(DEBDATA_DIR)/opt/$(PROJECTNAME)/Service/ACVC.GTK.Service.deps.json" /tmp/ACVC.GTK.Service.deps.nosqlite.json acvc.gtk..deps.patch "/opt/$(PROJECTNAME)/Service/ACVC.GTK.Service.deps.json"
-	bash ./remove-sqlite-from-deps.sh "$(DEBDATA_DIR)/opt/$(PROJECTNAME)/AWS VPN Client.deps.json" /tmp/AWS.VPN.Client.deps.nosqlite.json awsvpnclient.deps.patch "/opt/$(PROJECTNAME)/AWS VPN Client.deps.json"
 
 fc: srpm
 	mock --no-clean --dnf -r fedora-$(FEDORA_VERSION)-x86_64 --resultdir=rpm-results  $(PROJECTTMPDIR)/$(PROJECTNAME)-${RPM_VERSION}.src.rpm

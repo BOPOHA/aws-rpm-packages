@@ -1,6 +1,21 @@
 #!/bin/bash
-set -x
+# Pre-removal: stop all application processes before files are removed
+set -e
+# Binary names match constants in rust_common/src/constants.rs
+APP_NAME="AWS VPN Client"
+DAEMON="aws-client-vpn-daemon"
+AGENT="aws-vpn-client-agent"
 
-rm -Rf /opt/awsvpnclient/Service/Resources/openvpn/fipsmodule.cnf
-rm -Rf /opt/awsvpnclient/ConnectionInfoFiles
+# Terminate GUI first so it doesn't send requests during daemon teardown.
+pkill -x "$APP_NAME" 2>/dev/null || true
 
+# Stop the posture agent (user process spawned by the GUI).
+pkill -f "$AGENT" 2>/dev/null || true
+
+# Stop the daemon via systemd (synchronous, waits for graceful teardown).
+if systemctl is-active --quiet "$DAEMON" 2>/dev/null; then
+    echo "Stopping ${DAEMON}..."
+    systemctl stop "$DAEMON" || true
+fi
+
+exit 0
