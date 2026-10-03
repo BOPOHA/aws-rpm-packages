@@ -1,19 +1,26 @@
 #!/bin/bash
-set -x
+# Post-install: set permissions and start daemon
 set -e
+INSTALL_BASE="/opt/awsvpnclient"
+DAEMON="aws-client-vpn-daemon"
 
-LOG_FOLDER="/var/log/aws-vpn-client"
-mkdir -p $LOG_FOLDER
-LOG_FILE=$LOG_FOLDER/postinst.log
+# Set binary permissions
+chmod 750 "${INSTALL_BASE}/aws-client-vpn-daemon"
+chmod 755 "${INSTALL_BASE}/aws-vpn-client"
+# Posture agent: daemon spawns it as the user; must be executable or spawn hits EACCES.
+chmod 755 "${INSTALL_BASE}/aws-vpn-client-agent"
 
-# Start awsvpnclient.service
-sudo systemctl enable awsvpnclient >> $LOG_FILE 2>&1
-sudo systemctl start awsvpnclient >> $LOG_FILE 2>&1
+# DNS scripts executable by root only
+if [ -d "${INSTALL_BASE}/dns" ]; then
+    find "${INSTALL_BASE}/dns" -type f -exec chmod 750 {} \;
+fi
 
-OPENVPN_PATH=/opt/awsvpnclient/Service/Resources/openvpn
-pushd $OPENVPN_PATH
-export LD_LIBRARY_PATH=$OPENVPN_PATH
-$OPENVPN_PATH/openssl \
-    fipsinstall \
-    -out /opt/awsvpnclient/Service/Resources/openvpn/fipsmodule.cnf \
-    -module $OPENVPN_PATH/fips.so >> $LOG_FILE 2>&1
+mkdir -p /var/lib/awsvpnclient
+chmod 700 /var/lib/awsvpnclient
+
+# Reload systemd and enable + start daemon
+systemctl daemon-reload
+systemctl enable "$DAEMON"
+systemctl start "$DAEMON"
+
+exit 0

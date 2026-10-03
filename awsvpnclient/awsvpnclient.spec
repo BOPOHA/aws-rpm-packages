@@ -1,7 +1,3 @@
-# Start method called with config file and management port password file contents.
-# Ovpn binary calculated checksum: 506017103194649c81825504261fd0a24e20cb2dba5bb88cc9a4c91b1a52fa41.
-# Ovpn binary actual checksum: 6719be8e3b8b6355a480fd605f385b7a627b2b59eed3f6357cfeb7c33a6b5a5b
-# OvpnBinaryChecksumValidationFailed
 # Disable stripping:
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
 
@@ -9,150 +5,113 @@
 %define _build_id_links none
 %undefine _auto_set_build_flags
 
-%global __provides_exclude_from  /opt/awsvpnclient/.*\\.(so|dll|dylib)
-%global __requires_exclude_from  ^/opt/awsvpnclient/(.*\\.(so|dll|dylib)|Resources/openvpn/.*)$
+%global __provides_exclude_from ^/opt/awsvpnclient/.*\\.so(\\.[0-9]+)*$
+%global __requires_exclude_from ^/opt/awsvpnclient/.*\\.so(\\.[0-9]+)*$
+%global __requires_exclude ^lib(crypto|ffmpeg|ssl)\\.so\\(\\)\\(64bit\\)$
 
 ExclusiveArch: x86_64
 Name:          awsvpnclient
-Version:       5.3.2
-Release:       3%{?dist}
-License:       ASL 2.0
+Version:       6.2.0
+Release:       1%{?dist}
+License:       LicenseRef-Proprietary
 Group:         Converted/misc
 Summary:       AWS VPN Client
 URL:           https://aws.amazon.com/vpn/
 Source0:       https://d20adtppz83p9s.cloudfront.net/GTK/%{version}/awsvpnclient_amd64.deb
-Source1:       70-awsvpnclient.preset
-Source2:       awsvpnclient.service.override.conf
-Source3:       hook0.c
-Patch0:        awsvpnclient.desktop.patch
-Patch1:        configure-dns.patch
-Patch2:        awsvpnclient.runtimeconfig.patch
-Patch3:        awsvpnclient.deps.patch
-Patch4:        acvc.gtk..deps.patch
 
-BuildRequires: gcc
+BuildRequires: binutils
+BuildRequires: gzip
 BuildRequires: systemd-rpm-macros
-Requires:      sqlite-libs
-Requires:      /usr/bin/env
+BuildRequires: tar
+Requires:      alsa-lib
+Requires:      gtk3
+Requires:      libdrm
+Requires:      libnotify
+Requires:      libXScrnSaver
+Requires:      libXtst
+Requires:      mesa-libgbm
+Requires:      nss
+Requires:      systemd-resolved
+Requires(pre): procps-ng
+Requires(pre): systemd
+Requires(post): systemd
+Requires(preun): procps-ng
+Requires(postun): systemd
+Requires(posttrans): systemd
 
 %description
 %{summary}
 
 %prep
 %setup -cT
-ar p %{SOURCE0} data.tar.zst | tar --zstd -x
-%patch -P 0 -p1
-%patch -P 2 -p1
-%patch -P 3 -p1
-%patch -P 4 -p1
-
-find . -iname "*.a" -delete
-find . -iname "*.pdb" -delete
-mv ./opt/%{name}/Service/Resources/openvpn       ./opt/%{name}/Resources/
-mv ./opt/%{name}/Service/ACVC.GTK.Service{,.dll} ./opt/%{name}/
-mv ./opt/%{name}/Service/*.json                  ./opt/%{name}/
-mv ./opt/%{name}/Service/System.IO.Pipelines.dll ./opt/%{name}/
-rm ./opt/%{name}/Tmds.DBus.dll
-mv ./opt/%{name}/Service/Tmds.DBus.{Protocol.,}dll ./opt/%{name}/
-rm -rf ./opt/%{name}/Service
-rm -rf ./opt/%{name}/libe_sqlite3.so
-sed -i "s#/opt/awsvpnclient/Service/#/opt/awsvpnclient/#;" ./etc/systemd/system/%{name}.service
-mv ./opt/%{name}/{AWS\ VPN\ Client,AWSVPNClient}
-rm -rf \
-       ./opt/%{name}/libmscordbi.so \
-       ./opt/%{name}/libmscordaccore.so \
-       ./opt/%{name}/libcoreclrtraceptprovider.so \
-       ./opt/%{name}/createdump
-
-%build
-gcc -shared -fPIC -o hook.so %{SOURCE3} -ldl
+ar p %{SOURCE0} data.tar.gz | tar -z -x
 
 %install
-mv opt %{buildroot}/
-%__install -Dpm 0644 usr/share/applications/awsvpnclient.desktop %{buildroot}%{_datadir}/applications/awsvpnclient.desktop
-%__install -Dpm 0644 usr/share/doc/awsvpnclient/copyright        %{buildroot}%{_datadir}/doc/awsvpnclient/copyright
-%__install -Dpm 0644 usr/share/pixmaps/acvc-64.png               %{buildroot}%{_datadir}/pixmaps/acvc-64.png
+cp -a opt %{buildroot}/
+install -Dpm 0644 etc/systemd/system/aws-client-vpn-daemon.service \
+    %{buildroot}%{_unitdir}/aws-client-vpn-daemon.service
+install -Dpm 0644 usr/share/applications/aws-vpn-client.desktop \
+    %{buildroot}%{_datadir}/applications/aws-vpn-client.desktop
+mkdir -p %{buildroot}%{_bindir}
+ln -s /opt/%{name}/aws-vpn-client %{buildroot}%{_bindir}/aws-vpn-client
+install -dm 0700 %{buildroot}%{_sharedstatedir}/%{name}
+install -dm 0755 %{buildroot}%{_presetdir}
+printf 'enable aws-client-vpn-daemon.service\n' > \
+    %{buildroot}%{_presetdir}/70-%{name}.preset
 
-%__install -Dpm 0644 etc/systemd/system/%{name}.service          %{buildroot}%{_unitdir}/%{name}.service
-%__install -Dpm 0644 %{SOURCE1}                                  %{buildroot}%{_presetdir}/70-%{name}.preset
-%__install -Dpm 0644 %{SOURCE2}                                  %{buildroot}%{_unitdir}/%{name}.service.d/override.conf
-%__install -Dpm 0644 hook.so                                     %{buildroot}/opt/%{name}/hook.so
-
-%__install -d %{buildroot}/opt/%{name}/Service/Resources/openvpn
-ln -s ../../../Resources/openvpn/configure-dns %{buildroot}/opt/%{name}/Service/Resources/openvpn/configure-dns
-( cd %{buildroot}/opt/%{name}/Resources/openvpn/ && ./openssl fipsinstall -out fipsmodule.cnf -module ./fips.so )
-ln -s ../../../Resources/openvpn/fipsmodule.cnf %{buildroot}/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
-### ln -s ../../usr/%{_lib}/libsqlite3.so %{buildroot}/opt/%{name}/libe_sqlite3.so
-
-%if 0%{?fc40}%{?fc41}
-mkdir -p %{buildroot}/usr/bin
-ln -s /usr/sbin/ip %{buildroot}/usr/bin/ip
-%endif
-
-%clean
+chmod 0750 %{buildroot}/opt/%{name}/aws-client-vpn-daemon
+chmod 0755 %{buildroot}/opt/%{name}/aws-vpn-client
+chmod 0755 %{buildroot}/opt/%{name}/aws-vpn-client-agent
+chmod 0750 %{buildroot}/opt/%{name}/dns/configure-dns
 
 %files
-%defattr(0644, root, root, 0755)
-%attr(0755, root, root) "/opt/%{name}/AWSVPNClient"
-%attr(0755, root, root) /opt/%{name}/Resources/openvpn/acvc-openvpn
-%attr(0755, root, root) /opt/%{name}/Resources/openvpn/configure-dns
-%attr(0755, root, root) /opt/%{name}/Resources/openvpn/openssl
-%attr(0755, root, root) /opt/%{name}/Resources/openvpn/ld-musl-x86_64.so.1
-%attr(0755, root, root) /opt/%{name}/Resources/openvpn/*.so
-%attr(0755, root, root) /opt/%{name}/ACVC.GTK.Service
-/opt/%{name}/*.dll
-/opt/%{name}/*.dylib
-/opt/%{name}/*/*.dll
-/opt/%{name}/*.so
-/opt/%{name}/Resources/openvpn/*.cnf
-/opt/%{name}/*.json
-/opt/%{name}/Resources/acvc-64.png
-/opt/%{name}/Resources/green-dot.png
-/opt/%{name}/Resources/grey-dot.png
-/opt/%{name}/awsvpnclient-dbus.conf
-
-/usr/share/applications/%{name}.desktop
-/usr/share/pixmaps/acvc-64.png
+/opt/%{name}
+%{_unitdir}/aws-client-vpn-daemon.service
 %{_presetdir}/70-%{name}.preset
-%{_unitdir}/%{name}.service
-%{_unitdir}/%{name}.service.d/override.conf
+%{_bindir}/aws-vpn-client
+%{_datadir}/applications/aws-vpn-client.desktop
+%attr(0700,root,root) %dir %{_sharedstatedir}/%{name}
 
-/opt/%{name}/Service/Resources/openvpn/configure-dns
-/opt/%{name}/Service/Resources/openvpn/fipsmodule.cnf
-
-%if 0%{?fc40}%{?fc41}
-/usr/bin/ip
-%endif
-
-%license /opt/%{name}/Resources/LINUX-LICENSE.txt
-%license /opt/%{name}/Resources/THIRD-PARTY-LICENSES-GTK.txt
-%doc %{_docdir}/%{name}
-%dir /opt/%{name}/
-%dir /opt/%{name}/Resources/
-%dir /opt/%{name}/Resources/openvpn
-%dir /opt/%{name}/Service/
-%dir /opt/%{name}/Service/Resources
-%dir /opt/%{name}/Service/Resources/openvpn
-%dir /opt/%{name}/de/
-%dir /opt/%{name}/es/
-%dir /opt/%{name}/fr/
-%dir /opt/%{name}/it/
-%dir /opt/%{name}/ja/
-%dir /opt/%{name}/ko/
-%dir /opt/%{name}/pt-BR/
-%dir /opt/%{name}/zh-Hans/
-%dir /opt/%{name}/zh-Hant/
+%pre
+if [ "$1" -gt 1 ]; then
+    # Stop both current and legacy processes before replacing their binaries.
+    systemctl stop aws-client-vpn-daemon.service >/dev/null 2>&1 || :
+    systemctl stop awsvpnclient.service >/dev/null 2>&1 || :
+    systemctl disable awsvpnclient.service >/dev/null 2>&1 || :
+    pkill -x "AWS VPN Client" >/dev/null 2>&1 || :
+    pkill -x AWSVPNClient >/dev/null 2>&1 || :
+    pkill -f aws-vpn-client-agent >/dev/null 2>&1 || :
+fi
 
 %post
-%systemd_post %{name}.service
+%systemd_post aws-client-vpn-daemon.service
 
 %preun
-%systemd_preun %{name}.service
+if [ "$1" -eq 0 ]; then
+    pkill -x "AWS VPN Client" >/dev/null 2>&1 || :
+    pkill -x AWSVPNClient >/dev/null 2>&1 || :
+    pkill -f aws-vpn-client-agent >/dev/null 2>&1 || :
+fi
+%systemd_preun aws-client-vpn-daemon.service
 
 %postun
-%systemd_postun_with_restart %{name}.service
+%systemd_postun_with_restart aws-client-vpn-daemon.service
+if [ "$1" -eq 0 ]; then
+    systemctl reset-failed aws-client-vpn-daemon.service >/dev/null 2>&1 || :
+fi
+
+%posttrans
+if [ -d /run/systemd/system ]; then
+    systemctl preset aws-client-vpn-daemon.service >/dev/null 2>&1 || :
+    systemctl start aws-client-vpn-daemon.service >/dev/null 2>&1 || :
+fi
 
 %changelog
+* Sat Oct 03 2026 AV - 6.2.0-1
+- repackage the new upstream Electron-based client without modifications
+- translate upstream permissions, dependencies, and service lifecycle to RPM
+- add systemd-resolved dependency and transaction-safe service migration
+
 * Fri May 15 2026 AV - 5.3.2-3
 - fix sqlite dep: require sqlite-libs instead of unversioned libsqlite3.so path (Fedora 44)
 

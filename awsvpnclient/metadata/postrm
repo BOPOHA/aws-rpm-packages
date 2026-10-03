@@ -1,13 +1,18 @@
 #!/bin/bash
-set -x
+# Post-removal: tear down the systemd service.
+#
+# Behavior intentionally mirrors the old client (SecureConnectClientCore):
+# the service is stopped, disabled, the systemd manager is reloaded, and the
+# unit's failed-state is reset. Persistent user data and logs are NOT removed
+# on uninstall (matching the old client, which never deleted them). dpkg
+# removes the package-tracked files (install dir, CLI symlink, systemd unit,
+# desktop entry).
+set -e
+DAEMON="aws-client-vpn-daemon"
 
-LOG_FOLDER="/var/log/aws-vpn-client"
-mkdir -p $LOG_FOLDER
-LOG_FILE=$LOG_FOLDER/postrm.log
+systemctl stop "$DAEMON" 2>/dev/null || true
+systemctl disable "$DAEMON" 2>/dev/null || true
+systemctl daemon-reload 2>/dev/null || true
+systemctl reset-failed "$DAEMON" 2>/dev/null || true
 
-# Remove service
-sudo systemctl stop awsvpnclient >> $LOG_FILE 2>&1
-sudo systemctl disable awsvpnclient >> $LOG_FILE 2>&1
-sudo systemctl daemon-reload >> $LOG_FILE 2>&1
-sudo systemctl reset-failed >> $LOG_FILE 2>&1
-
+exit 0
